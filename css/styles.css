@@ -451,6 +451,51 @@ section {
   100% { background-position: 0% 50%; }
 }
 
+/* Badge with countdown inside */
+.hero-badge-with-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+}
+
+.hero-badge-title {
+  display: block;
+  font-size: var(--text-base);
+  letter-spacing: 0.1em;
+}
+
+.hero-badge-countdown {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+  opacity: 0.95;
+}
+
+.badge-countdown-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.badge-countdown-item strong {
+  font-size: var(--text-lg);
+  font-weight: 800;
+}
+
+.badge-countdown-separator {
+  opacity: 0.6;
+  font-weight: 300;
+}
+
+.badge-countdown-text {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  opacity: 0.9;
+}
+
 /* Hero headline */
 .hero-headline {
   font-family: var(--font-display);
@@ -482,13 +527,25 @@ section {
 
 /* Limited spots urgency notice */
 .hero-limited {
-  margin-top: var(--space-xl);
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
   font-size: var(--text-base);
   font-weight: 600;
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  animation: fadeInUp 0.8s ease 0.8s forwards, pulse 2s ease-in-out infinite;
+  letter-spacing: 0.12em;
+  background: rgba(244, 197, 66, 0.1);
+  border: 1px solid rgba(244, 197, 66, 0.25);
+  border-radius: var(--radius-full);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 0.8s ease 0.8s forwards;
   opacity: 0;
 }
 
@@ -576,13 +633,54 @@ section {
 }
 
 /* Countdown Timer */
+.countdown-label-text {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: var(--space-md);
+  animation: fadeInUp 0.8s ease 0.35s forwards, pulse 2s ease-in-out infinite;
+  opacity: 0;
+  text-shadow: 0 0 20px rgba(244, 197, 66, 0.5);
+}
+
 .countdown {
   display: flex;
   justify-content: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-2xl);
-  animation: fadeInUp 0.8s ease 0.5s forwards;
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
   opacity: 0;
+}
+
+/* Enhanced hero countdown */
+.countdown.countdown-hero {
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.countdown.countdown-hero .countdown-item {
+  background: linear-gradient(135deg, rgba(246, 137, 58, 0.3) 0%, rgba(244, 197, 66, 0.2) 100%);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(244, 197, 66, 0.4);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg) var(--space-xl);
+  min-width: clamp(70px, 15vw, 110px);
+  box-shadow: 0 0 30px rgba(246, 137, 58, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-base);
+}
+
+.countdown.countdown-hero .countdown-value {
+  font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl));
+  color: var(--white);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.countdown.countdown-hero .countdown-label {
+  font-size: var(--text-sm);
+  color: var(--gold);
+  font-weight: 600;
 }
 
 .countdown-item {
@@ -611,9 +709,20 @@ section {
 }
 
 .countdown-ended {
-  font-size: var(--text-xl);
-  color: var(--gold);
-  font-weight: 500;
+  font-size: var(--text-lg);
+  color: var(--white);
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(45, 139, 158, 0.3) 0%, rgba(26, 54, 93, 0.4) 100%);
+  backdrop-filter: blur(10px);
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.countdown.event-ended {
+  margin-bottom: var(--space-lg);
 }
 
 /* Hero CTAs */
@@ -1412,6 +1521,24 @@ section {
   text-align: center;
   opacity: 0.7;
   font-size: var(--text-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.admin-login-link {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.admin-login-link:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* ========================================

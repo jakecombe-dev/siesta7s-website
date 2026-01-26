@@ -230,37 +230,41 @@
     <div class="hero-bg-overlay" aria-hidden="true"></div>
     <div class="hero-palms"></div>
     <div class="hero-content">
-      <span class="hero-badge hero-badge-animated">🔥 INAUGURAL EVENT • MAY 2025 🔥</span>
+      <!-- 1. URGENCY BADGE - Creates immediate excitement and countdown pressure -->
+      <div class="hero-badge hero-badge-animated hero-badge-with-countdown">
+        <span class="hero-badge-title">🔥 INAUGURAL EVENT 🔥</span>
+        <div class="hero-badge-countdown" id="badge-countdown">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
       
-      <!-- Hero Logo - Main Branding -->
+      <!-- 2. BRAND IDENTITY - Logo as the visual anchor -->
       <img src="assets/images/logo.png" alt="Siesta 7s Logo" class="hero-logo hero-logo-large" onerror="this.style.display='none'">
       
-      <p class="hero-headline">Florida's Hottest New Beach Rugby Tournament</p>
+      <!-- 3. VALUE PROPOSITION GROUP - Headline + Tagline together for stronger impact -->
+      <div class="hero-messaging">
+        <h1 class="hero-headline">Florida's Hottest New Beach Rugby Tournament</h1>
+        <p class="hero-tagline">Sun. Sand. Scrums. One Epic Day.</p>
+      </div>
       
+      <!-- 4. CONTEXT - Location and date information -->
       <div class="hero-meta">
         <div class="hero-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-          May 16, 2025
-        </div>
-        <div class="hero-meta-item">
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Siesta Key Beach — America's #1 Beach
+          <span>Siesta Key Beach, FL</span>
+          <span class="hero-meta-divider">•</span>
+          <span>May 16, 2026</span>
         </div>
       </div>
       
-      <p class="hero-tagline">Sun. Sand. Scrums. One Epic Day.</p>
-      
-      <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
-        <!-- Populated by JavaScript -->
+      <!-- 5. PRIMARY ACTION - CTAs with integrated scarcity -->
+      <div class="hero-action-group">
+        <div class="hero-ctas">
+          <a href="#register" class="btn btn-primary btn-lg btn-pulse">🏉 Claim Your Spot</a>
+          <a href="#freeagent" class="btn btn-secondary btn-lg">Join as Free Agent</a>
+        </div>
+        <p class="hero-scarcity">⚡ Only 16 team spots available</p>
       </div>
-      
-      <div class="hero-ctas">
-        <a href="#register" class="btn btn-primary btn-lg btn-pulse">🏉 Claim Your Spot</a>
-        <a href="#freeagent" class="btn btn-secondary btn-lg">Join as Free Agent</a>
-      </div>
-      
-      <p class="hero-limited">⚡ Limited to 16 Teams — Don't Miss Out!</p>
     </div>
   </section>
 
@@ -754,6 +758,7 @@
       
       <div class="footer-bottom">
         <p>&copy; 2025 Sarasota Rugby Club. All rights reserved.</p>
+        <a href="admin.html" class="admin-login-link">Admin Login</a>
       </div>
     </div>
   </footer>

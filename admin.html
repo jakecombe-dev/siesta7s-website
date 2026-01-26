@@ -192,6 +192,16 @@
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card.clickable {
+      cursor: pointer;
+    }
+
+    .stat-card.clickable:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .stat-card h3 {
@@ -382,8 +392,8 @@
       background: var(--white);
       border-radius: 12px;
       width: 100%;
-      max-width: 500px;
-      max-height: 80vh;
+      max-width: 650px;
+      max-height: 85vh;
       overflow-y: auto;
     }
 
@@ -432,6 +442,14 @@
       border: 1px solid var(--gray-300);
       border-radius: 6px;
       font-size: 0.875rem;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .form-group textarea {
+      resize: none;
+      overflow: hidden;
+      min-height: 100px;
+      line-height: 1.5;
     }
 
     .modal-footer {
@@ -530,19 +548,19 @@
       <!-- Overview Tab -->
       <div class="tab-panel active" id="overview">
         <div class="stats-grid">
-          <div class="stat-card">
+          <div class="stat-card clickable" data-navigate="teams">
             <h3>Teams Registered</h3>
             <div class="value" id="teamCount">-</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card clickable" data-navigate="freeagents">
             <h3>Free Agents</h3>
             <div class="value" id="freeAgentCount">-</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card clickable" data-navigate="vendors">
             <h3>Vendors</h3>
             <div class="value" id="vendorCount">-</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card clickable" data-navigate="sponsors">
             <h3>Sponsors</h3>
             <div class="value" id="sponsorCount">-</div>
           </div>
@@ -794,6 +812,7 @@
         <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
         <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
       </div>
+    </div>
   </div>
 
   <!-- Schedule Modal -->
@@ -937,6 +956,20 @@
           const formType = tabId === 'freeagents' ? 'Free Agents' : 
                           tabId.charAt(0).toUpperCase() + tabId.slice(1);
           loadData(formType);
+        }
+      });
+    });
+
+    // Clickable stat cards on overview - navigate to corresponding tab
+    document.querySelectorAll('.stat-card.clickable').forEach(card => {
+      card.addEventListener('click', () => {
+        const tabId = card.dataset.navigate;
+        if (!tabId) return;
+        
+        // Find the corresponding nav tab and click it
+        const navTab = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+        if (navTab) {
+          navTab.click();
         }
       });
     });
@@ -1289,7 +1322,24 @@
       }
       
       document.getElementById('scheduleModal').classList.add('active');
+      
+      // Auto-resize textarea after modal is visible
+      setTimeout(() => {
+        autoResizeTextarea(document.getElementById('scheduleDescription'));
+      }, 10);
     }
+
+    // Auto-resize textarea to fit content
+    function autoResizeTextarea(textarea) {
+      if (!textarea) return;
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.max(100, textarea.scrollHeight) + 'px';
+    }
+
+    // Set up auto-resize on input
+    document.getElementById('scheduleDescription').addEventListener('input', function() {
+      autoResizeTextarea(this);
+    });
 
     function editScheduleEvent(index) {
       openScheduleModal(index);

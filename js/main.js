@@ -6,7 +6,7 @@
 // Configuration
 // ========================================
 const CONFIG = {
-  eventDate: new Date('2025-05-16T09:00:00-04:00'), // May 16, 2025, 9AM ET
+  eventDate: new Date('2026-05-16T09:00:00-04:00'), // May 16, 2026, 9AM ET (2nd Annual)
   googleScriptUrl: 'https://script.google.com/macros/s/AKfycbyndwQKFl7FMY9PjM525VMR8ImmhMm5ShelQtGU1wcVnZtxCyERMfxQohDzeo8wdgmkpA/exec', // Google Apps Script for form submissions
   
   // Pricing tiers with deadlines
@@ -100,19 +100,42 @@ function initNavigation() {
 // ========================================
 function initCountdown() {
   const countdownEl = document.getElementById('countdown');
-  if (!countdownEl) return;
+  const badgeCountdownEl = document.getElementById('badge-countdown');
+  
+  // Get related elements that should be hidden when event ends
+  const countdownLabel = document.querySelector('.countdown-label-text');
+  const limitedTeamsText = document.querySelector('.hero-limited');
+  const heroBadge = document.querySelector('.hero-badge-with-countdown');
   
   function updateCountdown() {
     const now = new Date();
     const diff = CONFIG.eventDate - now;
     
-    // Event has passed
+    // Event has passed - hide countdown-related elements and show post-event message
     if (diff <= 0) {
-      countdownEl.innerHTML = `
-        <div class="countdown-ended">
-          Get ready for the inaugural Siesta 7s — Florida's hottest beach rugby tournament!
-        </div>
-      `;
+      // Hide the "KICKOFF IN" label
+      if (countdownLabel) {
+        countdownLabel.style.display = 'none';
+      }
+      // Hide the "Limited to 16 Teams" urgency text
+      if (limitedTeamsText) {
+        limitedTeamsText.style.display = 'none';
+      }
+      
+      // Update main countdown
+      if (countdownEl) {
+        countdownEl.innerHTML = `
+          <div class="countdown-ended">
+            🏆 Stay tuned for next year's tournament!
+          </div>
+        `;
+        countdownEl.classList.add('event-ended');
+      }
+      
+      // Update badge countdown to show event completed
+      if (badgeCountdownEl) {
+        badgeCountdownEl.innerHTML = `<span class="badge-countdown-text">Event Completed</span>`;
+      }
       return;
     }
     
@@ -121,24 +144,40 @@ function initCountdown() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
-    countdownEl.innerHTML = `
-      <div class="countdown-item">
-        <div class="countdown-value">${days}</div>
-        <div class="countdown-label">Days</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-value">${hours.toString().padStart(2, '0')}</div>
-        <div class="countdown-label">Hours</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-value">${minutes.toString().padStart(2, '0')}</div>
-        <div class="countdown-label">Minutes</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-value">${seconds.toString().padStart(2, '0')}</div>
-        <div class="countdown-label">Seconds</div>
-      </div>
-    `;
+    // Update main countdown (if exists)
+    if (countdownEl) {
+      countdownEl.innerHTML = `
+        <div class="countdown-item">
+          <div class="countdown-value">${days}</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value">${hours.toString().padStart(2, '0')}</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value">${minutes.toString().padStart(2, '0')}</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value">${seconds.toString().padStart(2, '0')}</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      `;
+    }
+    
+    // Update badge countdown (compact inline format)
+    if (badgeCountdownEl) {
+      badgeCountdownEl.innerHTML = `
+        <span class="badge-countdown-item"><strong>${days}</strong>d</span>
+        <span class="badge-countdown-separator">:</span>
+        <span class="badge-countdown-item"><strong>${hours.toString().padStart(2, '0')}</strong>h</span>
+        <span class="badge-countdown-separator">:</span>
+        <span class="badge-countdown-item"><strong>${minutes.toString().padStart(2, '0')}</strong>m</span>
+        <span class="badge-countdown-separator">:</span>
+        <span class="badge-countdown-item"><strong>${seconds.toString().padStart(2, '0')}</strong>s</span>
+      `;
+    }
   }
   
   updateCountdown();
