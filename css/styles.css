@@ -427,6 +427,96 @@ section {
   animation: fadeInUp 0.8s ease forwards;
 }
 
+/* Animated excited badge */
+.hero-badge-animated {
+  background: linear-gradient(135deg, rgba(246, 137, 58, 0.9) 0%, rgba(244, 197, 66, 0.9) 50%, rgba(246, 137, 58, 0.9) 100%);
+  background-size: 200% 200%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: var(--white);
+  font-weight: 700;
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-base);
+  box-shadow: 0 0 30px rgba(246, 137, 58, 0.5), 0 0 60px rgba(244, 197, 66, 0.3);
+  animation: fadeInUp 0.8s ease forwards, badgeGlow 2s ease-in-out infinite, badgeGradient 3s ease infinite;
+}
+
+@keyframes badgeGlow {
+  0%, 100% { box-shadow: 0 0 30px rgba(246, 137, 58, 0.5), 0 0 60px rgba(244, 197, 66, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(246, 137, 58, 0.7), 0 0 80px rgba(244, 197, 66, 0.4); }
+}
+
+@keyframes badgeGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero headline */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease 0.15s forwards;
+  opacity: 0;
+}
+
+/* Hero tagline - more impactful */
+.hero-tagline {
+  font-size: var(--text-xl);
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: var(--space-2xl);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+  opacity: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.05em;
+}
+
+/* Limited spots urgency notice */
+.hero-limited {
+  margin-top: var(--space-xl);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  animation: fadeInUp 0.8s ease 0.8s forwards, pulse 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+/* Pulsing CTA button */
+.btn-pulse {
+  animation: buttonPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.btn-pulse::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 0 rgba(246, 137, 58, 0.7);
+  animation: buttonRing 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes buttonRing {
+  0% { box-shadow: 0 0 0 0 rgba(246, 137, 58, 0.7); }
+  50% { box-shadow: 0 0 0 15px rgba(246, 137, 58, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(246, 137, 58, 0); }
+}
+
 .hero-logo {
   width: 180px;
   height: auto;

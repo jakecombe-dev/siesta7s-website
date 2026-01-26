@@ -32,6 +32,7 @@ const CONFIG = {
 // DOM Ready
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
+  initDynamicContent(); // Load schedule and pricing from localStorage first
   initNavigation();
   initCountdown();
   initScrollReveal();
