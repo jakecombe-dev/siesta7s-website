@@ -522,6 +522,8 @@
       <button class="nav-tab" data-tab="freeagents">Free Agents</button>
       <button class="nav-tab" data-tab="vendors">Vendors</button>
       <button class="nav-tab" data-tab="sponsors">Sponsors</button>
+      <button class="nav-tab" data-tab="schedule">Schedule</button>
+      <button class="nav-tab" data-tab="pricing">Pricing</button>
     </nav>
 
     <main class="dashboard-content">
@@ -689,6 +691,75 @@
           </div>
         </div>
       </div>
+
+      <!-- Schedule Tab -->
+      <div class="tab-panel" id="schedule">
+        <div class="table-card">
+          <div class="table-header">
+            <h2>Weekend Schedule</h2>
+            <button class="btn btn-primary" onclick="openScheduleModal()">+ Add Event</button>
+          </div>
+          <div class="table-container">
+            <table id="scheduleTable">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Date</th>
+                  <th>Event</th>
+                  <th>Time</th>
+                  <th>Location</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Tab -->
+      <div class="tab-panel" id="pricing">
+        <div class="table-card" style="margin-bottom: 2rem;">
+          <div class="table-header">
+            <h2>Team Registration Pricing</h2>
+            <button class="btn btn-primary" onclick="openPricingModal('team')">+ Add Tier</button>
+          </div>
+          <div class="table-container">
+            <table id="teamPricingTable">
+              <thead>
+                <tr>
+                  <th>Tier Name</th>
+                  <th>Price</th>
+                  <th>Deadline</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="teamPricingBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h2>Free Agent Pricing</h2>
+            <button class="btn btn-primary" onclick="openPricingModal('freeagent')">+ Add Tier</button>
+          </div>
+          <div class="table-container">
+            <table id="freeagentPricingTable">
+              <thead>
+                <tr>
+                  <th>Tier Name</th>
+                  <th>Price</th>
+                  <th>Deadline</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="freeagentPricingBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -722,6 +793,80 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
         <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+      </div>
+  </div>
+
+  <!-- Schedule Modal -->
+  <div class="modal-overlay" id="scheduleModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="scheduleModalTitle">Add Event</h3>
+        <button class="modal-close" onclick="closeScheduleModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="scheduleEditIndex" value="-1">
+        <div class="form-group">
+          <label>Day *</label>
+          <select id="scheduleDay" required>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date Label *</label>
+          <input type="text" id="scheduleDate" placeholder="e.g., May 15, 2025 or Evening" required>
+        </div>
+        <div class="form-group">
+          <label>Event Title *</label>
+          <input type="text" id="scheduleTitle" placeholder="e.g., Pre-Tournament Party" required>
+        </div>
+        <div class="form-group">
+          <label>Time *</label>
+          <input type="text" id="scheduleTime" placeholder="e.g., 6:00 PM - 9:00 PM" required>
+        </div>
+        <div class="form-group">
+          <label>Location *</label>
+          <input type="text" id="scheduleLocation" placeholder="e.g., Siesta Key Beach" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="scheduleDescription" rows="3" placeholder="Event description..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeScheduleModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveScheduleEvent()">Save Event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Modal -->
+  <div class="modal-overlay" id="pricingModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="pricingModalTitle">Add Pricing Tier</h3>
+        <button class="modal-close" onclick="closePricingModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="pricingEditIndex" value="-1">
+        <input type="hidden" id="pricingType" value="team">
+        <div class="form-group">
+          <label>Tier Name *</label>
+          <input type="text" id="pricingTierName" placeholder="e.g., Super Early" required>
+        </div>
+        <div class="form-group">
+          <label>Price *</label>
+          <input type="text" id="pricingPrice" placeholder="e.g., $200" required>
+        </div>
+        <div class="form-group">
+          <label>Deadline *</label>
+          <input type="text" id="pricingDeadline" placeholder="e.g., February 28, 2025" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closePricingModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="savePricingTier()">Save Tier</button>
       </div>
     </div>
   </div>
