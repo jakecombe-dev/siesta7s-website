@@ -328,9 +328,39 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--gradient-hero);
   overflow: hidden;
   padding-top: 72px;
+}
+
+/* Hero background image */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../assets/images/hero-beach-rugby.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Gradient overlay for text readability */
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 54, 93, 0.75) 0%,
+    rgba(15, 35, 64, 0.6) 30%,
+    rgba(26, 54, 93, 0.7) 60%,
+    rgba(15, 35, 64, 0.9) 100%
+  );
+  z-index: 1;
 }
 
 /* Animated wave pattern */
@@ -343,34 +373,35 @@ section {
   height: 150px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f5f0e6' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
   background-size: cover;
-  z-index: 2;
+  z-index: 4;
 }
 
-/* Sun glow effect */
+/* Sun glow effect - now enhances the photo */
 .hero::after {
   content: '';
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(244, 197, 66, 0.4) 0%, rgba(246, 137, 58, 0.2) 40%, transparent 70%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(244, 197, 66, 0.25) 0%, rgba(246, 137, 58, 0.1) 40%, transparent 70%);
   border-radius: 50%;
   animation: pulse 4s ease-in-out infinite;
-  z-index: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* Palm tree silhouettes */
+/* Palm tree silhouettes - subtle overlay on image */
 .hero-palms {
   position: absolute;
   bottom: 100px;
   left: 0;
   right: 0;
   height: 200px;
-  opacity: 0.15;
+  opacity: 0.08;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Cpath fill='%23000' d='M10,50 L12,30 Q15,20 8,15 Q15,18 15,10 Q18,18 25,15 Q18,22 20,30 L22,50 Z M80,50 L82,25 Q85,15 78,10 Q85,13 85,5 Q88,13 95,10 Q88,17 90,25 L92,50 Z'/%3E%3C/svg%3E") repeat-x bottom;
-  z-index: 1;
+  z-index: 3;
 }
 
 .hero-content {
@@ -403,6 +434,13 @@ section {
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
   animation: fadeInUp 0.8s ease 0.1s forwards;
   opacity: 0;
+}
+
+/* Large hero logo - main branding element */
+.hero-logo.hero-logo-large {
+  width: clamp(280px, 40vw, 450px);
+  margin: 0 auto var(--space-xl);
+  filter: drop-shadow(0 8px 40px rgba(0,0,0,0.4));
 }
 
 .hero-title {

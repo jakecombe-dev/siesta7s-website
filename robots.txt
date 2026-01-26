@@ -1,0 +1,15 @@
+# Siesta 7s - Beach Rugby Tournament
+# https://siesta7s.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://siesta7s.com/sitemap.xml
+
+# Crawl-delay (optional, gentle request)
+Crawl-delay: 1
+
+# Block common bot traps and unnecessary paths
+Disallow: /.git/
+Disallow: /.agent/

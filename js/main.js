@@ -7,7 +7,7 @@
 // ========================================
 const CONFIG = {
   eventDate: new Date('2025-05-16T09:00:00-04:00'), // May 16, 2025, 9AM ET
-  googleScriptUrl: '', // Replace with your Google Apps Script Web App URL
+  googleScriptUrl: 'https://script.google.com/macros/s/AKfycbyndwQKFl7FMY9PjM525VMR8ImmhMm5ShelQtGU1wcVnZtxCyERMfxQohDzeo8wdgmkpA/exec', // Google Apps Script for form submissions
   
   // Pricing tiers with deadlines
   teamTiers: [
@@ -109,7 +109,7 @@ function initCountdown() {
     if (diff <= 0) {
       countdownEl.innerHTML = `
         <div class="countdown-ended">
-          Get ready for the inaugural Siesta 7s — Florida's hottest beach rugby tournament! 🏉🔥
+          Get ready for the inaugural Siesta 7s — Florida's hottest beach rugby tournament!
         </div>
       `;
       return;
