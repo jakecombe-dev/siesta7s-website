@@ -455,13 +455,17 @@ section {
 .hero-headline {
   font-family: var(--font-display);
   font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
-  color: var(--white);
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-lg);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 4px 40px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 0.8s ease 0.15s forwards;
   opacity: 0;
+  background: rgba(15, 35, 64, 0.85);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  display: inline-block;
 }
 
 /* Hero tagline - more impactful */
@@ -569,15 +573,6 @@ section {
   width: 20px;
   height: 20px;
   fill: var(--gold);
-}
-
-.hero-tagline {
-  font-size: var(--text-xl);
-  color: rgba(255,255,255,0.85);
-  font-weight: 300;
-  margin-bottom: var(--space-2xl);
-  animation: fadeInUp 0.8s ease 0.4s forwards;
-  opacity: 0;
 }
 
 /* Countdown Timer */
@@ -1535,6 +1530,26 @@ section {
 
 .nav-link-external:hover {
   color: var(--orange) !important;
+}
+
+/* CTA button in navigation */
+.nav-link-cta {
+  background: var(--gradient-sunset) !important;
+  color: var(--white) !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: var(--radius-full);
+  font-weight: 600 !important;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(246, 137, 58, 0.3);
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(246, 137, 58, 0.4);
+}
+
+.nav-link-cta::after {
+  display: none !important;
 }
 
 /* Club link inline styling */

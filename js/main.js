@@ -465,6 +465,141 @@ function generateTeamCode() {
 }
 
 // ========================================
+// Dynamic Content from localStorage
+// ========================================
+const DEFAULT_SCHEDULE = [
+  {
+    day: 'Friday',
+    date: 'May 15, 2025',
+    title: 'Pre-Tournament Party',
+    time: '6:00 PM - 9:00 PM',
+    location: 'Daiquiri Deck Southbridge',
+    description: 'Kick off the weekend right! Meet other teams, enjoy live music, enter the 50/50 raffle, compete in the cornhole tournament, and grab some giveaways. The perfect warm-up for tournament day.'
+  },
+  {
+    day: 'Saturday',
+    date: 'May 16, 2025',
+    title: 'Tournament Day',
+    time: 'Kickoff at 9:00 AM',
+    location: 'Siesta Key Beach',
+    description: 'The main event! Beach rugby matches throughout the day on the famous white quartz sand. Food vendors, merchandise, music, and incredible beach atmosphere. Awards ceremony following the final matches.'
+  },
+  {
+    day: 'Saturday',
+    date: 'Evening',
+    title: 'Siesta Stumble Bar Crawl',
+    time: 'After Tournament Concludes',
+    location: 'Siesta Key Village',
+    description: 'Keep the celebration going! Post-tournament bar crawl hitting multiple iconic Siesta Key Village spots. All venues within walking distance — no driving needed. The perfect way to cap off an epic day.'
+  }
+];
+
+const DEFAULT_TEAM_PRICING = [
+  { name: 'Super Early', price: '$200', deadline: 'February 28, 2025' },
+  { name: 'Early Bird', price: '$250', deadline: 'March 31, 2025' },
+  { name: 'Regular', price: '$300', deadline: 'April 30, 2025' },
+  { name: 'Late', price: '$350', deadline: 'May 15, 2025' }
+];
+
+const DEFAULT_FREEAGENT_PRICING = [
+  { name: 'Earliest Rate', price: '$30', deadline: 'March 15, 2025' },
+  { name: 'Normal Rate', price: '$40', deadline: 'May 9, 2025' },
+  { name: 'Final Week Rate', price: '$50', deadline: 'May 15, 2025' }
+];
+
+function initDynamicContent() {
+  loadSchedule();
+  loadPricing();
+}
+
+function loadSchedule() {
+  const container = document.getElementById('schedule-timeline');
+  if (!container) return;
+  
+  let scheduleData;
+  try {
+    const stored = localStorage.getItem('siesta7s_schedule');
+    scheduleData = stored ? JSON.parse(stored) : DEFAULT_SCHEDULE;
+  } catch (e) {
+    scheduleData = DEFAULT_SCHEDULE;
+  }
+  
+  if (!scheduleData || scheduleData.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:#718096;">No events scheduled yet. Check back soon!</p>';
+    return;
+  }
+  
+  container.innerHTML = scheduleData.map(event => `
+    <div class="schedule-item reveal">
+      <div class="schedule-time">
+        <div class="schedule-day">${event.day}</div>
+        <div class="schedule-date">${event.date}</div>
+      </div>
+      <div class="schedule-content">
+        <h3>${event.title}</h3>
+        <div class="time">${event.time}</div>
+        <div class="location">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          ${event.location}
+        </div>
+        <p>${event.description}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function loadPricing() {
+  loadTeamPricing();
+  loadFreeAgentPricing();
+}
+
+function loadTeamPricing() {
+  const tbody = document.querySelector('#team-pricing tbody');
+  if (!tbody) return;
+  
+  let pricingData;
+  try {
+    const stored = localStorage.getItem('siesta7s_team_pricing');
+    pricingData = stored ? JSON.parse(stored) : DEFAULT_TEAM_PRICING;
+  } catch (e) {
+    pricingData = DEFAULT_TEAM_PRICING;
+  }
+  
+  if (!pricingData || pricingData.length === 0) return;
+  
+  tbody.innerHTML = pricingData.map((tier, index) => `
+    <tr data-tier="${index}">
+      <td class="tier-name">${tier.name}</td>
+      <td class="tier-price">${tier.price}</td>
+      <td class="tier-deadline">${tier.deadline}</td>
+    </tr>
+  `).join('');
+}
+
+function loadFreeAgentPricing() {
+  const tbody = document.querySelector('#freeagent-pricing tbody');
+  if (!tbody) return;
+  
+  let pricingData;
+  try {
+    const stored = localStorage.getItem('siesta7s_freeagent_pricing');
+    pricingData = stored ? JSON.parse(stored) : DEFAULT_FREEAGENT_PRICING;
+  } catch (e) {
+    pricingData = DEFAULT_FREEAGENT_PRICING;
+  }
+  
+  if (!pricingData || pricingData.length === 0) return;
+  
+  tbody.innerHTML = pricingData.map((tier, index) => `
+    <tr data-tier="${index}">
+      <td class="tier-name">${tier.name}</td>
+      <td class="tier-price">${tier.price}</td>
+      <td class="tier-deadline">${tier.deadline}</td>
+    </tr>
+  `).join('');
+}
+
+// ========================================
 // Utility: Spinner Animation
 // ========================================
 const style = document.createElement('style');
