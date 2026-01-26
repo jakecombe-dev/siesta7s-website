@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Siesta 7s - First annual beach rugby 7s tournament hosted by Sarasota Rugby Club on Siesta Key Beach, Florida. May 16, 2025. Join the Sarasota rugby community for sun, sand, and rugby!">
+  <meta name="keywords" content="Siesta 7s, beach rugby, rugby 7s, Siesta Key, Sarasota, Florida, rugby tournament, beach sports, Sarasota Rugby Club, SRQ Surge, Florida rugby, beach rugby tournament 2025">
+  <meta name="author" content="Sarasota Rugby Club">
+  
+  <!-- Canonical & Related Links -->
+  <link rel="canonical" href="https://siesta7s.com">
+  <link rel="me" href="https://www.sarasotarugbyclub.com">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Siesta 7s - Beach Rugby Tournament | Sarasota Rugby Club">
+  <meta property="og:description" content="First annual beach rugby tournament on America's #1 beach. Hosted by Sarasota Rugby Club. May 16, 2025 - Siesta Key Beach, Sarasota, FL.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://siesta7s.com">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:site_name" content="Siesta 7s | Sarasota Rugby Club">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Siesta 7s - Beach Rugby Tournament | Sarasota Rugby Club">
+  <meta name="twitter:description" content="First annual beach rugby tournament on America's #1 beach. Hosted by Sarasota Rugby Club. May 16, 2025.">
+  
+  <title>Siesta 7s | Beach Rugby Tournament - Siesta Key, FL | Sarasota Rugby Club</title>
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": "Siesta 7s Beach Rugby Tournament",
+    "description": "First annual beach rugby 7s tournament hosted by Sarasota Rugby Club on America's #1 beach.",
+    "startDate": "2025-05-16T09:00:00-04:00",
+    "endDate": "2025-05-16T18:00:00-04:00",
+    "location": {
+      "@type": "Place",
+      "name": "Siesta Key Beach",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Siesta Key",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+      }
+    },
+    "organizer": {
+      "@type": "SportsTeam",
+      "name": "Sarasota Rugby Club",
+      "url": "https://www.sarasotarugbyclub.com",
+      "sport": "Rugby"
+    },
+    "sport": "Rugby",
+    "url": "https://siesta7s.com"
+  }
+  </script>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- ========================================
+       Header & Navigation
+       ======================================== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="nav-logo">
+        <img src="assets/images/siesta7s-logo.png" alt="Siesta 7s Logo">
+      </a>
+      
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#schedule" class="nav-link">Schedule</a></li>
+        <li><a href="#register" class="nav-link">Register</a></li>
+        <li><a href="vendors.html" class="nav-link">Vendors</a></li>
+        <li><a href="sponsors.html" class="nav-link">Sponsors</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="https://www.sarasotarugbyclub.com" class="nav-link nav-link-external" target="_blank" rel="noopener noreferrer">SRQ Rugby Club ↗</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ========================================
+       Hero Section
+       ======================================== -->
+  <section class="hero" id="home">
+    <div class="hero-palms"></div>
+    <div class="hero-content">
+      <span class="hero-badge">🏉 First Annual Event</span>
+      
+      <!-- Logo placeholder - replace src with actual logo -->
+      <img src="assets/images/logo.png" alt="Siesta 7s Logo" class="hero-logo" onerror="this.style.display='none'">
+      
+      <h1 class="hero-title">
+        SIESTA <span>7s</span>
+      </h1>
+      
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          May 16, 2025
+        </div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Siesta Key Beach, Sarasota FL
+        </div>
+      </div>
+      
+      <p class="hero-tagline">Beach Rugby • Music • Community • Competition</p>
+      
+      <!-- Countdown Timer -->
+      <div class="countdown" id="countdown">
+        <!-- Populated by JavaScript -->
+      </div>
+      
+      <div class="hero-ctas">
+        <a href="#register" class="btn btn-primary btn-lg">Register Your Team</a>
+        <a href="#freeagent" class="btn btn-secondary btn-lg">Join as Free Agent</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       About Section
+       ======================================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title reveal">Welcome to Siesta 7s</h2>
+      
+      <p class="about-intro reveal">
+        <strong>Siesta 7s</strong> is the first annual beach rugby tournament hosted by 
+        <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer" class="club-link"><strong>Sarasota Rugby Club</strong></a> on the legendary white quartz sand of Siesta Key — 
+        America's #1 beach. Expect high-energy matches, live music, great food, and a full weekend 
+        of beach community vibes.
+      </p>
+      
+      <!-- Hosted By Callout -->
+      <div class="hosted-by reveal">
+        <span class="hosted-by-label">Proudly Hosted By</span>
+        <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer" class="hosted-by-link">
+          <span class="hosted-by-name">Sarasota Rugby Club</span>
+          <span class="hosted-by-tagline">Where rugby meets community, and teammates become family</span>
+        </a>
+        <div class="hosted-by-links">
+          <a href="https://www.sarasotarugbyclub.com/mens-team" target="_blank" rel="noopener noreferrer">Men's Team</a>
+          <a href="https://www.sarasotarugbyclub.com/youthrugbyteam" target="_blank" rel="noopener noreferrer">Youth Academy</a>
+          <a href="https://www.sarasotarugbyclub.com/about" target="_blank" rel="noopener noreferrer">About the Club</a>
+        </div>
+      </div>
+      
+      <div class="about-cards">
+        <div class="about-card reveal">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>On the Field</h3>
+          <p>Competitive beach rugby 7s with teams battling it out on the sand. Multiple divisions, bracket-style tournament format, and awards for top teams.</p>
+        </div>
+        
+        <div class="about-card reveal">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <h3>Off the Field</h3>
+          <p>Live music, local food vendors, cold drinks, and beach vibes. Whether you're playing or spectating, the atmosphere is electric all day long.</p>
+        </div>
+        
+        <div class="about-card reveal">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+          </div>
+          <h3>Full Weekend Experience</h3>
+          <p>Kick off Friday at the pre-party, compete Saturday on the beach, then hit the Siesta Stumble bar crawl Saturday night. It's a full rugby weekend.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Schedule Section
+       ======================================== -->
+  <section class="schedule" id="schedule">
+    <div class="container">
+      <h2 class="section-title reveal">Weekend Schedule</h2>
+      
+      <div class="schedule-timeline">
+        <div class="schedule-item reveal">
+          <div class="schedule-time">
+            <div class="schedule-day">Friday</div>
+            <div class="schedule-date">May 15, 2025</div>
+          </div>
+          <div class="schedule-content">
+            <h3>Pre-Tournament Party</h3>
+            <div class="time">6:00 PM - 9:00 PM</div>
+            <div class="location">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Daiquiri Deck Southbridge
+            </div>
+            <p>Kick off the weekend right! Meet other teams, enjoy live music, enter the 50/50 raffle, compete in the cornhole tournament, and grab some giveaways. The perfect warm-up for tournament day.</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item reveal">
+          <div class="schedule-time">
+            <div class="schedule-day">Saturday</div>
+            <div class="schedule-date">May 16, 2025</div>
+          </div>
+          <div class="schedule-content">
+            <h3>Tournament Day</h3>
+            <div class="time">Kickoff at 9:00 AM</div>
+            <div class="location">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Siesta Key Beach
+            </div>
+            <p>The main event! Beach rugby matches throughout the day on the famous white quartz sand. Food vendors, merchandise, music, and incredible beach atmosphere. Awards ceremony following the final matches.</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item reveal">
+          <div class="schedule-time">
+            <div class="schedule-day">Saturday</div>
+            <div class="schedule-date">Evening</div>
+          </div>
+          <div class="schedule-content">
+            <h3>Siesta Stumble Bar Crawl</h3>
+            <div class="time">After Tournament Concludes</div>
+            <div class="location">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Siesta Key Village
+            </div>
+            <p>Keep the celebration going! Post-tournament bar crawl hitting multiple iconic Siesta Key Village spots. All venues within walking distance — no driving needed. The perfect way to cap off an epic day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Team Registration Section
+       ======================================== -->
+  <section class="registration" id="register">
+    <div class="container">
+      <div class="registration-header reveal">
+        <h2 class="section-title">Team Registration</h2>
+        <p>Bring your squad to compete on America's #1 beach. Lock in early for the best rates!</p>
+      </div>
+      
+      <!-- Pricing Table -->
+      <div class="pricing-table reveal" id="team-pricing">
+        <table>
+          <thead>
+            <tr>
+              <th>Registration Tier</th>
+              <th>Price</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tier="0">
+              <td class="tier-name">Super Early</td>
+              <td class="tier-price">$200</td>
+              <td class="tier-deadline">February 28, 2025</td>
+            </tr>
+            <tr data-tier="1">
+              <td class="tier-name">Early Bird</td>
+              <td class="tier-price">$250</td>
+              <td class="tier-deadline">March 31, 2025</td>
+            </tr>
+            <tr data-tier="2">
+              <td class="tier-name">Regular</td>
+              <td class="tier-price">$300</td>
+              <td class="tier-deadline">April 30, 2025</td>
+            </tr>
+            <tr data-tier="3">
+              <td class="tier-name">Late</td>
+              <td class="tier-price">$350</td>
+              <td class="tier-deadline">May 15, 2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="registration-grid">
+        <div class="registration-info reveal">
+          <h3>What's Included</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Entry for your team into the tournament
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Guaranteed minimum 3 matches
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Awards for top finishers
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Pre-party access Friday night
+            </li>
+          </ul>
+          
+          <h3>Roster Requirements</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Minimum 7 players
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Maximum 12 players
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              All players must sign liability waiver
+            </li>
+          </ul>
+          
+          <h3>Documents</h3>
+          <p class="mt-md">Required documents will be available for download soon:</p>
+          <ul class="mt-md">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+              Roster Form (Coming Soon)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+              Liability Waiver (Coming Soon)
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Team Registration Form -->
+        <div class="form-card reveal">
+          <h3>Register Your Team</h3>
+          <form data-form-type="Teams">
+            <!-- Honeypot -->
+            <div class="form-hp" aria-hidden="true">
+              <label>Leave empty</label>
+              <input type="text" name="hp_field" tabindex="-1" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Team Name <span class="required">*</span></label>
+              <input type="text" name="teamName" class="form-input" required placeholder="Enter your team name">
+              <div class="form-error">Please enter your team name</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Division <span class="required">*</span></label>
+              <select name="division" class="form-select" required>
+                <option value="">Select division</option>
+                <option value="Mens">Men's</option>
+              </select>
+              <div class="form-error">Please select a division</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Captain/Manager Name <span class="required">*</span></label>
+              <input type="text" name="captainName" class="form-input" required placeholder="Full name">
+              <div class="form-error">Please enter captain's name</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Captain Email <span class="required">*</span></label>
+              <input type="email" name="captainEmail" class="form-input" required placeholder="email@example.com">
+              <div class="form-error">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Captain Phone <span class="required">*</span></label>
+              <input type="tel" name="captainPhone" class="form-input" required placeholder="(123) 456-7890">
+              <div class="form-error">Please enter a valid phone number</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Number of Players <span class="required">*</span></label>
+              <select name="playerCount" class="form-select" required>
+                <option value="">Select player count</option>
+                <option value="7">7 players</option>
+                <option value="8">8 players</option>
+                <option value="9">9 players</option>
+                <option value="10">10 players</option>
+                <option value="11">11 players</option>
+                <option value="12">12 players</option>
+              </select>
+              <div class="form-error">Please select the number of players</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">How did you hear about us?</label>
+              <input type="text" name="referralSource" class="form-input" placeholder="Instagram, friend, etc.">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Submit Registration
+            </button>
+            
+            <p class="form-privacy">
+              🔒 Your info goes to Sarasota Rugby Club only and is not shared.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Free Agent Registration Section
+       ======================================== -->
+  <section class="registration registration-alt" id="freeagent">
+    <div class="container">
+      <div class="registration-header reveal">
+        <h2 class="section-title">Free Agent Registration</h2>
+        <p>Don't have a team? No problem! Sign up as a free agent and we'll place you on a team.</p>
+      </div>
+      
+      <!-- Pricing Table -->
+      <div class="pricing-table reveal" id="freeagent-pricing">
+        <table>
+          <thead>
+            <tr>
+              <th>Registration Tier</th>
+              <th>Price</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tier="0">
+              <td class="tier-name">Earliest Rate</td>
+              <td class="tier-price">$30</td>
+              <td class="tier-deadline">March 15, 2025</td>
+            </tr>
+            <tr data-tier="1">
+              <td class="tier-name">Normal Rate</td>
+              <td class="tier-price">$40</td>
+              <td class="tier-deadline">May 9, 2025</td>
+            </tr>
+            <tr data-tier="2">
+              <td class="tier-name">Final Week Rate</td>
+              <td class="tier-price">$50</td>
+              <td class="tier-deadline">May 15, 2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="registration-grid">
+        <div class="registration-info reveal">
+          <h3>How It Works</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Sign up and pay your fee
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              We'll match you with a team
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Get introduced before tournament day
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Show up, play, and have a blast!
+            </li>
+          </ul>
+          
+          <h3>Perfect For</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Solo travelers visiting Siesta Key
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Players whose team couldn't make it
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Anyone wanting to meet new people
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Free Agent Form -->
+        <div class="form-card reveal">
+          <h3>Sign Up as Free Agent</h3>
+          <form data-form-type="Free Agents">
+            <!-- Honeypot -->
+            <div class="form-hp" aria-hidden="true">
+              <label>Leave empty</label>
+              <input type="text" name="hp_field" tabindex="-1" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" name="fullName" class="form-input" required placeholder="Your full name">
+              <div class="form-error">Please enter your full name</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email <span class="required">*</span></label>
+              <input type="email" name="email" class="form-input" required placeholder="email@example.com">
+              <div class="form-error">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Phone <span class="required">*</span></label>
+              <input type="tel" name="phone" class="form-input" required placeholder="(123) 456-7890">
+              <div class="form-error">Please enter a valid phone number</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Division Preference <span class="required">*</span></label>
+              <select name="divisionPreference" class="form-select" required>
+                <option value="">Select division</option>
+                <option value="Mens">Men's</option>
+              </select>
+              <div class="form-error">Please select a division</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Experience Level <span class="required">*</span></label>
+              <select name="experienceLevel" class="form-select" required>
+                <option value="">Select experience</option>
+                <option value="Beginner">Beginner - New to rugby</option>
+                <option value="Intermediate">Intermediate - Some experience</option>
+                <option value="Experienced">Experienced - Played competitively</option>
+              </select>
+              <div class="form-error">Please select your experience level</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Position Preference</label>
+              <input type="text" name="positionPreference" class="form-input" placeholder="e.g., Forward, Back, Anywhere">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Anything else we should know?</label>
+              <textarea name="notes" class="form-textarea" placeholder="Injuries, availability, etc."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Sign Up as Free Agent
+            </button>
+            
+            <p class="form-privacy">
+              🔒 Your info goes to Sarasota Rugby Club only and is not shared.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendors/Sponsors sections now on dedicated pages: vendors.html and sponsors.html -->
+
+  <!-- ========================================
+       Payment Section
+       ======================================== -->
+  <section class="payment" id="payment">
+    <div class="container">
+      <h2 class="section-title reveal">Payment Information</h2>
+      <p class="reveal" style="max-width: 600px; margin: 0 auto var(--space-xl);">
+        Pay by Venmo or Zelle after submitting your registration form. 
+        Both are registered under the same email.
+      </p>
+      
+      <div class="payment-methods reveal">
+        <div class="payment-method">
+          <div class="payment-method-icon">
+            <svg viewBox="0 0 24 24" fill="#008CFF">
+              <path d="M19.6 4.7c.5 1.1.7 2.1.7 3.5 0 4.3-3.6 9.9-6.5 13.8H8.1L5.4 3.6l5.2-.5L12 16.1c1.5-2.8 3.4-6.9 3.4-9.6 0-1.3-.3-2.1-.6-2.8l4.8 1z"/>
+            </svg>
+          </div>
+          <h3>Venmo</h3>
+          <div class="email">sarasotarugbyclub@gmail.com</div>
+        </div>
+        
+        <div class="payment-method">
+          <div class="payment-method-icon">
+            <svg viewBox="0 0 24 24" fill="#6D1ED4">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+            </svg>
+          </div>
+          <h3>Zelle</h3>
+          <div class="email">sarasotarugbyclub@gmail.com</div>
+        </div>
+      </div>
+      
+      <div class="payment-qr reveal">
+        <img src="assets/images/qr-code.png" alt="Payment QR Code" onerror="this.parentElement.innerHTML='<p style=&quot;color: var(--navy); opacity: 0.7;&quot;>QR Code Coming Soon!</p>'">
+        <p>Scan to pay instantly!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Footer
+       ======================================== -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>SIESTA 7s</h3>
+          <p>
+            The first annual beach rugby tournament on America's #1 beach. 
+            Hosted by <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer" class="footer-club-link">Sarasota Rugby Club</a>.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/srqsurge/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/srqsurge" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#register">Team Registration</a>
+          <a href="#freeagent">Free Agent</a>
+          <a href="vendors.html">Vendors</a>
+          <a href="sponsors.html">Sponsors</a>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Sarasota Rugby Club</h4>
+          <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer">Club Home</a>
+          <a href="https://www.sarasotarugbyclub.com/about" target="_blank" rel="noopener noreferrer">About the Club</a>
+          <a href="https://www.sarasotarugbyclub.com/mens-team" target="_blank" rel="noopener noreferrer">Men's Team</a>
+          <a href="https://www.sarasotarugbyclub.com/youthrugbyteam" target="_blank" rel="noopener noreferrer">Youth Academy</a>
+          <a href="https://www.sarasotarugbyclub.com/calendar" target="_blank" rel="noopener noreferrer">Club Calendar</a>
+          <a href="https://www.sarasotarugbyclub.com/sponsorship" target="_blank" rel="noopener noreferrer">Sponsor the Club</a>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <a href="mailto:sarasotarugbyclub@gmail.com">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            sarasotarugbyclub@gmail.com
+          </a>
+          <a href="https://goo.gl/maps/SiestaKeyBeach" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Siesta Key Beach, Sarasota, FL
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sarasota Rugby Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-cta">
+    <div class="mobile-cta-buttons">
+      <a href="#register" class="btn btn-primary">Register Team</a>
+      <a href="#freeagent" class="btn btn-secondary">Free Agent</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

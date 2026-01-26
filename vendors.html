@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Become a vendor at Siesta 7s beach rugby tournament. Food, retail, and service vendors wanted for Siesta Key Beach, May 16, 2025.">
+  <meta name="keywords" content="vendor opportunity, beach event vendors, Siesta Key vendors, rugby tournament vendors, food vendors Florida">
+  
+  <meta property="og:title" content="Vendor Opportunities | Siesta 7s Beach Rugby">
+  <meta property="og:description" content="Get your brand in front of players, fans, and tourists at America's #1 beach. Apply now!">
+  <meta property="og:type" content="website">
+  
+  <title>Vendor Opportunities | Siesta 7s Beach Rugby Tournament</title>
+  
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Page-specific styles */
+    .page-hero {
+      padding: 180px 0 100px;
+      background: var(--gradient-navy);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") repeat;
+      opacity: 0.5;
+    }
+    
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .page-hero h1 {
+      color: var(--gold);
+      margin-bottom: var(--space-md);
+    }
+    
+    .page-hero p {
+      font-size: var(--text-xl);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: rgba(255,255,255,0.8);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-xl);
+      transition: color var(--transition-fast);
+    }
+    
+    .back-link:hover {
+      color: var(--gold);
+    }
+    
+    .back-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .benefit-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all var(--transition-base);
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-lg);
+    }
+    
+    .benefit-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--white);
+    }
+    
+    .benefit-card h3 {
+      color: var(--navy);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-md);
+    }
+    
+    .benefit-card p {
+      color: var(--navy);
+      opacity: 0.8;
+      font-size: var(--text-base);
+    }
+    
+    .vendor-types {
+      background: var(--navy);
+      color: var(--white);
+      padding: var(--space-section) 0;
+    }
+    
+    .vendor-types .section-title {
+      color: var(--white);
+    }
+    
+    .vendor-types .section-title::after {
+      background: var(--gold);
+    }
+    
+    .type-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-lg);
+    }
+    
+    .type-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    
+    .type-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-3px);
+    }
+    
+    .type-card h4 {
+      color: var(--gold);
+      margin-bottom: var(--space-md);
+    }
+    
+    .type-card p {
+      font-size: var(--text-sm);
+      opacity: 0.85;
+    }
+    
+    .logistics-section {
+      background: var(--sand);
+    }
+    
+    .logistics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .logistics-item {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+    
+    .logistics-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .logistics-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--white);
+    }
+    
+    .logistics-content h4 {
+      color: var(--navy);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .logistics-content p {
+      color: var(--navy);
+      opacity: 0.8;
+    }
+    
+    .faq-section {
+      background: var(--white);
+    }
+    
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: var(--space-xl) 0;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-md);
+    }
+    
+    .faq-answer {
+      color: var(--navy);
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+    
+    .apply-section {
+      background: var(--sand);
+    }
+    
+    .apply-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+    
+    @media (max-width: 900px) {
+      .apply-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/siesta7s-logo.png" alt="Siesta 7s Logo">
+      </a>
+      
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#schedule" class="nav-link">Schedule</a></li>
+        <li><a href="index.html#register" class="nav-link">Register</a></li>
+        <li><a href="vendors.html" class="nav-link" style="color: var(--gold);">Vendors</a></li>
+        <li><a href="sponsors.html" class="nav-link">Sponsors</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Main Site
+      </a>
+      <h1>Become a Vendor</h1>
+      <p>Get your brand in front of players, fans, and tourists at America's #1 beach. Join us for an unforgettable day on Siesta Key.</p>
+    </div>
+  </section>
+
+  <!-- Why Vend Section -->
+  <section class="registration" style="padding-top: var(--space-section);">
+    <div class="container">
+      <h2 class="section-title reveal">Why Vend at Siesta 7s?</h2>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>Prime Location</h3>
+          <p>Set up right on Siesta Key Beach — voted America's #1 beach. You'll have access to tournament attendees, local beachgoers, and tourists alike.</p>
+        </div>
+        
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          </div>
+          <h3>Engaged Audience</h3>
+          <p>Rugby players and fans are known for their enthusiasm and community spirit. You'll meet hundreds of engaged visitors ready to support local vendors.</p>
+        </div>
+        
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <h3>Full Day Exposure</h3>
+          <p>From 9 AM to 5 PM, you'll have continuous foot traffic as matches run throughout the day. The beach atmosphere keeps crowds lingering longer.</p>
+        </div>
+        
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Marketing Boost</h3>
+          <p>All vendors are promoted on our social media channels and event materials. Get exposure before, during, and after the event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendor Types -->
+  <section class="vendor-types">
+    <div class="container">
+      <h2 class="section-title reveal">Vendor Categories We're Looking For</h2>
+      
+      <div class="type-cards">
+        <div class="type-card reveal">
+          <h4>🍔 Food & Beverage</h4>
+          <p>Food trucks, BBQ, tacos, acai bowls, coffee, smoothies, and more. Feed hungry players and fans between matches!</p>
+        </div>
+        
+        <div class="type-card reveal">
+          <h4>👕 Retail & Merchandise</h4>
+          <p>Beach apparel, rugby gear, sunglasses, hats, jewelry, and local crafts. Perfect for impulse buys in a festive atmosphere.</p>
+        </div>
+        
+        <div class="type-card reveal">
+          <h4>💆 Services</h4>
+          <p>Sports massage, physiotherapy, face painting, photography, and wellness services. Help attendees feel their best.</p>
+        </div>
+        
+        <div class="type-card reveal">
+          <h4>🎨 Local Artisans</h4>
+          <p>Handmade goods, artwork, custom apparel, and unique Sarasota-made products. Show off local creativity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logistics -->
+  <section class="logistics-section registration">
+    <div class="container">
+      <h2 class="section-title reveal">What's Included</h2>
+      
+      <div class="logistics-grid">
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Full-Day Setup</h4>
+            <p>Arrive from 7:30 AM for setup. Event runs 9 AM - 5 PM. Teardown by 6 PM.</p>
+          </div>
+        </div>
+        
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Prime Beach Spot</h4>
+            <p>Assigned spot in the vendor area adjacent to the tournament fields and spectator zones.</p>
+          </div>
+        </div>
+        
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Transportation Help</h4>
+            <p>ATVs available to help transport your gear from the parking area to the beach setup location.</p>
+          </div>
+        </div>
+        
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Power Access</h4>
+            <p>Limited power hookups available on request. Generator use permitted for food vendors.</p>
+          </div>
+        </div>
+        
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Signage Included</h4>
+            <p>Your business name on event signage and vendor directory for easy visibility.</p>
+          </div>
+        </div>
+        
+        <div class="logistics-item reveal">
+          <div class="logistics-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <div class="logistics-content">
+            <h4>Vendor Coordinator</h4>
+            <p>Dedicated point of contact for questions, setup assistance, and day-of support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="registration registration-alt">
+    <div class="container">
+      <h2 class="section-title reveal">Vendor Pricing</h2>
+      
+      <div class="pricing-table reveal" id="vendor-pricing" style="max-width: 700px; margin: 0 auto var(--space-3xl);">
+        <table>
+          <thead>
+            <tr>
+              <th>Registration Tier</th>
+              <th>Price</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tier="0">
+              <td class="tier-name">Early Rate</td>
+              <td class="tier-price">$250</td>
+              <td class="tier-deadline">April 15, 2025</td>
+            </tr>
+            <tr data-tier="1">
+              <td class="tier-name">Standard Rate</td>
+              <td class="tier-price">$300</td>
+              <td class="tier-deadline">May 9, 2025</td>
+            </tr>
+            <tr data-tier="2">
+              <td class="tier-name">Last-Minute Rate</td>
+              <td class="tier-price">$350</td>
+              <td class="tier-deadline">May 15, 2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="text-center reveal" style="max-width: 600px; margin: 0 auto; color: var(--navy); opacity: 0.8;">
+        Lock in the early rate and save $100! Vendor spots are limited, so apply early to secure your place.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section registration">
+    <div class="container">
+      <h2 class="section-title reveal">Frequently Asked Questions</h2>
+      
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-question">What size is the vendor space?</div>
+          <div class="faq-answer">Standard vendor spaces are approximately 10' x 10'. Larger spaces may be available upon request — just note your needs in the application.</div>
+        </div>
+        
+        <div class="faq-item reveal">
+          <div class="faq-question">Do I need any permits?</div>
+          <div class="faq-answer">Food vendors must have a valid Florida food service license or temporary event permit. We can provide guidance on obtaining the necessary permits for Sarasota County.</div>
+        </div>
+        
+        <div class="faq-item reveal">
+          <div class="faq-question">Is there parking for vendors?</div>
+          <div class="faq-answer">Yes! Vendors receive reserved parking in a designated lot. ATVs will help transport your gear to the beach setup area.</div>
+        </div>
+        
+        <div class="faq-item reveal">
+          <div class="faq-question">What if it rains?</div>
+          <div class="faq-answer">The event runs rain or shine. We'll provide weather updates leading up to the event. In case of severe weather cancellation, vendors will receive a full refund.</div>
+        </div>
+        
+        <div class="faq-item reveal">
+          <div class="faq-question">Can I bring my own tent/canopy?</div>
+          <div class="faq-answer">Absolutely! We recommend a 10x10 pop-up canopy. You're responsible for your own setup, but we have volunteers to assist if needed. All structures must be weighted down properly for beach conditions.</div>
+        </div>
+        
+        <div class="faq-item reveal">
+          <div class="faq-question">How do I get my fee refunded if I can't make it?</div>
+          <div class="faq-answer">Cancellations made 30+ days before the event receive a full refund. 14-30 days: 50% refund. Less than 14 days: no refund, but we'll try to find a replacement vendor and refund if successful.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="apply-section registration">
+    <div class="container">
+      <h2 class="section-title reveal">Apply to Vend</h2>
+      
+      <div class="apply-grid">
+        <div class="registration-info reveal">
+          <h3>Ready to Join Us?</h3>
+          <p>Fill out the application form and we'll get back to you within 48 hours to confirm your spot and discuss any special requirements.</p>
+          
+          <h3 class="mt-xl">Questions?</h3>
+          <p>Contact us at <a href="mailto:sarasotarugbyclub@gmail.com" style="color: var(--orange);">sarasotarugbyclub@gmail.com</a></p>
+          
+          <h3 class="mt-xl">Payment Info</h3>
+          <p>After approval, pay via:</p>
+          <ul style="margin-top: var(--space-md);">
+            <li style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm); color: var(--navy);">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--teal)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Venmo: sarasotarugbyclub@gmail.com
+            </li>
+            <li style="display: flex; align-items: center; gap: var(--space-md); color: var(--navy);">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--teal)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Zelle: sarasotarugbyclub@gmail.com
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Vendor Application Form -->
+        <div class="form-card reveal">
+          <h3>Vendor Application</h3>
+          <form data-form-type="Vendors">
+            <div class="form-hp" aria-hidden="true">
+              <label>Leave empty</label>
+              <input type="text" name="hp_field" tabindex="-1" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Business/Vendor Name <span class="required">*</span></label>
+              <input type="text" name="businessName" class="form-input" required placeholder="Your business name">
+              <div class="form-error">Please enter your business name</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Contact Person <span class="required">*</span></label>
+              <input type="text" name="contactName" class="form-input" required placeholder="Full name">
+              <div class="form-error">Please enter contact name</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email <span class="required">*</span></label>
+              <input type="email" name="email" class="form-input" required placeholder="email@example.com">
+              <div class="form-error">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Phone <span class="required">*</span></label>
+              <input type="tel" name="phone" class="form-input" required placeholder="(123) 456-7890">
+              <div class="form-error">Please enter a valid phone number</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Vendor Type <span class="required">*</span></label>
+              <select name="vendorType" class="form-select" required>
+                <option value="">Select type</option>
+                <option value="Food & Beverage">Food & Beverage</option>
+                <option value="Retail & Merchandise">Retail & Merchandise</option>
+                <option value="Services">Services</option>
+                <option value="Local Artisan">Local Artisan</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="form-error">Please select vendor type</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">What will you be selling/offering? <span class="required">*</span></label>
+              <textarea name="description" class="form-textarea" required placeholder="Describe your products or services"></textarea>
+              <div class="form-error">Please describe your offerings</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Do you need power access? <span class="required">*</span></label>
+              <select name="needsPower" class="form-select" required>
+                <option value="">Select</option>
+                <option value="Yes">Yes, I need power</option>
+                <option value="No">No, I don't need power</option>
+              </select>
+              <div class="form-error">Please indicate if you need power</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Special requirements or notes</label>
+              <textarea name="specialRequirements" class="form-textarea" placeholder="Space requirements, setup needs, etc."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Submit Application
+            </button>
+            
+            <p class="form-privacy">
+              🔒 Your info goes to Sarasota Rugby Club only and is not shared.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>SIESTA 7s</h3>
+          <p>The first annual beach rugby tournament on America's #1 beach. Hosted by <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer" class="footer-club-link">Sarasota Rugby Club</a>.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/srqsurge/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/srqsurge" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="index.html#register">Team Registration</a>
+          <a href="index.html#freeagent">Free Agent</a>
+          <a href="vendors.html">Vendors</a>
+          <a href="sponsors.html">Sponsors</a>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <a href="mailto:sarasotarugbyclub@gmail.com">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            sarasotarugbyclub@gmail.com
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sarasota Rugby Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
