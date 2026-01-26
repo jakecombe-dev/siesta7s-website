@@ -319,6 +319,13 @@ async function handleFormSubmit(e) {
     data.fields.amountDue = currentTier.price;
   }
   
+  // Generate team code for Teams registration
+  let teamCode = null;
+  if (formType === 'Teams') {
+    teamCode = generateTeamCode();
+    data.fields.teamCode = teamCode;
+  }
+  
   try {
     // If Google Script URL is configured, submit to it
     if (CONFIG.googleScriptUrl) {
@@ -333,7 +340,7 @@ async function handleFormSubmit(e) {
     }
     
     // Show success state
-    showFormSuccess(form, formType, data.fields.amountDue);
+    showFormSuccess(form, formType, data.fields.amountDue, teamCode);
     
   } catch (error) {
     console.error('Form submission error:', error);
@@ -398,7 +405,7 @@ function validateForm(form) {
   return isValid;
 }
 
-function showFormSuccess(form, formType, amount) {
+function showFormSuccess(form, formType, amount, teamCode = null) {
   const formCard = form.closest('.form-card');
   
   let paymentMessage = '';
@@ -412,6 +419,21 @@ function showFormSuccess(form, formType, amount) {
     `;
   }
   
+  // Team code message for Team registrations
+  let teamCodeMessage = '';
+  if (teamCode) {
+    teamCodeMessage = `
+      <div style="background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+        <p style="font-size: 0.875rem; margin-bottom: 0.5rem; opacity: 0.9;">Your Team Code:</p>
+        <p style="font-size: 1.5rem; font-weight: 700; font-family: monospace; letter-spacing: 2px; margin-bottom: 0.5rem;">${teamCode}</p>
+        <p style="font-size: 0.75rem; opacity: 0.8;">⚠️ Save this code! You'll need it to manage your roster.</p>
+      </div>
+      <p style="margin-bottom: 1rem;">
+        <a href="team-portal.html" style="color: #2d8b9e; font-weight: 600;">Go to Team Captain Portal →</a>
+      </p>
+    `;
+  }
+  
   formCard.innerHTML = `
     <div class="form-success">
       <div class="form-success-icon">
@@ -421,6 +443,7 @@ function showFormSuccess(form, formType, amount) {
       </div>
       <h3>You're In! 🎉</h3>
       <p>Your ${formType.toLowerCase()} registration has been submitted successfully.</p>
+      ${teamCodeMessage}
       ${paymentMessage}
       <p>Questions? Email us at sarasotarugbyclub@gmail.com</p>
     </div>
@@ -428,6 +451,16 @@ function showFormSuccess(form, formType, amount) {
   
   // Scroll to success message
   formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Generate unique team code
+function generateTeamCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Removed confusing chars like 0,O,1,I
+  let code = 'S7-';
+  for (let i = 0; i < 6; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
 }
 
 // ========================================
