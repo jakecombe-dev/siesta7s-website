@@ -230,10 +230,12 @@
     <div class="hero-bg-overlay" aria-hidden="true"></div>
     <div class="hero-palms"></div>
     <div class="hero-content">
-      <span class="hero-badge">🏉 First Annual Event</span>
+      <span class="hero-badge hero-badge-animated">🔥 INAUGURAL EVENT • MAY 2025 🔥</span>
       
       <!-- Hero Logo - Main Branding -->
       <img src="assets/images/logo.png" alt="Siesta 7s Logo" class="hero-logo hero-logo-large" onerror="this.style.display='none'">
+      
+      <p class="hero-headline">Florida's Hottest New Beach Rugby Tournament</p>
       
       <div class="hero-meta">
         <div class="hero-meta-item">
@@ -242,11 +244,11 @@
         </div>
         <div class="hero-meta-item">
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Siesta Key Beach, Sarasota FL
+          Siesta Key Beach — America's #1 Beach
         </div>
       </div>
       
-      <p class="hero-tagline">Beach Rugby • Music • Community • Competition</p>
+      <p class="hero-tagline">Sun. Sand. Scrums. One Epic Day.</p>
       
       <!-- Countdown Timer -->
       <div class="countdown" id="countdown">
@@ -254,9 +256,11 @@
       </div>
       
       <div class="hero-ctas">
-        <a href="#register" class="btn btn-primary btn-lg">Register Your Team</a>
+        <a href="#register" class="btn btn-primary btn-lg btn-pulse">🏉 Claim Your Spot</a>
         <a href="#freeagent" class="btn btn-secondary btn-lg">Join as Free Agent</a>
       </div>
+      
+      <p class="hero-limited">⚡ Limited to 16 Teams — Don't Miss Out!</p>
     </div>
   </section>
 
@@ -323,54 +327,8 @@
     <div class="container">
       <h2 class="section-title reveal">Weekend Schedule</h2>
       
-      <div class="schedule-timeline">
-        <div class="schedule-item reveal">
-          <div class="schedule-time">
-            <div class="schedule-day">Friday</div>
-            <div class="schedule-date">May 15, 2025</div>
-          </div>
-          <div class="schedule-content">
-            <h3>Pre-Tournament Party</h3>
-            <div class="time">6:00 PM - 9:00 PM</div>
-            <div class="location">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-              Daiquiri Deck Southbridge
-            </div>
-            <p>Kick off the weekend right! Meet other teams, enjoy live music, enter the 50/50 raffle, compete in the cornhole tournament, and grab some giveaways. The perfect warm-up for tournament day.</p>
-          </div>
-        </div>
-        
-        <div class="schedule-item reveal">
-          <div class="schedule-time">
-            <div class="schedule-day">Saturday</div>
-            <div class="schedule-date">May 16, 2025</div>
-          </div>
-          <div class="schedule-content">
-            <h3>Tournament Day</h3>
-            <div class="time">Kickoff at 9:00 AM</div>
-            <div class="location">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-              Siesta Key Beach
-            </div>
-            <p>The main event! Beach rugby matches throughout the day on the famous white quartz sand. Food vendors, merchandise, music, and incredible beach atmosphere. Awards ceremony following the final matches.</p>
-          </div>
-        </div>
-        
-        <div class="schedule-item reveal">
-          <div class="schedule-time">
-            <div class="schedule-day">Saturday</div>
-            <div class="schedule-date">Evening</div>
-          </div>
-          <div class="schedule-content">
-            <h3>Siesta Stumble Bar Crawl</h3>
-            <div class="time">After Tournament Concludes</div>
-            <div class="location">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-              Siesta Key Village
-            </div>
-            <p>Keep the celebration going! Post-tournament bar crawl hitting multiple iconic Siesta Key Village spots. All venues within walking distance — no driving needed. The perfect way to cap off an epic day.</p>
-          </div>
-        </div>
+      <div class="schedule-timeline" id="schedule-timeline">
+        <!-- Schedule items will be loaded dynamically from localStorage -->
       </div>
     </div>
   </section>

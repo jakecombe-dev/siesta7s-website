@@ -1159,6 +1159,337 @@
       document.getElementById('deleteModal').classList.remove('active');
       currentDelete = null;
     }
+
+    // =====================================================
+    // SCHEDULE MANAGEMENT
+    // =====================================================
+    
+    const DEFAULT_SCHEDULE = [
+      {
+        day: 'Friday',
+        date: 'May 15, 2025',
+        title: 'Pre-Tournament Party',
+        time: '6:00 PM - 9:00 PM',
+        location: 'Daiquiri Deck Southbridge',
+        description: 'Kick off the weekend right! Meet other teams, enjoy live music, enter the 50/50 raffle, compete in the cornhole tournament, and grab some giveaways. The perfect warm-up for tournament day.'
+      },
+      {
+        day: 'Saturday',
+        date: 'May 16, 2025',
+        title: 'Tournament Day',
+        time: 'Kickoff at 9:00 AM',
+        location: 'Siesta Key Beach',
+        description: 'The main event! Beach rugby matches throughout the day on the famous white quartz sand. Food vendors, merchandise, music, and incredible beach atmosphere. Awards ceremony following the final matches.'
+      },
+      {
+        day: 'Saturday',
+        date: 'Evening',
+        title: 'Siesta Stumble Bar Crawl',
+        time: 'After Tournament Concludes',
+        location: 'Siesta Key Village',
+        description: 'Keep the celebration going! Post-tournament bar crawl hitting multiple iconic Siesta Key Village spots. All venues within walking distance — no driving needed. The perfect way to cap off an epic day.'
+      }
+    ];
+
+    const DEFAULT_TEAM_PRICING = [
+      { name: 'Super Early', price: '$200', deadline: 'February 28, 2025' },
+      { name: 'Early Bird', price: '$250', deadline: 'March 31, 2025' },
+      { name: 'Regular', price: '$300', deadline: 'April 30, 2025' },
+      { name: 'Late', price: '$350', deadline: 'May 15, 2025' }
+    ];
+
+    const DEFAULT_FREEAGENT_PRICING = [
+      { name: 'Earliest Rate', price: '$30', deadline: 'March 15, 2025' },
+      { name: 'Normal Rate', price: '$40', deadline: 'May 9, 2025' },
+      { name: 'Final Week Rate', price: '$50', deadline: 'May 15, 2025' }
+    ];
+
+    function getScheduleData() {
+      const stored = localStorage.getItem('siesta7s_schedule');
+      if (stored) return JSON.parse(stored);
+      // Seed with defaults
+      localStorage.setItem('siesta7s_schedule', JSON.stringify(DEFAULT_SCHEDULE));
+      return DEFAULT_SCHEDULE;
+    }
+
+    function saveScheduleData(data) {
+      localStorage.setItem('siesta7s_schedule', JSON.stringify(data));
+    }
+
+    function getTeamPricingData() {
+      const stored = localStorage.getItem('siesta7s_team_pricing');
+      if (stored) return JSON.parse(stored);
+      localStorage.setItem('siesta7s_team_pricing', JSON.stringify(DEFAULT_TEAM_PRICING));
+      return DEFAULT_TEAM_PRICING;
+    }
+
+    function saveTeamPricingData(data) {
+      localStorage.setItem('siesta7s_team_pricing', JSON.stringify(data));
+    }
+
+    function getFreeagentPricingData() {
+      const stored = localStorage.getItem('siesta7s_freeagent_pricing');
+      if (stored) return JSON.parse(stored);
+      localStorage.setItem('siesta7s_freeagent_pricing', JSON.stringify(DEFAULT_FREEAGENT_PRICING));
+      return DEFAULT_FREEAGENT_PRICING;
+    }
+
+    function saveFreeagentPricingData(data) {
+      localStorage.setItem('siesta7s_freeagent_pricing', JSON.stringify(data));
+    }
+
+    function renderScheduleTable() {
+      const tbody = document.getElementById('scheduleBody');
+      const data = getScheduleData();
+      
+      if (!data || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--gray-600);">
+          No events scheduled. Click "Add Event" to create one.
+        </td></tr>`;
+        return;
+      }
+      
+      tbody.innerHTML = data.map((event, index) => `
+        <tr>
+          <td>${event.day}</td>
+          <td>${event.date}</td>
+          <td><strong>${event.title}</strong></td>
+          <td>${event.time}</td>
+          <td>${event.location}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${event.description}">${event.description}</td>
+          <td>
+            <button class="action-btn" onclick="editScheduleEvent(${index})" title="Edit">✏️</button>
+            <button class="action-btn delete" onclick="deleteScheduleEvent(${index})" title="Delete">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openScheduleModal(index = -1) {
+      document.getElementById('scheduleEditIndex').value = index;
+      
+      if (index >= 0) {
+        const data = getScheduleData();
+        const event = data[index];
+        document.getElementById('scheduleModalTitle').textContent = 'Edit Event';
+        document.getElementById('scheduleDay').value = event.day;
+        document.getElementById('scheduleDate').value = event.date;
+        document.getElementById('scheduleTitle').value = event.title;
+        document.getElementById('scheduleTime').value = event.time;
+        document.getElementById('scheduleLocation').value = event.location;
+        document.getElementById('scheduleDescription').value = event.description;
+      } else {
+        document.getElementById('scheduleModalTitle').textContent = 'Add Event';
+        document.getElementById('scheduleDay').value = 'Friday';
+        document.getElementById('scheduleDate').value = '';
+        document.getElementById('scheduleTitle').value = '';
+        document.getElementById('scheduleTime').value = '';
+        document.getElementById('scheduleLocation').value = '';
+        document.getElementById('scheduleDescription').value = '';
+      }
+      
+      document.getElementById('scheduleModal').classList.add('active');
+    }
+
+    function editScheduleEvent(index) {
+      openScheduleModal(index);
+    }
+
+    function closeScheduleModal() {
+      document.getElementById('scheduleModal').classList.remove('active');
+    }
+
+    function saveScheduleEvent() {
+      const index = parseInt(document.getElementById('scheduleEditIndex').value);
+      const event = {
+        day: document.getElementById('scheduleDay').value,
+        date: document.getElementById('scheduleDate').value,
+        title: document.getElementById('scheduleTitle').value,
+        time: document.getElementById('scheduleTime').value,
+        location: document.getElementById('scheduleLocation').value,
+        description: document.getElementById('scheduleDescription').value
+      };
+      
+      if (!event.date || !event.title || !event.time || !event.location) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      const data = getScheduleData();
+      
+      if (index >= 0) {
+        data[index] = event;
+      } else {
+        data.push(event);
+      }
+      
+      saveScheduleData(data);
+      renderScheduleTable();
+      closeScheduleModal();
+      alert(index >= 0 ? 'Event updated!' : 'Event added!');
+    }
+
+    function deleteScheduleEvent(index) {
+      if (!confirm('Are you sure you want to delete this event?')) return;
+      
+      const data = getScheduleData();
+      data.splice(index, 1);
+      saveScheduleData(data);
+      renderScheduleTable();
+      alert('Event deleted!');
+    }
+
+    // =====================================================
+    // PRICING MANAGEMENT
+    // =====================================================
+
+    function renderPricingTables() {
+      renderTeamPricingTable();
+      renderFreeagentPricingTable();
+    }
+
+    function renderTeamPricingTable() {
+      const tbody = document.getElementById('teamPricingBody');
+      const data = getTeamPricingData();
+      
+      if (!data || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--gray-600);">
+          No pricing tiers. Click "Add Tier" to create one.
+        </td></tr>`;
+        return;
+      }
+      
+      tbody.innerHTML = data.map((tier, index) => `
+        <tr>
+          <td>${tier.name}</td>
+          <td><strong>${tier.price}</strong></td>
+          <td>${tier.deadline}</td>
+          <td>
+            <button class="action-btn" onclick="editPricingTier('team', ${index})" title="Edit">✏️</button>
+            <button class="action-btn delete" onclick="deletePricingTier('team', ${index})" title="Delete">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderFreeagentPricingTable() {
+      const tbody = document.getElementById('freeagentPricingBody');
+      const data = getFreeagentPricingData();
+      
+      if (!data || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--gray-600);">
+          No pricing tiers. Click "Add Tier" to create one.
+        </td></tr>`;
+        return;
+      }
+      
+      tbody.innerHTML = data.map((tier, index) => `
+        <tr>
+          <td>${tier.name}</td>
+          <td><strong>${tier.price}</strong></td>
+          <td>${tier.deadline}</td>
+          <td>
+            <button class="action-btn" onclick="editPricingTier('freeagent', ${index})" title="Edit">✏️</button>
+            <button class="action-btn delete" onclick="deletePricingTier('freeagent', ${index})" title="Delete">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openPricingModal(type, index = -1) {
+      document.getElementById('pricingEditIndex').value = index;
+      document.getElementById('pricingType').value = type;
+      
+      const typeLabel = type === 'team' ? 'Team' : 'Free Agent';
+      
+      if (index >= 0) {
+        const data = type === 'team' ? getTeamPricingData() : getFreeagentPricingData();
+        const tier = data[index];
+        document.getElementById('pricingModalTitle').textContent = `Edit ${typeLabel} Tier`;
+        document.getElementById('pricingTierName').value = tier.name;
+        document.getElementById('pricingPrice').value = tier.price;
+        document.getElementById('pricingDeadline').value = tier.deadline;
+      } else {
+        document.getElementById('pricingModalTitle').textContent = `Add ${typeLabel} Tier`;
+        document.getElementById('pricingTierName').value = '';
+        document.getElementById('pricingPrice').value = '';
+        document.getElementById('pricingDeadline').value = '';
+      }
+      
+      document.getElementById('pricingModal').classList.add('active');
+    }
+
+    function editPricingTier(type, index) {
+      openPricingModal(type, index);
+    }
+
+    function closePricingModal() {
+      document.getElementById('pricingModal').classList.remove('active');
+    }
+
+    function savePricingTier() {
+      const index = parseInt(document.getElementById('pricingEditIndex').value);
+      const type = document.getElementById('pricingType').value;
+      
+      const tier = {
+        name: document.getElementById('pricingTierName').value,
+        price: document.getElementById('pricingPrice').value,
+        deadline: document.getElementById('pricingDeadline').value
+      };
+      
+      if (!tier.name || !tier.price || !tier.deadline) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      let data;
+      if (type === 'team') {
+        data = getTeamPricingData();
+        if (index >= 0) data[index] = tier; else data.push(tier);
+        saveTeamPricingData(data);
+        renderTeamPricingTable();
+      } else {
+        data = getFreeagentPricingData();
+        if (index >= 0) data[index] = tier; else data.push(tier);
+        saveFreeagentPricingData(data);
+        renderFreeagentPricingTable();
+      }
+      
+      closePricingModal();
+      alert(index >= 0 ? 'Tier updated!' : 'Tier added!');
+    }
+
+    function deletePricingTier(type, index) {
+      if (!confirm('Are you sure you want to delete this tier?')) return;
+      
+      let data;
+      if (type === 'team') {
+        data = getTeamPricingData();
+        data.splice(index, 1);
+        saveTeamPricingData(data);
+        renderTeamPricingTable();
+      } else {
+        data = getFreeagentPricingData();
+        data.splice(index, 1);
+        saveFreeagentPricingData(data);
+        renderFreeagentPricingTable();
+      }
+      
+      alert('Tier deleted!');
+    }
+
+    // Initialize schedule and pricing on page load
+    function initContentManagement() {
+      renderScheduleTable();
+      renderPricingTables();
+    }
+
+    // Call init when dashboard loads
+    const originalShowDashboard = showDashboard;
+    showDashboard = function() {
+      originalShowDashboard();
+      initContentManagement();
+    };
   </script>
 </body>
 </html>
