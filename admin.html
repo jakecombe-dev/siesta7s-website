@@ -21,7 +21,106 @@
       --gray-600: #718096;
       --gray-800: #2d3748;
       --success: #48bb78;
+      --warning: #ed8936;
       --danger: #f56565;
+      
+      /* Light theme (default) */
+      --bg-primary: #f7fafc;
+      --bg-card: #ffffff;
+      --bg-hover: #f1f5f9;
+      --border-color: #e2e8f0;
+      --text-primary: #1a365d;
+      --text-secondary: #718096;
+      --text-muted: #a0aec0;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --bg-hover: #334155;
+      --border-color: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --gray-100: #1e293b;
+      --gray-200: #334155;
+      --gray-300: #475569;
+      --white: #1e293b;
+    }
+
+    [data-theme="dark"] .login-screen {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    }
+
+    [data-theme="dark"] .login-card {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .login-card h1 {
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .login-input {
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .dashboard-nav {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+    }
+
+    [data-theme="dark"] .stat-card,
+    [data-theme="dark"] .table-card,
+    [data-theme="dark"] .modal {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .stat-card .value {
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] th {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+
+    [data-theme="dark"] td {
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] tr:hover {
+      background: var(--bg-hover);
+    }
+
+    [data-theme="dark"] .modal-header,
+    [data-theme="dark"] .modal-footer,
+    [data-theme="dark"] .table-header {
+      border-color: var(--border-color);
+    }
+
+    [data-theme="dark"] .form-group input,
+    [data-theme="dark"] .form-group select,
+    [data-theme="dark"] .form-group textarea {
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .btn-secondary {
+      background: var(--bg-hover);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .refresh-btn {
+      background: var(--bg-hover);
+      border-color: var(--border-color);
+      color: var(--text-primary);
     }
 
     * {
@@ -308,20 +407,120 @@
     }
 
     .action-btn {
-      background: none;
-      border: none;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
       cursor: pointer;
-      padding: 0.25rem;
+      padding: 0.5rem;
       color: var(--gray-600);
-      transition: color 0.2s;
+      transition: all 0.2s ease;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.15rem;
+      position: relative;
+    }
+
+    .action-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+      transition: transform 0.2s ease;
     }
 
     .action-btn:hover {
-      color: var(--teal);
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(45, 139, 158, 0.25);
+    }
+
+    .action-btn:hover svg {
+      transform: scale(1.1);
     }
 
     .action-btn.delete:hover {
-      color: var(--danger);
+      background: var(--danger);
+      border-color: var(--danger);
+      box-shadow: 0 2px 8px rgba(245, 101, 101, 0.25);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Premium Tooltip System */
+    [data-tooltip] {
+      position: relative;
+    }
+
+    [data-tooltip]::before,
+    [data-tooltip]::after {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 9999;
+    }
+
+    [data-tooltip]::before {
+      content: attr(data-tooltip);
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      padding: 0.5rem 0.75rem;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(26, 54, 93, 0.25);
+    }
+
+    [data-tooltip]::after {
+      content: '';
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      border: 5px solid transparent;
+      border-top-color: var(--navy);
+    }
+
+    [data-tooltip]:hover::before,
+    [data-tooltip]:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    [data-tooltip]:hover::before {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    [data-tooltip]:hover::after {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Tooltip position variations */
+    [data-tooltip-position="bottom"]::before {
+      bottom: auto;
+      top: calc(100% + 8px);
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    [data-tooltip-position="bottom"]::after {
+      bottom: auto;
+      top: calc(100% + 4px);
+      border-top-color: transparent;
+      border-bottom-color: var(--navy);
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    [data-tooltip-position="bottom"]:hover::before,
+    [data-tooltip-position="bottom"]:hover::after {
+      transform: translateX(-50%) translateY(0);
     }
 
     /* Loading State */
@@ -394,6 +593,11 @@
       width: 100%;
       max-width: 650px;
       max-height: 85vh;
+      overflow: visible;
+    }
+
+    .modal-body {
+      max-height: 70vh;
       overflow-y: auto;
     }
 
@@ -496,6 +700,706 @@
       color: var(--success);
     }
 
+    /* Custom Date Picker Styles */
+    .date-picker-wrapper {
+      position: relative;
+    }
+
+    .date-picker-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      padding-right: 3rem;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .date-picker-input:hover {
+      border-color: var(--gray-300);
+    }
+
+    .date-picker-input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(45, 139, 158, 0.15);
+    }
+
+    .date-picker-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-600);
+      pointer-events: none;
+      font-size: 1.25rem;
+    }
+
+    .date-picker-calendar {
+      position: fixed;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+      min-width: 300px;
+    }
+
+    .date-picker-calendar.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0 1rem;
+      border-bottom: 1px solid var(--gray-200);
+      margin-bottom: 1rem;
+    }
+
+    .calendar-header button {
+      background: none;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .calendar-header button:hover {
+      background: var(--gray-100);
+      color: var(--teal);
+    }
+
+    .calendar-month-year {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-weekdays span {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--gray-800);
+      font-weight: 500;
+    }
+
+    .calendar-day:hover:not(.other-month):not(.selected) {
+      background: var(--gray-100);
+    }
+
+    .calendar-day.other-month {
+      color: var(--gray-300);
+    }
+
+    .calendar-day.today {
+      border: 2px solid var(--teal);
+    }
+
+    .calendar-day.selected {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .calendar-day.selected:hover {
+      background: #247a8a;
+    }
+
+    .calendar-footer {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray-200);
+      margin-top: 1rem;
+    }
+
+    .calendar-footer button {
+      background: none;
+      border: none;
+      color: var(--teal);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .calendar-footer button:hover {
+      background: rgba(45, 139, 158, 0.1);
+    }
+
+    /* ========================================
+       NEW DASHBOARD STYLES
+       ======================================== */
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+      margin-right: 0.75rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Quick Actions Bar */
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .quick-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .quick-action-btn.primary {
+      background: var(--teal);
+      color: white;
+    }
+
+    .quick-action-btn.primary:hover {
+      background: #247a8a;
+      transform: translateY(-1px);
+    }
+
+    .quick-action-btn.secondary {
+      background: var(--gray-100);
+      color: var(--gray-800);
+      border: 1px solid var(--gray-300);
+    }
+
+    .quick-action-btn.secondary:hover {
+      background: var(--gray-200);
+    }
+
+    [data-theme="dark"] .quick-actions {
+      background: var(--bg-card);
+    }
+
+    [data-theme="dark"] .quick-action-btn.secondary {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+
+    /* Alerts Section */
+    .alerts-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .alert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .alert-item.warning {
+      background: linear-gradient(135deg, rgba(237, 137, 54, 0.15) 0%, rgba(237, 137, 54, 0.08) 100%);
+      border: 1px solid rgba(237, 137, 54, 0.3);
+      color: #c05621;
+    }
+
+    .alert-item.success {
+      background: linear-gradient(135deg, rgba(72, 187, 120, 0.15) 0%, rgba(72, 187, 120, 0.08) 100%);
+      border: 1px solid rgba(72, 187, 120, 0.3);
+      color: #276749;
+    }
+
+    .alert-item.danger {
+      background: linear-gradient(135deg, rgba(245, 101, 101, 0.15) 0%, rgba(245, 101, 101, 0.08) 100%);
+      border: 1px solid rgba(245, 101, 101, 0.3);
+      color: #c53030;
+    }
+
+    [data-theme="dark"] .alert-item.warning {
+      color: #fbd38d;
+    }
+
+    [data-theme="dark"] .alert-item.success {
+      color: #9ae6b4;
+    }
+
+    [data-theme="dark"] .alert-item.danger {
+      color: #feb2b2;
+    }
+
+    .alert-btn {
+      background: rgba(0,0,0,0.1);
+      border: none;
+      padding: 0.375rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .alert-btn:hover {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* Progress Bar in Stat Card */
+    .stat-progress {
+      margin-top: 0.75rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-fill.normal {
+      background: linear-gradient(90deg, var(--teal) 0%, #3aa8bf 100%);
+    }
+
+    .progress-fill.warning {
+      background: linear-gradient(90deg, var(--warning) 0%, #f6ad55 100%);
+    }
+
+    .progress-fill.danger {
+      background: linear-gradient(90deg, var(--danger) 0%, #fc8181 100%);
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      margin-top: 0.25rem;
+    }
+
+    /* Stats with inline value */
+    .stat-inline {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .stat-inline .max {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    /* Dashboard Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dashboard-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Recent Lists */
+    .recent-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .recent-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .recent-header h3 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .recent-header .view-all {
+      font-size: 0.75rem;
+      color: var(--teal);
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .recent-header .view-all:hover {
+      color: #247a8a;
+    }
+
+    .recent-list {
+      padding: 0;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+      transition: background 0.2s;
+    }
+
+    .recent-item:last-child {
+      border-bottom: none;
+    }
+
+    .recent-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .recent-info {
+      flex: 1;
+    }
+
+    .recent-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      margin-bottom: 0.125rem;
+    }
+
+    .recent-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .recent-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .recent-empty {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    [data-theme="dark"] .recent-card {
+      background: var(--bg-card);
+    }
+
+    [data-theme="dark"] .recent-header,
+    [data-theme="dark"] .recent-item {
+      border-color: var(--border-color);
+    }
+
+    /* Activity Feed */
+    .activity-feed {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .activity-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .activity-header h3 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .activity-list {
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+      transition: background 0.2s;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .activity-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-text {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      margin-bottom: 0.125rem;
+    }
+
+    .activity-text strong {
+      font-weight: 600;
+    }
+
+    .activity-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .activity-empty {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    [data-theme="dark"] .activity-feed {
+      background: var(--bg-card);
+    }
+
+    [data-theme="dark"] .activity-header,
+    [data-theme="dark"] .activity-item {
+      border-color: var(--border-color);
+    }
+
+    /* Financial Card */
+    .financial-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+
+    .financial-total {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 0.25rem;
+    }
+
+    .financial-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .financial-breakdown {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .breakdown-item {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .breakdown-item strong {
+      color: var(--text-primary);
+    }
+
+    .payment-status {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-dot.paid {
+      background: var(--success);
+    }
+
+    .status-dot.pending {
+      background: var(--warning);
+    }
+
+    [data-theme="dark"] .financial-card {
+      background: var(--bg-card);
+    }
+
+    [data-theme="dark"] .financial-breakdown {
+      border-color: var(--border-color);
+    }
+
+    /* Countdown Card */
+    .countdown-card {
+      background: linear-gradient(135deg, var(--navy) 0%, #2d4a7c 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: white;
+      text-align: center;
+    }
+
+    .countdown-value {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .countdown-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown-date {
+      font-size: 0.875rem;
+      opacity: 0.7;
+    }
+
+    .countdown-card.urgent .countdown-value {
+      color: var(--gold);
+    }
+
+    /* Payment Toggle */
+    .payment-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .payment-toggle.paid {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+
+    .payment-toggle.unpaid {
+      background: #feebc8;
+      color: #744210;
+    }
+
+    .payment-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    [data-theme="dark"] .payment-toggle.paid {
+      background: rgba(72, 187, 120, 0.2);
+      color: #9ae6b4;
+    }
+
+    [data-theme="dark"] .payment-toggle.unpaid {
+      background: rgba(237, 137, 54, 0.2);
+      color: #fbd38d;
+    }
+
     @media (max-width: 768px) {
       .dashboard-nav {
         overflow-x: auto;
@@ -509,6 +1413,192 @@
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+    }
+
+    /* =====================================================
+       TOURNAMENT STYLES
+       ===================================================== */
+    
+    /* Pool Cards */
+    .pool-card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      color: white;
+    }
+
+    .pool-header h4 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .pool-count {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+
+    .pool-teams {
+      min-height: 120px;
+      padding: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-content: flex-start;
+      transition: background 0.2s;
+    }
+
+    .pool-teams.pool-drop-active {
+      background: rgba(45, 139, 158, 0.1);
+    }
+
+    .pool-empty {
+      color: var(--gray-400);
+      font-style: italic;
+      font-size: 0.875rem;
+      width: 100%;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* Team Chips */
+    .team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: grab;
+      transition: all 0.2s;
+    }
+
+    .team-chip:hover {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    .team-chip.unassigned {
+      background: #fef3cd;
+      border-color: #ffc107;
+      color: #856404;
+    }
+
+    .team-chip.unassigned:hover {
+      background: #ffc107;
+      color: #212529;
+    }
+
+    .team-chip-remove {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .team-chip-remove:hover {
+      opacity: 1;
+    }
+
+    /* Match Status Badges */
+    .match-status {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-upcoming {
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    .status-live {
+      background: #fed7d7;
+      color: #c53030;
+      animation: pulse-live 2s infinite;
+    }
+
+    .status-final {
+      background: #c6f6d5;
+      color: #276749;
+    }
+
+    @keyframes pulse-live {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Match Row - Live Highlight */
+    tr.match-live {
+      background: rgba(254, 215, 215, 0.3) !important;
+    }
+
+    /* Score Display */
+    .score-display {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--gray-100);
+      border-radius: 4px;
+    }
+
+    .score-display.score-final {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      color: white;
+    }
+
+    /* Standings */
+    .standing-leader td {
+      background: rgba(45, 139, 158, 0.1);
+    }
+
+    .standing-leader td:first-child {
+      border-left: 3px solid var(--teal);
+    }
+
+    /* Dark mode tournament styles */
+    [data-theme="dark"] .pool-card {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+    }
+
+    [data-theme="dark"] .pool-teams {
+      background: var(--bg-primary);
+    }
+
+    [data-theme="dark"] .team-chip {
+      background: var(--bg-hover);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .team-chip:hover {
+      background: var(--teal);
+      color: white;
+    }
+
+    [data-theme="dark"] .score-display {
+      background: var(--bg-hover);
+      color: var(--text-primary);
     }
   </style>
 </head>
@@ -531,26 +1621,55 @@
   <div class="dashboard" id="dashboard">
     <header class="dashboard-header">
       <h1>🏉 Siesta 7s — Event Dashboard</h1>
-      <button class="logout-btn" id="logoutBtn">Logout</button>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+        <button class="logout-btn" id="logoutBtn" data-tooltip="Sign out of dashboard" data-tooltip-position="bottom">Logout</button>
+      </div>
     </header>
 
     <nav class="dashboard-nav">
-      <button class="nav-tab active" data-tab="overview">Overview</button>
-      <button class="nav-tab" data-tab="teams">Teams</button>
-      <button class="nav-tab" data-tab="freeagents">Free Agents</button>
-      <button class="nav-tab" data-tab="vendors">Vendors</button>
-      <button class="nav-tab" data-tab="sponsors">Sponsors</button>
-      <button class="nav-tab" data-tab="schedule">Schedule</button>
-      <button class="nav-tab" data-tab="pricing">Pricing</button>
+      <button class="nav-tab active" data-tab="overview" data-tooltip="Dashboard overview" data-tooltip-position="bottom">Overview</button>
+      <button class="nav-tab" data-tab="teams" data-tooltip="View team registrations" data-tooltip-position="bottom">Teams</button>
+      <button class="nav-tab" data-tab="freeagents" data-tooltip="View free agent signups" data-tooltip-position="bottom">Free Agents</button>
+      <button class="nav-tab" data-tab="vendors" data-tooltip="View vendor applications" data-tooltip-position="bottom">Vendors</button>
+      <button class="nav-tab" data-tab="sponsors" data-tooltip="View sponsor inquiries" data-tooltip-position="bottom">Sponsors</button>
+      <button class="nav-tab" data-tab="schedule" data-tooltip="Manage event schedule" data-tooltip-position="bottom">Schedule</button>
+      <button class="nav-tab" data-tab="tournament" data-tooltip="Manage tournament brackets & scores" data-tooltip-position="bottom">🏆 Tournament</button>
+      <button class="nav-tab" data-tab="pricing" data-tooltip="Manage pricing tiers" data-tooltip-position="bottom">Pricing</button>
     </nav>
 
     <main class="dashboard-content">
       <!-- Overview Tab -->
       <div class="tab-panel active" id="overview">
+        
+        <!-- Quick Actions Bar -->
+        <div class="quick-actions">
+          <button class="quick-action-btn primary" onclick="navigateToTab('teams')">➕ Add Team</button>
+          <button class="quick-action-btn primary" onclick="navigateToTab('freeagents')">➕ Add Free Agent</button>
+          <button class="quick-action-btn secondary" onclick="emailAllTeams()">📧 Email Teams</button>
+          <button class="quick-action-btn secondary" onclick="emailAllFreeAgents()">📧 Email Free Agents</button>
+          <button class="quick-action-btn secondary" onclick="exportAllData()">📊 Export Data</button>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="alerts-section" id="alertsSection">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Stats Row -->
         <div class="stats-grid">
           <div class="stat-card clickable" data-navigate="teams">
             <h3>Teams Registered</h3>
-            <div class="value" id="teamCount">-</div>
+            <div class="stat-inline">
+              <div class="value" id="teamCount">-</div>
+              <span class="max">/ 16</span>
+            </div>
+            <div class="stat-progress">
+              <div class="progress-bar">
+                <div class="progress-fill normal" id="teamProgress" style="width: 0%"></div>
+              </div>
+              <div class="progress-text" id="teamProgressText">0% capacity</div>
+            </div>
           </div>
           <div class="stat-card clickable" data-navigate="freeagents">
             <h3>Free Agents</h3>
@@ -566,16 +1685,57 @@
           </div>
         </div>
 
-        <div class="stats-grid">
-          <div class="stat-card">
-            <h3>Total Revenue (Expected)</h3>
-            <div class="value revenue" id="totalRevenue">$0</div>
-            <div class="subtext">Based on registration fees</div>
+        <!-- Financial & Countdown Row -->
+        <div class="dashboard-grid">
+          <div class="financial-card">
+            <div class="financial-total" id="totalRevenue">$0</div>
+            <div class="financial-label">Total Expected Revenue</div>
+            <div class="financial-breakdown">
+              <span class="breakdown-item">Teams: <strong id="teamRevenue">$0</strong></span>
+              <span class="breakdown-item">Free Agents: <strong id="agentRevenue">$0</strong></span>
+              <span class="breakdown-item">Vendors: <strong id="vendorRevenue">$0</strong></span>
+            </div>
+            <div class="payment-status">
+              <span class="status-item"><span class="status-dot paid"></span> <span id="paidCount">0</span> Paid</span>
+              <span class="status-item"><span class="status-dot pending"></span> <span id="unpaidCount">0</span> Pending</span>
+            </div>
           </div>
-          <div class="stat-card">
-            <h3>Days Until Event</h3>
-            <div class="value" id="daysUntil">-</div>
-            <div class="subtext">May 16, 2025</div>
+          <div class="countdown-card" id="countdownCard">
+            <div class="countdown-value" id="daysUntil">-</div>
+            <div class="countdown-label">Days Until Event</div>
+            <div class="countdown-date">May 16, 2026</div>
+          </div>
+        </div>
+
+        <!-- Recent Registrations -->
+        <div class="dashboard-grid">
+          <div class="recent-card">
+            <div class="recent-header">
+              <h3>🏉 Recent Teams</h3>
+              <span class="view-all" onclick="navigateToTab('teams')">View All →</span>
+            </div>
+            <div class="recent-list" id="recentTeamsList">
+              <div class="recent-empty">No teams registered yet</div>
+            </div>
+          </div>
+          <div class="recent-card">
+            <div class="recent-header">
+              <h3>👤 Recent Free Agents</h3>
+              <span class="view-all" onclick="navigateToTab('freeagents')">View All →</span>
+            </div>
+            <div class="recent-list" id="recentAgentsList">
+              <div class="recent-empty">No free agents registered yet</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="activity-header">
+            <h3>📋 Activity Feed</h3>
+          </div>
+          <div class="activity-list" id="activityFeed">
+            <div class="activity-empty">No recent activity</div>
           </div>
         </div>
       </div>
@@ -585,7 +1745,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Team Registrations</h2>
-            <button class="refresh-btn" onclick="loadData('Teams')">
+            <button class="refresh-btn" onclick="loadData('Teams')" data-tooltip="Reload team data">
               <span>↻</span> Refresh
             </button>
           </div>
@@ -603,6 +1763,7 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Division</th>
+                  <th>Status</th>
                   <th>Amount</th>
                   <th>Actions</th>
                 </tr>
@@ -618,7 +1779,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Free Agent Registrations</h2>
-            <button class="refresh-btn" onclick="loadData('Free Agents')">
+            <button class="refresh-btn" onclick="loadData('Free Agents')" data-tooltip="Reload free agent data">
               <span>↻</span> Refresh
             </button>
           </div>
@@ -650,7 +1811,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Vendor Applications</h2>
-            <button class="refresh-btn" onclick="loadData('Vendors')">
+            <button class="refresh-btn" onclick="loadData('Vendors')" data-tooltip="Reload vendor data">
               <span>↻</span> Refresh
             </button>
           </div>
@@ -683,7 +1844,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Sponsor Inquiries</h2>
-            <button class="refresh-btn" onclick="loadData('Sponsors')">
+            <button class="refresh-btn" onclick="loadData('Sponsors')" data-tooltip="Reload sponsor data">
               <span>↻</span> Refresh
             </button>
           </div>
@@ -715,7 +1876,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Weekend Schedule</h2>
-            <button class="btn btn-primary" onclick="openScheduleModal()">+ Add Event</button>
+            <button class="btn btn-primary" onclick="openScheduleModal()" data-tooltip="Create new schedule event">+ Add Event</button>
           </div>
           <div class="table-container">
             <table id="scheduleTable">
@@ -736,12 +1897,111 @@
         </div>
       </div>
 
+      <!-- Tournament Tab -->
+      <div class="tab-panel" id="tournament">
+        <!-- Tournament Setup Card -->
+        <div class="table-card" style="margin-bottom: 2rem;">
+          <div class="table-header">
+            <h2>🏆 Pool Setup & Teams</h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" onclick="resetTournament()">Reset</button>
+              <button class="btn btn-primary" onclick="saveTournamentSetup()">Save Setup</button>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <!-- Pool Configuration -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label>Number of Pools</label>
+                <select id="poolCount" onchange="updatePoolDisplay()">
+                  <option value="1">1 Pool</option>
+                  <option value="2" selected>2 Pools</option>
+                  <option value="4">4 Pools</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Tournament Format</label>
+                <select id="tournamentFormat">
+                  <option value="pool-knockout" selected>Pool Play → Knockout</option>
+                  <option value="round-robin">Round Robin Only</option>
+                  <option value="single-elim">Single Elimination</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Match Duration (mins)</label>
+                <input type="number" id="matchDuration" value="14" min="5" max="30">
+              </div>
+            </div>
+            
+            <!-- Pool Assignment Grid -->
+            <div id="poolAssignmentGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+              <!-- Pools will be rendered here -->
+            </div>
+            
+            <!-- Unassigned Teams -->
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--gray-100); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.75rem; color: var(--gray-600);">Unassigned Teams</h4>
+              <div id="unassignedTeams" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <!-- Teams not yet assigned to pools -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Schedule Card -->
+        <div class="table-card" style="margin-bottom: 2rem;">
+          <div class="table-header">
+            <h2>📅 Match Schedule & Scores</h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" onclick="generatePoolPlaySchedule()">Generate Pool Play</button>
+              <button class="btn btn-primary" onclick="openMatchModal()">+ Add Match</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table id="matchesTable">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">#</th>
+                  <th>Time</th>
+                  <th>Field</th>
+                  <th style="text-align: right;">Team 1</th>
+                  <th style="width: 100px; text-align: center;">Score</th>
+                  <th>Team 2</th>
+                  <th>Status</th>
+                  <th style="width: 100px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="matchesBody">
+                <tr>
+                  <td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-600);">
+                    No matches scheduled. Assign teams to pools and click "Generate Pool Play" to create the schedule.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Standings Card -->
+        <div class="table-card">
+          <div class="table-header">
+            <h2>📊 Pool Standings</h2>
+            <button class="btn btn-secondary" onclick="recalculateStandings()">↻ Recalculate</button>
+          </div>
+          <div id="standingsContainer" style="padding: 1.5rem;">
+            <p style="text-align:center;color:var(--gray-600);">
+              Standings will appear here once pool play matches are completed.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Pricing Tab -->
       <div class="tab-panel" id="pricing">
         <div class="table-card" style="margin-bottom: 2rem;">
           <div class="table-header">
             <h2>Team Registration Pricing</h2>
-            <button class="btn btn-primary" onclick="openPricingModal('team')">+ Add Tier</button>
+            <button class="btn btn-primary" onclick="openPricingModal('team')" data-tooltip="Create new team pricing tier">+ Add Tier</button>
           </div>
           <div class="table-container">
             <table id="teamPricingTable">
@@ -761,7 +2021,7 @@
         <div class="table-card">
           <div class="table-header">
             <h2>Free Agent Pricing</h2>
-            <button class="btn btn-primary" onclick="openPricingModal('freeagent')">+ Add Tier</button>
+            <button class="btn btn-primary" onclick="openPricingModal('freeagent')" data-tooltip="Create new free agent pricing tier">+ Add Tier</button>
           </div>
           <div class="table-container">
             <table id="freeagentPricingTable">
@@ -811,6 +2071,26 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
         <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule Delete Confirmation Modal -->
+  <div class="modal-overlay" id="scheduleDeleteModal">
+    <div class="modal" style="max-width: 450px;">
+      <div class="modal-header">
+        <h3>Delete Event</h3>
+        <button class="modal-close" onclick="closeScheduleDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="text-align: center; font-size: 1rem; color: var(--gray-800);">
+          Are you sure you want to delete this scheduled event?<br>
+          <span style="color: var(--danger); font-weight: 500;">This action cannot be undone.</span>
+        </p>
+      </div>
+      <div class="modal-footer" style="justify-content: center; gap: 1rem;">
+        <button class="btn btn-secondary" onclick="closeScheduleDeleteModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmScheduleDelete()">Delete Event</button>
       </div>
     </div>
   </div>
@@ -880,7 +2160,11 @@
         </div>
         <div class="form-group">
           <label>Deadline *</label>
-          <input type="text" id="pricingDeadline" placeholder="e.g., February 28, 2025" required>
+          <div class="date-picker-wrapper" id="deadlinePicker">
+            <input type="text" class="date-picker-input" id="pricingDeadlineDisplay" placeholder="Select date" readonly required>
+            <span class="date-picker-icon">📅</span>
+            <input type="hidden" id="pricingDeadline">
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -890,12 +2174,68 @@
     </div>
   </div>
 
+  <!-- Score Entry Modal -->
+  <div class="modal-overlay" id="scoreModal">
+    <div class="modal" style="max-width: 450px;">
+      <div class="modal-header">
+        <h3>Edit Match Score</h3>
+        <button class="modal-close" onclick="closeScoreModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="scoreMatch" style="text-align: center; font-weight: 600; margin-bottom: 1.5rem; color: var(--navy);"></p>
+        
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: end; margin-bottom: 1.5rem;">
+          <div class="form-group" style="margin: 0;">
+            <label id="scoreTeam1Label" style="text-align: center; display: block;">Team 1</label>
+            <input type="number" id="scoreTeam1" min="0" placeholder="0" style="text-align: center; font-size: 1.5rem; font-weight: 700;">
+          </div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--gray-600); padding-bottom: 0.5rem;">:</div>
+          <div class="form-group" style="margin: 0;">
+            <label id="scoreTeam2Label" style="text-align: center; display: block;">Team 2</label>
+            <input type="number" id="scoreTeam2" min="0" placeholder="0" style="text-align: center; font-size: 1.5rem; font-weight: 700;">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Match Status</label>
+          <select id="matchStatus">
+            <option value="upcoming">⏳ Upcoming</option>
+            <option value="live">🔴 Live</option>
+            <option value="final">✓ Final</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeScoreModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveMatchScore()">Save Score</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date Picker Calendar (outside modal for z-index stacking) -->
+  <div class="date-picker-calendar" id="deadlineCalendar">
+    <div class="calendar-header">
+      <button type="button" id="prevMonth">‹</button>
+      <span class="calendar-month-year" id="calendarMonthYear"></span>
+      <button type="button" id="nextMonth">›</button>
+    </div>
+    <div class="calendar-weekdays">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+    <div class="calendar-days" id="calendarDays"></div>
+    <div class="calendar-footer">
+      <button type="button" id="clearDate">Clear</button>
+      <button type="button" id="todayDate">Today</button>
+    </div>
+  </div>
+
   <script>
     // Configuration
     const CONFIG = {
       password: 'Surge2010!',
       scriptUrl: 'https://script.google.com/macros/s/AKfycbyndwQKFl7FMY9PjM525VMR8ImmhMm5ShelQtGU1wcVnZtxCyERMfxQohDzeo8wdgmkpA/exec',
-      eventDate: new Date('2025-05-16T09:00:00-04:00')
+      eventDate: new Date('2026-05-16T09:00:00-04:00'),
+      maxTeams: 16
     };
 
     // State
@@ -907,6 +2247,169 @@
     };
     let currentEdit = null;
     let currentDelete = null;
+    let currentScheduleDelete = null;
+
+    // Payment status tracking (stored locally)
+    let paymentStatus = JSON.parse(localStorage.getItem('siesta7s_payment_status') || '{}');
+
+    // ========================================
+    // THEME MANAGEMENT
+    // ========================================
+    
+    function initTheme() {
+      // Check localStorage first, then system preference
+      const savedTheme = localStorage.getItem('siesta7s_theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        updateThemeIcon('dark');
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('siesta7s_theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      const toggle = document.getElementById('themeToggle');
+      if (toggle) {
+        toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        toggle.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+      }
+    }
+
+    // Initialize theme on page load
+    initTheme();
+
+    // Theme toggle button
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
+    });
+
+    // ========================================
+    // PAYMENT STATUS MANAGEMENT
+    // ========================================
+
+    function getPaymentKey(formType, index) {
+      return `${formType}_${index}`;
+    }
+
+    function isRowPaid(formType, index) {
+      return paymentStatus[getPaymentKey(formType, index)] === true;
+    }
+
+    function togglePaymentStatus(formType, index) {
+      const key = getPaymentKey(formType, index);
+      paymentStatus[key] = !paymentStatus[key];
+      localStorage.setItem('siesta7s_payment_status', JSON.stringify(paymentStatus));
+      renderTable(formType, allData[formType]);
+      updateOverviewStats();
+    }
+
+    // ========================================
+    // QUICK ACTIONS
+    // ========================================
+
+    function navigateToTab(tabId) {
+      const navTab = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+      if (navTab) {
+        navTab.click();
+      }
+    }
+
+    function emailAllTeams() {
+      const emails = allData['Teams']
+        .map(row => row[3]) // Email is column 3
+        .filter(email => email && email.includes('@'))
+        .join(',');
+      
+      if (emails) {
+        window.location.href = `mailto:${emails}?subject=Siesta 7s Tournament Update`;
+      } else {
+        alert('No team emails found.');
+      }
+    }
+
+    function emailAllFreeAgents() {
+      const emails = allData['Free Agents']
+        .map(row => row[2]) // Email is column 2
+        .filter(email => email && email.includes('@'))
+        .join(',');
+      
+      if (emails) {
+        window.location.href = `mailto:${emails}?subject=Siesta 7s - Free Agent Update`;
+      } else {
+        alert('No free agent emails found.');
+      }
+    }
+
+    function exportAllData() {
+      let csv = '';
+      
+      // Teams
+      csv += 'TEAMS\n';
+      csv += 'Date,Team Name,Captain,Email,Phone,Division,Tier,Amount,Paid\n';
+      allData['Teams'].forEach((row, i) => {
+        const paid = isRowPaid('Teams', i) ? 'Yes' : 'No';
+        csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + `,${paid}\n`;
+      });
+      
+      csv += '\nFREE AGENTS\n';
+      csv += 'Date,Name,Email,Phone,Experience,Tier,Amount\n';
+      allData['Free Agents'].forEach(row => {
+        csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + '\n';
+      });
+      
+      csv += '\nVENDORS\n';
+      csv += 'Date,Business,Contact,Email,Phone,Type,Tier,Amount\n';
+      allData['Vendors'].forEach(row => {
+        csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + '\n';
+      });
+      
+      csv += '\nSPONSORS\n';
+      csv += 'Date,Company,Contact,Email,Phone,Level,Message\n';
+      allData['Sponsors'].forEach(row => {
+        csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + '\n';
+      });
+      
+      // Download
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `siesta7s_export_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ========================================
+    // RELATIVE TIME FORMATTING
+    // ========================================
+
+    function getRelativeTime(dateStr) {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diffMs = now - date;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+      
+      if (diffMins < 1) return 'Just now';
+      if (diffMins < 60) return `${diffMins}m ago`;
+      if (diffHours < 24) return `${diffHours}h ago`;
+      if (diffDays < 7) return `${diffDays}d ago`;
+      if (diffDays < 30) return `${Math.floor(diffDays / 7)}w ago`;
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
 
     // DOM Elements
     const loginScreen = document.getElementById('loginScreen');
@@ -978,6 +2481,8 @@
       loginScreen.style.display = 'none';
       dashboard.classList.add('active');
       loadAllData();
+      // Initialize schedule and pricing tables
+      initContentManagement();
     }
 
     async function loadAllData() {
@@ -1031,56 +2536,333 @@
       if (!tbody) return;
       
       if (!data || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-600);">
+        const colSpan = formType === 'Teams' ? 10 : 8;
+        tbody.innerHTML = `<tr><td colspan="${colSpan}" style="text-align:center;padding:2rem;color:var(--gray-600);">
           No registrations yet.
         </td></tr>`;
         return;
       }
       
-      tbody.innerHTML = data.map((row, index) => {
-        const date = row[0] ? new Date(row[0]).toLocaleDateString() : '-';
-        return `
-          <tr>
-            <td>${date}</td>
-            ${row.slice(1).map(cell => `<td>${cell || '-'}</td>`).join('')}
-            <td>
-              <button class="action-btn" onclick="editRow('${formType}', ${index})" title="Edit">✏️</button>
-              <button class="action-btn delete" onclick="deleteRow('${formType}', ${index})" title="Delete">🗑️</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
+      if (formType === 'Teams') {
+        // Special rendering for Teams with payment status
+        tbody.innerHTML = data.map((row, index) => {
+          const date = row[0] ? new Date(row[0]).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-';
+          const paid = isRowPaid('Teams', index);
+          const statusClass = paid ? 'paid' : 'unpaid';
+          const statusText = paid ? '✓ Paid' : 'Unpaid';
+          
+          return `
+            <tr>
+              <td>${date}</td>
+              <td><strong>${row[1] || '-'}</strong></td>
+              <td>${row[2] || '-'}</td>
+              <td>${row[3] || '-'}</td>
+              <td>${row[4] || '-'}</td>
+              <td>${row[5] || '-'}</td>
+              <td>
+                <button class="payment-toggle ${statusClass}" onclick="togglePaymentStatus('Teams', ${index})">
+                  ${statusText}
+                </button>
+              </td>
+              <td>${row[7] || row[6] || '-'}</td>
+              <td>
+                <button class="action-btn" onclick="editRow('${formType}', ${index})" title="Edit">✏️</button>
+                <button class="action-btn delete" onclick="deleteRow('${formType}', ${index})" title="Delete">🗑️</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } else {
+        // Standard rendering for other types
+        tbody.innerHTML = data.map((row, index) => {
+          const date = row[0] ? new Date(row[0]).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-';
+          return `
+            <tr>
+              <td>${date}</td>
+              ${row.slice(1).map(cell => `<td>${cell || '-'}</td>`).join('')}
+              <td>
+                <button class="action-btn" onclick="editRow('${formType}', ${index})" title="Edit">✏️</button>
+                <button class="action-btn delete" onclick="deleteRow('${formType}', ${index})" title="Delete">🗑️</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
     }
 
     function updateOverviewStats() {
-      document.getElementById('teamCount').textContent = allData['Teams'].length;
-      document.getElementById('freeAgentCount').textContent = allData['Free Agents'].length;
-      document.getElementById('vendorCount').textContent = allData['Vendors'].length;
-      document.getElementById('sponsorCount').textContent = allData['Sponsors'].length;
+      const teamCount = allData['Teams'].length;
+      const agentCount = allData['Free Agents'].length;
+      const vendorCount = allData['Vendors'].length;
+      const sponsorCount = allData['Sponsors'].length;
+
+      // Update counts
+      document.getElementById('teamCount').textContent = teamCount;
+      document.getElementById('freeAgentCount').textContent = agentCount;
+      document.getElementById('vendorCount').textContent = vendorCount;
+      document.getElementById('sponsorCount').textContent = sponsorCount;
+
+      // Team progress bar
+      const teamPercent = Math.round((teamCount / CONFIG.maxTeams) * 100);
+      const progressFill = document.getElementById('teamProgress');
+      const progressText = document.getElementById('teamProgressText');
       
-      // Calculate total revenue (simplified - you may want to sum actual amounts)
-      let revenue = 0;
-      allData['Teams'].forEach(row => {
+      if (progressFill) {
+        progressFill.style.width = `${Math.min(100, teamPercent)}%`;
+        progressFill.className = 'progress-fill';
+        if (teamPercent >= 100) {
+          progressFill.classList.add('danger');
+        } else if (teamPercent >= 80) {
+          progressFill.classList.add('warning');
+        } else {
+          progressFill.classList.add('normal');
+        }
+      }
+      if (progressText) {
+        progressText.textContent = `${teamPercent}% capacity`;
+      }
+
+      // Calculate revenue by type
+      let teamRevenue = 0;
+      let agentRevenue = 0;
+      let vendorRevenue = 0;
+      let paidCount = 0;
+      let unpaidCount = 0;
+
+      allData['Teams'].forEach((row, i) => {
         const amount = parseFloat(row[row.length - 1]) || 0;
-        revenue += amount;
+        teamRevenue += amount;
+        if (isRowPaid('Teams', i)) {
+          paidCount++;
+        } else {
+          unpaidCount++;
+        }
       });
+
       allData['Free Agents'].forEach(row => {
         const amount = parseFloat(row[row.length - 1]) || 0;
-        revenue += amount;
+        agentRevenue += amount;
       });
+
       allData['Vendors'].forEach(row => {
         const amount = parseFloat(row[row.length - 1]) || 0;
-        revenue += amount;
+        vendorRevenue += amount;
       });
+
+      const totalRevenue = teamRevenue + agentRevenue + vendorRevenue;
+
+      // Update financial card
+      document.getElementById('totalRevenue').textContent = `$${totalRevenue.toLocaleString()}`;
       
-      document.getElementById('totalRevenue').textContent = `$${revenue.toLocaleString()}`;
+      const teamRevEl = document.getElementById('teamRevenue');
+      const agentRevEl = document.getElementById('agentRevenue');
+      const vendorRevEl = document.getElementById('vendorRevenue');
+      const paidCountEl = document.getElementById('paidCount');
+      const unpaidCountEl = document.getElementById('unpaidCount');
+      
+      if (teamRevEl) teamRevEl.textContent = `$${teamRevenue.toLocaleString()}`;
+      if (agentRevEl) agentRevEl.textContent = `$${agentRevenue.toLocaleString()}`;
+      if (vendorRevEl) vendorRevEl.textContent = `$${vendorRevenue.toLocaleString()}`;
+      if (paidCountEl) paidCountEl.textContent = paidCount;
+      if (unpaidCountEl) unpaidCountEl.textContent = unpaidCount;
+
+      // Update recent lists
+      updateRecentLists();
+      
+      // Update activity feed
+      updateActivityFeed();
+      
+      // Update alerts
+      updateAlerts();
+    }
+
+    function updateRecentLists() {
+      // Recent Teams
+      const recentTeamsList = document.getElementById('recentTeamsList');
+      if (recentTeamsList) {
+        const recentTeams = allData['Teams'].slice(-5).reverse();
+        if (recentTeams.length === 0) {
+          recentTeamsList.innerHTML = '<div class="recent-empty">No teams registered yet</div>';
+        } else {
+          recentTeamsList.innerHTML = recentTeams.map(row => `
+            <div class="recent-item">
+              <div class="recent-info">
+                <div class="recent-name">${row[1] || 'Unnamed Team'}</div>
+                <div class="recent-meta">Captain: ${row[2] || '-'}</div>
+              </div>
+              <div class="recent-time">${getRelativeTime(row[0])}</div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Recent Free Agents
+      const recentAgentsList = document.getElementById('recentAgentsList');
+      if (recentAgentsList) {
+        const recentAgents = allData['Free Agents'].slice(-5).reverse();
+        if (recentAgents.length === 0) {
+          recentAgentsList.innerHTML = '<div class="recent-empty">No free agents registered yet</div>';
+        } else {
+          recentAgentsList.innerHTML = recentAgents.map(row => `
+            <div class="recent-item">
+              <div class="recent-info">
+                <div class="recent-name">${row[1] || 'Unknown'}</div>
+                <div class="recent-meta">${row[4] || 'No experience listed'}</div>
+              </div>
+              <div class="recent-time">${getRelativeTime(row[0])}</div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function updateActivityFeed() {
+      const activityFeed = document.getElementById('activityFeed');
+      if (!activityFeed) return;
+
+      // Combine all data with types
+      const activities = [];
+      
+      allData['Teams'].forEach(row => {
+        activities.push({
+          type: 'team',
+          icon: '🏉',
+          text: `Team <strong>"${row[1] || 'Unnamed'}"</strong> registered`,
+          date: new Date(row[0])
+        });
+      });
+
+      allData['Free Agents'].forEach(row => {
+        activities.push({
+          type: 'agent',
+          icon: '👤',
+          text: `<strong>${row[1] || 'Someone'}</strong> signed up as free agent`,
+          date: new Date(row[0])
+        });
+      });
+
+      allData['Vendors'].forEach(row => {
+        activities.push({
+          type: 'vendor',
+          icon: '🎪',
+          text: `Vendor <strong>"${row[1] || 'Unknown'}"</strong> applied`,
+          date: new Date(row[0])
+        });
+      });
+
+      allData['Sponsors'].forEach(row => {
+        activities.push({
+          type: 'sponsor',
+          icon: '💼',
+          text: `Sponsor inquiry from <strong>"${row[1] || 'Unknown'}"</strong>`,
+          date: new Date(row[0])
+        });
+      });
+
+      // Sort by date descending and take last 10
+      activities.sort((a, b) => b.date - a.date);
+      const recent = activities.slice(0, 10);
+
+      if (recent.length === 0) {
+        activityFeed.innerHTML = '<div class="activity-empty">No recent activity</div>';
+      } else {
+        activityFeed.innerHTML = recent.map(activity => `
+          <div class="activity-item">
+            <span class="activity-icon">${activity.icon}</span>
+            <div class="activity-content">
+              <div class="activity-text">${activity.text}</div>
+              <div class="activity-time">${getRelativeTime(activity.date)}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function updateAlerts() {
+      const alertsSection = document.getElementById('alertsSection');
+      if (!alertsSection) return;
+
+      const alerts = [];
+
+      // Check for unpaid teams
+      let unpaidTeams = 0;
+      allData['Teams'].forEach((row, i) => {
+        if (!isRowPaid('Teams', i)) unpaidTeams++;
+      });
+      if (unpaidTeams > 0) {
+        alerts.push({
+          type: 'warning',
+          text: `⚠️ ${unpaidTeams} team${unpaidTeams > 1 ? 's' : ''} with pending payment`,
+          action: 'teams'
+        });
+      }
+
+      // Check capacity
+      const teamCount = allData['Teams'].length;
+      if (teamCount >= CONFIG.maxTeams) {
+        alerts.push({
+          type: 'danger',
+          text: '🚫 Team registration is FULL (16/16)',
+          action: null
+        });
+      } else if (teamCount >= CONFIG.maxTeams * 0.8) {
+        const remaining = CONFIG.maxTeams - teamCount;
+        alerts.push({
+          type: 'warning',
+          text: `⚡ Only ${remaining} team spot${remaining > 1 ? 's' : ''} remaining!`,
+          action: null
+        });
+      }
+
+      // Check for free agents needing teams
+      const freeAgentCount = allData['Free Agents'].length;
+      if (freeAgentCount > 0) {
+        alerts.push({
+          type: 'warning',
+          text: `👤 ${freeAgentCount} free agent${freeAgentCount > 1 ? 's' : ''} looking for teams`,
+          action: 'freeagents'
+        });
+      }
+
+      // Positive alerts
+      if (teamCount > 0 && unpaidTeams === 0) {
+        alerts.push({
+          type: 'success',
+          text: '✅ All registered teams are paid!',
+          action: null
+        });
+      }
+
+      if (alerts.length === 0) {
+        alertsSection.innerHTML = '';
+      } else {
+        alertsSection.innerHTML = alerts.map(alert => `
+          <div class="alert-item ${alert.type}">
+            <span>${alert.text}</span>
+            ${alert.action ? `<button class="alert-btn" onclick="navigateToTab('${alert.action}')">View</button>` : ''}
+          </div>
+        `).join('');
+      }
     }
 
     function updateDaysUntil() {
       const now = new Date();
       const diff = CONFIG.eventDate - now;
       const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
-      document.getElementById('daysUntil').textContent = days;
+      
+      const daysEl = document.getElementById('daysUntil');
+      const countdownCard = document.getElementById('countdownCard');
+      
+      if (daysEl) daysEl.textContent = days;
+      
+      // Add urgency class if less than 30 days
+      if (countdownCard) {
+        if (days <= 30) {
+          countdownCard.classList.add('urgent');
+        } else {
+          countdownCard.classList.remove('urgent');
+        }
+      }
     }
 
     function editRow(formType, index) {
@@ -1200,7 +2982,7 @@
     const DEFAULT_SCHEDULE = [
       {
         day: 'Friday',
-        date: 'May 15, 2025',
+        date: 'May 15, 2026',
         title: 'Pre-Tournament Party',
         time: '6:00 PM - 9:00 PM',
         location: 'Daiquiri Deck Southbridge',
@@ -1208,7 +2990,7 @@
       },
       {
         day: 'Saturday',
-        date: 'May 16, 2025',
+        date: 'May 16, 2026',
         title: 'Tournament Day',
         time: 'Kickoff at 9:00 AM',
         location: 'Siesta Key Beach',
@@ -1225,28 +3007,87 @@
     ];
 
     const DEFAULT_TEAM_PRICING = [
-      { name: 'Super Early', price: '$200', deadline: 'February 28, 2025' },
-      { name: 'Early Bird', price: '$250', deadline: 'March 31, 2025' },
-      { name: 'Regular', price: '$300', deadline: 'April 30, 2025' },
-      { name: 'Late', price: '$350', deadline: 'May 15, 2025' }
+      { name: 'Super Early', price: '$200', deadline: 'February 28, 2026' },
+      { name: 'Early Bird', price: '$250', deadline: 'March 31, 2026' },
+      { name: 'Regular', price: '$300', deadline: 'April 30, 2026' },
+      { name: 'Late', price: '$350', deadline: 'May 15, 2026' }
     ];
 
     const DEFAULT_FREEAGENT_PRICING = [
-      { name: 'Earliest Rate', price: '$30', deadline: 'March 15, 2025' },
-      { name: 'Normal Rate', price: '$40', deadline: 'May 9, 2025' },
-      { name: 'Final Week Rate', price: '$50', deadline: 'May 15, 2025' }
+      { name: 'Earliest Rate', price: '$30', deadline: 'March 15, 2026' },
+      { name: 'Normal Rate', price: '$40', deadline: 'May 9, 2026' },
+      { name: 'Final Week Rate', price: '$50', deadline: 'May 15, 2026' }
     ];
 
     function getScheduleData() {
       const stored = localStorage.getItem('siesta7s_schedule');
       if (stored) return JSON.parse(stored);
-      // Seed with defaults
-      localStorage.setItem('siesta7s_schedule', JSON.stringify(DEFAULT_SCHEDULE));
-      return DEFAULT_SCHEDULE;
+      // Seed with sorted defaults
+      const sortedDefaults = sortScheduleEvents(DEFAULT_SCHEDULE);
+      localStorage.setItem('siesta7s_schedule', JSON.stringify(sortedDefaults));
+      return sortedDefaults;
     }
 
     function saveScheduleData(data) {
-      localStorage.setItem('siesta7s_schedule', JSON.stringify(data));
+      // Sort events by date and time before saving
+      const sortedData = sortScheduleEvents(data);
+      localStorage.setItem('siesta7s_schedule', JSON.stringify(sortedData));
+    }
+
+    // Sort schedule events by date and time
+    function sortScheduleEvents(events) {
+      return events.slice().sort((a, b) => {
+        const dateA = parseEventDateTime(a);
+        const dateB = parseEventDateTime(b);
+        return dateA - dateB;
+      });
+    }
+
+    // Parse event date and time into a comparable value
+    function parseEventDateTime(event) {
+      const dayOrder = { 'Friday': 0, 'Saturday': 1, 'Sunday': 2, 'Monday': 3, 'Tuesday': 4, 'Wednesday': 5, 'Thursday': 6 };
+      
+      // Try to parse the date field
+      let eventDate = null;
+      const dateStr = event.date || '';
+      
+      // Check if it's a full date like "May 15, 2025" or "May 15, 2026"
+      const fullDateMatch = dateStr.match(/([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})/);
+      if (fullDateMatch) {
+        eventDate = new Date(`${fullDateMatch[1]} ${fullDateMatch[2]}, ${fullDateMatch[3]}`);
+      } else {
+        // If no full date, use day of week for ordering
+        const day = event.day || '';
+        const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
+        // Create a reference date (use 2026 as base year)
+        eventDate = new Date(2026, 0, 1 + dayNum);
+      }
+      
+      // Parse time - look for patterns like "6:00 PM", "9:00 AM", "Kickoff at 9:00 AM"
+      const timeStr = event.time || '';
+      const timeMatch = timeStr.match(/(\d{1,2}):?(\d{2})?\s*(AM|PM|am|pm)/i);
+      
+      if (timeMatch) {
+        let hours = parseInt(timeMatch[1]);
+        const minutes = parseInt(timeMatch[2] || '0');
+        const isPM = timeMatch[3].toUpperCase() === 'PM';
+        
+        // Convert to 24-hour format
+        if (isPM && hours !== 12) hours += 12;
+        if (!isPM && hours === 12) hours = 0;
+        
+        eventDate.setHours(hours, minutes, 0, 0);
+      } else {
+        // If time says "Evening" or "After", put it later in the day
+        const lowerTime = timeStr.toLowerCase();
+        if (lowerTime.includes('evening') || lowerTime.includes('after') || lowerTime.includes('concludes')) {
+          eventDate.setHours(20, 0, 0, 0); // 8 PM
+        } else {
+          eventDate.setHours(12, 0, 0, 0); // Default to noon
+        }
+      }
+      
+      return eventDate.getTime();
     }
 
     function getTeamPricingData() {
@@ -1289,10 +3130,14 @@
           <td><strong>${event.title}</strong></td>
           <td>${event.time}</td>
           <td>${event.location}</td>
-          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${event.description}">${event.description}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" data-tooltip="${event.description}">${event.description}</td>
           <td>
-            <button class="action-btn" onclick="editScheduleEvent(${index})" title="Edit">✏️</button>
-            <button class="action-btn delete" onclick="deleteScheduleEvent(${index})" title="Delete">🗑️</button>
+            <button class="action-btn" onclick="editScheduleEvent(${index})" data-tooltip="Edit event">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button class="action-btn delete" onclick="deleteScheduleEvent(${index})" data-tooltip="Delete event">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+            </button>
           </td>
         </tr>
       `).join('');
@@ -1380,13 +3225,436 @@
     }
 
     function deleteScheduleEvent(index) {
-      if (!confirm('Are you sure you want to delete this event?')) return;
+      currentScheduleDelete = index;
+      document.getElementById('scheduleDeleteModal').classList.add('active');
+    }
+
+    function confirmScheduleDelete() {
+      if (currentScheduleDelete === null) return;
       
       const data = getScheduleData();
-      data.splice(index, 1);
+      data.splice(currentScheduleDelete, 1);
       saveScheduleData(data);
       renderScheduleTable();
+      closeScheduleDeleteModal();
       alert('Event deleted!');
+    }
+
+    function closeScheduleDeleteModal() {
+      document.getElementById('scheduleDeleteModal').classList.remove('active');
+      currentScheduleDelete = null;
+    }
+
+    // =====================================================
+    // TOURNAMENT MANAGEMENT
+    // =====================================================
+    
+    const POOL_NAMES = ['A', 'B', 'C', 'D'];
+    let tournamentData = {
+      settings: { poolCount: 2, format: 'pool-knockout', matchDuration: 14 },
+      pools: {},
+      matches: [],
+      standings: {}
+    };
+
+    function initTournament() {
+      loadTournamentData();
+      updatePoolDisplay();
+      renderMatches();
+      renderStandings();
+    }
+
+    function loadTournamentData() {
+      const stored = localStorage.getItem('siesta7s_tournament');
+      if (stored) {
+        tournamentData = JSON.parse(stored);
+        // Sync UI with stored settings
+        document.getElementById('poolCount').value = tournamentData.settings.poolCount || 2;
+        document.getElementById('tournamentFormat').value = tournamentData.settings.format || 'pool-knockout';
+        document.getElementById('matchDuration').value = tournamentData.settings.matchDuration || 14;
+      }
+    }
+
+    function saveTournamentData() {
+      localStorage.setItem('siesta7s_tournament', JSON.stringify(tournamentData));
+    }
+
+    function saveTournamentSetup() {
+      tournamentData.settings = {
+        poolCount: parseInt(document.getElementById('poolCount').value),
+        format: document.getElementById('tournamentFormat').value,
+        matchDuration: parseInt(document.getElementById('matchDuration').value)
+      };
+      saveTournamentData();
+      alert('Tournament setup saved!');
+    }
+
+    function resetTournament() {
+      if (!confirm('Are you sure you want to reset the entire tournament? This will clear all pools, matches, and scores.')) return;
+      tournamentData = {
+        settings: { poolCount: 2, format: 'pool-knockout', matchDuration: 14 },
+        pools: {},
+        matches: [],
+        standings: {}
+      };
+      saveTournamentData();
+      updatePoolDisplay();
+      renderMatches();
+      renderStandings();
+      alert('Tournament reset!');
+    }
+
+    function updatePoolDisplay() {
+      const poolCount = parseInt(document.getElementById('poolCount').value);
+      const grid = document.getElementById('poolAssignmentGrid');
+      const unassignedDiv = document.getElementById('unassignedTeams');
+      
+      // Get all team names from registered teams
+      const teamNames = allData['Teams'].map(row => row[1]).filter(name => name);
+      
+      // Initialize pools if empty
+      for (let i = 0; i < poolCount; i++) {
+        const poolName = POOL_NAMES[i];
+        if (!tournamentData.pools[poolName]) {
+          tournamentData.pools[poolName] = [];
+        }
+      }
+      
+      // Remove teams from pools that no longer exist
+      Object.keys(tournamentData.pools).forEach(pool => {
+        if (POOL_NAMES.indexOf(pool) >= poolCount) {
+          // Move teams back to unassigned
+          delete tournamentData.pools[pool];
+        }
+      });
+      
+      // Find unassigned teams
+      const assignedTeams = Object.values(tournamentData.pools).flat();
+      const unassigned = teamNames.filter(team => !assignedTeams.includes(team));
+      
+      // Render pool cards
+      grid.innerHTML = Array.from({ length: poolCount }, (_, i) => {
+        const poolName = POOL_NAMES[i];
+        const poolTeams = tournamentData.pools[poolName] || [];
+        return `
+          <div class="pool-card" data-pool="${poolName}">
+            <div class="pool-header">
+              <h4>Pool ${poolName}</h4>
+              <span class="pool-count">${poolTeams.length} teams</span>
+            </div>
+            <div class="pool-teams" id="pool${poolName}Teams" ondrop="dropTeam(event, '${poolName}')" ondragover="allowDrop(event)">
+              ${poolTeams.map(team => `
+                <div class="team-chip" draggable="true" ondragstart="dragTeam(event, '${team}')" data-team="${team}">
+                  ${team}
+                  <button class="team-chip-remove" onclick="removeFromPool('${poolName}', '${team}')">&times;</button>
+                </div>
+              `).join('')}
+              ${poolTeams.length === 0 ? '<span class="pool-empty">Drag teams here</span>' : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      // Render unassigned teams
+      unassignedDiv.innerHTML = unassigned.length > 0 
+        ? unassigned.map(team => `
+            <div class="team-chip unassigned" draggable="true" ondragstart="dragTeam(event, '${team}')" data-team="${team}">
+              ${team}
+            </div>
+          `).join('')
+        : '<span style="color: var(--gray-600); font-style: italic;">All teams assigned to pools</span>';
+    }
+
+    // Drag and drop handlers
+    function dragTeam(e, teamName) {
+      e.dataTransfer.setData('text/plain', teamName);
+    }
+
+    function allowDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('pool-drop-active');
+    }
+
+    function dropTeam(e, poolName) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('pool-drop-active');
+      const teamName = e.dataTransfer.getData('text/plain');
+      
+      // Remove from any existing pool
+      Object.keys(tournamentData.pools).forEach(pool => {
+        tournamentData.pools[pool] = tournamentData.pools[pool].filter(t => t !== teamName);
+      });
+      
+      // Add to new pool
+      if (!tournamentData.pools[poolName]) {
+        tournamentData.pools[poolName] = [];
+      }
+      tournamentData.pools[poolName].push(teamName);
+      
+      saveTournamentData();
+      updatePoolDisplay();
+    }
+
+    function removeFromPool(poolName, teamName) {
+      tournamentData.pools[poolName] = tournamentData.pools[poolName].filter(t => t !== teamName);
+      saveTournamentData();
+      updatePoolDisplay();
+    }
+
+    // Match Generation
+    function generatePoolPlaySchedule() {
+      if (!confirm('Generate pool play schedule? This will replace existing pool play matches.')) return;
+      
+      // Clear existing pool play matches (keep knockout matches)
+      tournamentData.matches = tournamentData.matches.filter(m => m.round !== 'pool');
+      
+      const matchDuration = tournamentData.settings.matchDuration || 14;
+      let matchNumber = 1;
+      let startTime = new Date();
+      startTime.setHours(9, 0, 0, 0); // Start at 9 AM
+      
+      // Generate round-robin matches for each pool
+      Object.keys(tournamentData.pools).sort().forEach((poolName, poolIndex) => {
+        const teams = tournamentData.pools[poolName];
+        if (teams.length < 2) return;
+        
+        // Round-robin pairing
+        for (let i = 0; i < teams.length; i++) {
+          for (let j = i + 1; j < teams.length; j++) {
+            tournamentData.matches.push({
+              id: `pool-${matchNumber}`,
+              matchNumber: matchNumber,
+              round: 'pool',
+              pool: poolName,
+              time: formatTime(startTime),
+              field: poolIndex % 2 === 0 ? 'Field 1' : 'Field 2',
+              team1: teams[i],
+              team2: teams[j],
+              score1: null,
+              score2: null,
+              status: 'upcoming' // upcoming, live, final
+            });
+            
+            matchNumber++;
+            startTime = new Date(startTime.getTime() + (matchDuration + 5) * 60000); // Add match time + 5 min break
+          }
+        }
+      });
+      
+      saveTournamentData();
+      renderMatches();
+      alert(`Generated ${matchNumber - 1} pool play matches!`);
+    }
+
+    function formatTime(date) {
+      return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    }
+
+    function renderMatches() {
+      const tbody = document.getElementById('matchesBody');
+      
+      if (!tournamentData.matches || tournamentData.matches.length === 0) {
+        tbody.innerHTML = `<tr>
+          <td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-600);">
+            No matches scheduled. Assign teams to pools and click "Generate Pool Play" to create the schedule.
+          </td>
+        </tr>`;
+        return;
+      }
+      
+      tbody.innerHTML = tournamentData.matches.map((match, index) => {
+        const statusClass = match.status === 'live' ? 'status-live' : 
+                           match.status === 'final' ? 'status-final' : 'status-upcoming';
+        const statusLabel = match.status === 'live' ? '🔴 LIVE' : 
+                           match.status === 'final' ? '✓ Final' : '⏳ Upcoming';
+        
+        return `
+          <tr class="${match.status === 'live' ? 'match-live' : ''}">
+            <td><strong>${match.matchNumber}</strong></td>
+            <td>${match.time}</td>
+            <td>${match.field}</td>
+            <td style="text-align: right; font-weight: 500;">${match.team1}</td>
+            <td style="text-align: center;">
+              <span class="score-display ${match.status === 'final' ? 'score-final' : ''}">
+                ${match.score1 !== null ? match.score1 : '-'} : ${match.score2 !== null ? match.score2 : '-'}
+              </span>
+            </td>
+            <td style="font-weight: 500;">${match.team2}</td>
+            <td><span class="match-status ${statusClass}">${statusLabel}</span></td>
+            <td>
+              <button class="action-btn" onclick="openScoreModal(${index})" data-tooltip="Edit score">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+              <button class="action-btn delete" onclick="deleteMatch(${index})" data-tooltip="Delete match">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    let currentMatchEdit = null;
+
+    function openScoreModal(matchIndex) {
+      currentMatchEdit = matchIndex;
+      const match = tournamentData.matches[matchIndex];
+      
+      document.getElementById('scoreMatch').textContent = `Match ${match.matchNumber}: ${match.team1} vs ${match.team2}`;
+      document.getElementById('scoreTeam1Label').textContent = match.team1;
+      document.getElementById('scoreTeam2Label').textContent = match.team2;
+      document.getElementById('scoreTeam1').value = match.score1 !== null ? match.score1 : '';
+      document.getElementById('scoreTeam2').value = match.score2 !== null ? match.score2 : '';
+      document.getElementById('matchStatus').value = match.status;
+      
+      document.getElementById('scoreModal').classList.add('active');
+    }
+
+    function closeScoreModal() {
+      document.getElementById('scoreModal').classList.remove('active');
+      currentMatchEdit = null;
+    }
+
+    function saveMatchScore() {
+      if (currentMatchEdit === null) return;
+      
+      const score1 = document.getElementById('scoreTeam1').value;
+      const score2 = document.getElementById('scoreTeam2').value;
+      const status = document.getElementById('matchStatus').value;
+      
+      tournamentData.matches[currentMatchEdit].score1 = score1 !== '' ? parseInt(score1) : null;
+      tournamentData.matches[currentMatchEdit].score2 = score2 !== '' ? parseInt(score2) : null;
+      tournamentData.matches[currentMatchEdit].status = status;
+      
+      saveTournamentData();
+      renderMatches();
+      recalculateStandings();
+      closeScoreModal();
+    }
+
+    function deleteMatch(matchIndex) {
+      if (!confirm('Delete this match?')) return;
+      tournamentData.matches.splice(matchIndex, 1);
+      // Renumber matches
+      tournamentData.matches.forEach((m, i) => m.matchNumber = i + 1);
+      saveTournamentData();
+      renderMatches();
+    }
+
+    // Standings
+    function recalculateStandings() {
+      tournamentData.standings = {};
+      
+      Object.keys(tournamentData.pools).forEach(poolName => {
+        const teams = tournamentData.pools[poolName];
+        const poolStandings = {};
+        
+        teams.forEach(team => {
+          poolStandings[team] = { wins: 0, losses: 0, draws: 0, pf: 0, pa: 0, pd: 0, pts: 0 };
+        });
+        
+        // Calculate from completed pool matches
+        tournamentData.matches
+          .filter(m => m.round === 'pool' && m.pool === poolName && m.status === 'final')
+          .forEach(match => {
+            if (match.score1 === null || match.score2 === null) return;
+            
+            const s1 = match.score1;
+            const s2 = match.score2;
+            
+            if (poolStandings[match.team1]) {
+              poolStandings[match.team1].pf += s1;
+              poolStandings[match.team1].pa += s2;
+              poolStandings[match.team1].pd = poolStandings[match.team1].pf - poolStandings[match.team1].pa;
+              
+              if (s1 > s2) {
+                poolStandings[match.team1].wins++;
+                poolStandings[match.team1].pts += 3;
+              } else if (s1 < s2) {
+                poolStandings[match.team1].losses++;
+              } else {
+                poolStandings[match.team1].draws++;
+                poolStandings[match.team1].pts += 1;
+              }
+            }
+            
+            if (poolStandings[match.team2]) {
+              poolStandings[match.team2].pf += s2;
+              poolStandings[match.team2].pa += s1;
+              poolStandings[match.team2].pd = poolStandings[match.team2].pf - poolStandings[match.team2].pa;
+              
+              if (s2 > s1) {
+                poolStandings[match.team2].wins++;
+                poolStandings[match.team2].pts += 3;
+              } else if (s2 < s1) {
+                poolStandings[match.team2].losses++;
+              } else {
+                poolStandings[match.team2].draws++;
+                poolStandings[match.team2].pts += 1;
+              }
+            }
+          });
+        
+        tournamentData.standings[poolName] = poolStandings;
+      });
+      
+      saveTournamentData();
+      renderStandings();
+    }
+
+    function renderStandings() {
+      const container = document.getElementById('standingsContainer');
+      
+      if (Object.keys(tournamentData.standings).length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:var(--gray-600);">Standings will appear here once pool play matches are completed.</p>';
+        return;
+      }
+      
+      container.innerHTML = Object.keys(tournamentData.standings).sort().map(poolName => {
+        const poolData = tournamentData.standings[poolName];
+        const sorted = Object.entries(poolData)
+          .sort((a, b) => b[1].pts - a[1].pts || b[1].pd - a[1].pd);
+        
+        return `
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 0.75rem;">Pool ${poolName}</h4>
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th style="width: 40px;">#</th>
+                  <th>Team</th>
+                  <th style="text-align: center;">W</th>
+                  <th style="text-align: center;">L</th>
+                  <th style="text-align: center;">D</th>
+                  <th style="text-align: center;">PF</th>
+                  <th style="text-align: center;">PA</th>
+                  <th style="text-align: center;">PD</th>
+                  <th style="text-align: center;"><strong>Pts</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                ${sorted.map(([team, stats], i) => `
+                  <tr class="${i === 0 ? 'standing-leader' : ''}">
+                    <td>${i + 1}</td>
+                    <td><strong>${team}</strong></td>
+                    <td style="text-align: center;">${stats.wins}</td>
+                    <td style="text-align: center;">${stats.losses}</td>
+                    <td style="text-align: center;">${stats.draws}</td>
+                    <td style="text-align: center;">${stats.pf}</td>
+                    <td style="text-align: center;">${stats.pa}</td>
+                    <td style="text-align: center; ${stats.pd > 0 ? 'color: var(--success);' : stats.pd < 0 ? 'color: var(--danger);' : ''}">${stats.pd > 0 ? '+' : ''}${stats.pd}</td>
+                    <td style="text-align: center;"><strong>${stats.pts}</strong></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openMatchModal() {
+      alert('Quick add match coming soon! For now, use "Generate Pool Play" to create matches automatically.');
     }
 
     // =====================================================
@@ -1415,8 +3683,12 @@
           <td><strong>${tier.price}</strong></td>
           <td>${tier.deadline}</td>
           <td>
-            <button class="action-btn" onclick="editPricingTier('team', ${index})" title="Edit">✏️</button>
-            <button class="action-btn delete" onclick="deletePricingTier('team', ${index})" title="Delete">🗑️</button>
+            <button class="action-btn" onclick="editPricingTier('team', ${index})" data-tooltip="Edit tier">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button class="action-btn delete" onclick="deletePricingTier('team', ${index})" data-tooltip="Delete tier">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+            </button>
           </td>
         </tr>
       `).join('');
@@ -1439,12 +3711,242 @@
           <td><strong>${tier.price}</strong></td>
           <td>${tier.deadline}</td>
           <td>
-            <button class="action-btn" onclick="editPricingTier('freeagent', ${index})" title="Edit">✏️</button>
-            <button class="action-btn delete" onclick="deletePricingTier('freeagent', ${index})" title="Delete">🗑️</button>
+            <button class="action-btn" onclick="editPricingTier('freeagent', ${index})" data-tooltip="Edit tier">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button class="action-btn delete" onclick="deletePricingTier('freeagent', ${index})" data-tooltip="Delete tier">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+            </button>
           </td>
         </tr>
       `).join('');
     }
+
+    // Convert "February 28, 2025" format to "2025-02-28" for date input
+    function dateStringToInputValue(dateStr) {
+      if (!dateStr) return '';
+      // If already in YYYY-MM-DD format, return as-is
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+      
+      const parsed = new Date(dateStr);
+      if (isNaN(parsed.getTime())) return '';
+      
+      const year = parsed.getFullYear();
+      const month = String(parsed.getMonth() + 1).padStart(2, '0');
+      const day = String(parsed.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Convert "2025-02-28" format to "February 28, 2025" for display
+    function inputValueToDateString(inputValue) {
+      if (!inputValue) return '';
+      const parsed = new Date(inputValue + 'T00:00:00');
+      if (isNaN(parsed.getTime())) return inputValue;
+      
+      return parsed.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // =====================================================
+    // CUSTOM DATE PICKER
+    // =====================================================
+    
+    const datePicker = {
+      currentMonth: new Date().getMonth(),
+      currentYear: new Date().getFullYear(),
+      selectedDate: null,
+      isOpen: false,
+      
+      init() {
+        const input = document.getElementById('pricingDeadlineDisplay');
+        const calendar = document.getElementById('deadlineCalendar');
+        const wrapper = document.getElementById('deadlinePicker');
+        
+        // Open calendar on input click
+        input.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggle();
+        });
+        
+        // Prevent calendar from closing when clicking inside it
+        calendar.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!wrapper.contains(e.target) && !calendar.contains(e.target)) {
+            this.close();
+          }
+        });
+        
+        // Navigation buttons
+        document.getElementById('prevMonth').addEventListener('click', () => this.prevMonth());
+        document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+        document.getElementById('clearDate').addEventListener('click', () => this.clear());
+        document.getElementById('todayDate').addEventListener('click', () => this.today());
+      },
+      
+      toggle() {
+        if (this.isOpen) {
+          this.close();
+        } else {
+          this.open();
+        }
+      },
+      
+      open() {
+        const calendar = document.getElementById('deadlineCalendar');
+        const input = document.getElementById('pricingDeadlineDisplay');
+        const rect = input.getBoundingClientRect();
+        
+        // Position the calendar below the input using fixed positioning
+        calendar.style.top = (rect.bottom + 8) + 'px';
+        calendar.style.left = rect.left + 'px';
+        
+        this.isOpen = true;
+        this.render();
+        calendar.classList.add('active');
+      },
+      
+      close() {
+        const calendar = document.getElementById('deadlineCalendar');
+        this.isOpen = false;
+        calendar.classList.remove('active');
+      },
+      
+      render() {
+        const monthYearEl = document.getElementById('calendarMonthYear');
+        const daysEl = document.getElementById('calendarDays');
+        
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        monthYearEl.textContent = `${monthNames[this.currentMonth]} ${this.currentYear}`;
+        
+        // Calculate days
+        const firstDay = new Date(this.currentYear, this.currentMonth, 1).getDay();
+        const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+        const daysInPrevMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        let html = '';
+        
+        // Previous month days
+        for (let i = firstDay - 1; i >= 0; i--) {
+          const day = daysInPrevMonth - i;
+          html += `<div class="calendar-day other-month">${day}</div>`;
+        }
+        
+        // Current month days
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(this.currentYear, this.currentMonth, day);
+          const dateStr = this.formatDateValue(date);
+          
+          let classes = 'calendar-day';
+          
+          if (date.getTime() === today.getTime()) {
+            classes += ' today';
+          }
+          
+          if (this.selectedDate === dateStr) {
+            classes += ' selected';
+          }
+          
+          html += `<div class="${classes}" data-date="${dateStr}">${day}</div>`;
+        }
+        
+        // Next month days
+        const totalCells = firstDay + daysInMonth;
+        const remainingCells = totalCells > 35 ? 42 - totalCells : 35 - totalCells;
+        for (let i = 1; i <= remainingCells; i++) {
+          html += `<div class="calendar-day other-month">${i}</div>`;
+        }
+        
+        daysEl.innerHTML = html;
+        
+        // Add click handlers
+        daysEl.querySelectorAll('.calendar-day:not(.other-month)').forEach(dayEl => {
+          dayEl.addEventListener('click', () => {
+            this.selectDate(dayEl.dataset.date);
+          });
+        });
+      },
+      
+      formatDateValue(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      },
+      
+      selectDate(dateStr) {
+        this.selectedDate = dateStr;
+        document.getElementById('pricingDeadline').value = dateStr;
+        document.getElementById('pricingDeadlineDisplay').value = inputValueToDateString(dateStr);
+        this.render();
+        this.close();
+      },
+      
+      prevMonth() {
+        this.currentMonth--;
+        if (this.currentMonth < 0) {
+          this.currentMonth = 11;
+          this.currentYear--;
+        }
+        this.render();
+      },
+      
+      nextMonth() {
+        this.currentMonth++;
+        if (this.currentMonth > 11) {
+          this.currentMonth = 0;
+          this.currentYear++;
+        }
+        this.render();
+      },
+      
+      clear() {
+        this.selectedDate = null;
+        document.getElementById('pricingDeadline').value = '';
+        document.getElementById('pricingDeadlineDisplay').value = '';
+        this.render();
+        this.close();
+      },
+      
+      today() {
+        const today = new Date();
+        this.currentMonth = today.getMonth();
+        this.currentYear = today.getFullYear();
+        this.selectDate(this.formatDateValue(today));
+      },
+      
+      setDate(dateStr) {
+        if (!dateStr) {
+          this.selectedDate = null;
+          document.getElementById('pricingDeadlineDisplay').value = '';
+          return;
+        }
+        
+        this.selectedDate = dateStr;
+        const parsed = new Date(dateStr + 'T00:00:00');
+        if (!isNaN(parsed.getTime())) {
+          this.currentMonth = parsed.getMonth();
+          this.currentYear = parsed.getFullYear();
+        }
+        document.getElementById('pricingDeadlineDisplay').value = inputValueToDateString(dateStr);
+      }
+    };
+
+    // Initialize date picker when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      datePicker.init();
+    });
 
     function openPricingModal(type, index = -1) {
       document.getElementById('pricingEditIndex').value = index;
@@ -1458,12 +3960,16 @@
         document.getElementById('pricingModalTitle').textContent = `Edit ${typeLabel} Tier`;
         document.getElementById('pricingTierName').value = tier.name;
         document.getElementById('pricingPrice').value = tier.price;
-        document.getElementById('pricingDeadline').value = tier.deadline;
+        // Convert stored date format and set in custom date picker
+        const dateValue = dateStringToInputValue(tier.deadline);
+        document.getElementById('pricingDeadline').value = dateValue;
+        datePicker.setDate(dateValue);
       } else {
         document.getElementById('pricingModalTitle').textContent = `Add ${typeLabel} Tier`;
         document.getElementById('pricingTierName').value = '';
         document.getElementById('pricingPrice').value = '';
         document.getElementById('pricingDeadline').value = '';
+        datePicker.setDate('');
       }
       
       document.getElementById('pricingModal').classList.add('active');
@@ -1481,10 +3987,12 @@
       const index = parseInt(document.getElementById('pricingEditIndex').value);
       const type = document.getElementById('pricingType').value;
       
+      // Convert date input value to display format before storing
+      const deadlineInputValue = document.getElementById('pricingDeadline').value;
       const tier = {
         name: document.getElementById('pricingTierName').value,
         price: document.getElementById('pricingPrice').value,
-        deadline: document.getElementById('pricingDeadline').value
+        deadline: inputValueToDateString(deadlineInputValue)
       };
       
       if (!tier.name || !tier.price || !tier.deadline) {
@@ -1532,14 +4040,8 @@
     function initContentManagement() {
       renderScheduleTable();
       renderPricingTables();
+      initTournament();
     }
-
-    // Call init when dashboard loads
-    const originalShowDashboard = showDashboard;
-    showDashboard = function() {
-      originalShowDashboard();
-      initContentManagement();
-    };
   </script>
 </body>
 </html>

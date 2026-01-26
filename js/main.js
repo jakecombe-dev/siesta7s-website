@@ -568,6 +568,9 @@ function loadSchedule() {
     return;
   }
   
+  // Sort events by date and time
+  scheduleData = sortScheduleEvents(scheduleData);
+  
   container.innerHTML = scheduleData.map(event => `
     <div class="schedule-item reveal">
       <div class="schedule-time">
@@ -585,6 +588,62 @@ function loadSchedule() {
       </div>
     </div>
   `).join('');
+}
+
+// Sort schedule events by date and time
+function sortScheduleEvents(events) {
+  return events.slice().sort((a, b) => {
+    const dateA = parseEventDateTime(a);
+    const dateB = parseEventDateTime(b);
+    return dateA - dateB;
+  });
+}
+
+// Parse event date and time into a comparable value
+function parseEventDateTime(event) {
+  const dayOrder = { 'Friday': 0, 'Saturday': 1, 'Sunday': 2, 'Monday': 3, 'Tuesday': 4, 'Wednesday': 5, 'Thursday': 6 };
+  
+  // Try to parse the date field
+  let eventDate = null;
+  const dateStr = event.date || '';
+  
+  // Check if it's a full date like "May 15, 2025" or "May 15, 2026"
+  const fullDateMatch = dateStr.match(/([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})/);
+  if (fullDateMatch) {
+    eventDate = new Date(`${fullDateMatch[1]} ${fullDateMatch[2]}, ${fullDateMatch[3]}`);
+  } else {
+    // If no full date, use day of week for ordering
+    const day = event.day || '';
+    const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
+    // Create a reference date (use 2026 as base year)
+    eventDate = new Date(2026, 0, 1 + dayNum);
+  }
+  
+  // Parse time - look for patterns like "6:00 PM", "9:00 AM", "Kickoff at 9:00 AM"
+  const timeStr = event.time || '';
+  const timeMatch = timeStr.match(/(\d{1,2}):?(\d{2})?\s*(AM|PM|am|pm)/i);
+  
+  if (timeMatch) {
+    let hours = parseInt(timeMatch[1]);
+    const minutes = parseInt(timeMatch[2] || '0');
+    const isPM = timeMatch[3].toUpperCase() === 'PM';
+    
+    // Convert to 24-hour format
+    if (isPM && hours !== 12) hours += 12;
+    if (!isPM && hours === 12) hours = 0;
+    
+    eventDate.setHours(hours, minutes, 0, 0);
+  } else {
+    // If time says "Evening" or "After", put it later in the day
+    const lowerTime = timeStr.toLowerCase();
+    if (lowerTime.includes('evening') || lowerTime.includes('after') || lowerTime.includes('concludes')) {
+      eventDate.setHours(20, 0, 0, 0); // 8 PM
+    } else {
+      eventDate.setHours(12, 0, 0, 0); // Default to noon
+    }
+  }
+  
+  return eventDate.getTime();
 }
 
 function loadPricing() {

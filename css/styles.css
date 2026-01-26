@@ -325,11 +325,12 @@ section {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   position: relative;
   overflow: hidden;
   padding-top: 72px;
+  padding-bottom: var(--space-xl);
 }
 
 /* Hero background image */
@@ -363,17 +364,89 @@ section {
   z-index: 1;
 }
 
-/* Animated wave pattern */
+/* Clean bottom edge - removed wave pattern */
 .hero::before {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   right: 0;
-  height: 150px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f5f0e6' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
-  background-size: cover;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 50%, var(--orange) 100%);
   z-index: 4;
+}
+
+/* ========================================
+   Scrolling Marquee Banner
+   ======================================== */
+.marquee-banner {
+  position: relative;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  padding: var(--space-md) 0;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 50s linear infinite;
+  transition: animation-play-state 0.5s ease-out;
+}
+
+.marquee-banner:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  padding: 0 4rem;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.marquee-item:nth-child(odd) {
+  color: var(--gold);
+}
+
+/* Faded edges */
+.marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, var(--navy-dark) 0%, transparent 100%);
+}
+
+.marquee-fade-right {
+  right: 0;
+  background: linear-gradient(270deg, var(--navy-dark) 0%, transparent 100%);
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Sun glow effect - now enhances the photo */
@@ -395,7 +468,7 @@ section {
 /* Palm tree silhouettes - subtle overlay on image */
 .hero-palms {
   position: absolute;
-  bottom: 100px;
+  bottom: 0;
   left: 0;
   right: 0;
   height: 200px;
@@ -456,22 +529,25 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-2xl);
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .hero-badge-title {
   display: block;
-  font-size: var(--text-base);
-  letter-spacing: 0.1em;
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  opacity: 0.9;
 }
 
 .hero-badge-countdown {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  font-size: var(--text-sm);
-  opacity: 0.95;
+  gap: var(--space-sm);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  opacity: 1;
 }
 
 .badge-countdown-item {
@@ -481,72 +557,90 @@ section {
 }
 
 .badge-countdown-item strong {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: 800;
 }
 
 .badge-countdown-separator {
-  opacity: 0.6;
+  opacity: 0.5;
   font-weight: 300;
+  margin: 0 var(--space-xs);
 }
 
 .badge-countdown-text {
   font-size: var(--text-sm);
   font-weight: 600;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
-/* Hero headline */
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* Hero headline *//* Hero Messaging Group - Headline + Tagline as a unit */
+.hero-messaging {
   margin-bottom: var(--space-lg);
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 4px 40px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 0.8s ease 0.15s forwards;
   opacity: 0;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 3.5vw, var(--text-2xl));
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 4px 40px rgba(0, 0, 0, 0.5);
   background: rgba(15, 35, 64, 0.85);
-  padding: var(--space-sm) var(--space-lg);
+  padding: var(--space-sm) var(--space-xl);
   border-radius: var(--radius-md);
   display: inline-block;
+  line-height: 1.3;
 }
 
-/* Hero tagline - more impactful */
+/* Hero tagline - paired with headline */
 .hero-tagline {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   color: var(--gold);
   font-weight: 500;
-  margin-bottom: var(--space-2xl);
-  animation: fadeInUp 0.8s ease 0.4s forwards;
-  opacity: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.05em;
+  margin-top: var(--space-md);
+  margin-bottom: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.03em;
 }
 
-/* Limited spots urgency notice */
-.hero-limited {
-  display: inline-block;
-  width: 100%;
+/* Hero meta - location and date info */
+.hero-meta-divider {
+  margin: 0 var(--space-sm);
+  opacity: 0.6;
+}
+
+/* Hero Action Group - CTAs with scarcity */
+.hero-action-group {
+  margin-top: var(--space-xl);
+  animation: fadeInUp 0.8s ease 0.5s forwards;
+  opacity: 0;
+}
+
+.hero-action-group .hero-ctas {
+  animation: none;
+  opacity: 1;
+}
+
+/* Scarcity notice - subtle but effective */
+.hero-scarcity {
+  display: block;
   text-align: center;
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-lg);
-  padding: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--gold);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  background: rgba(244, 197, 66, 0.1);
-  border: 1px solid rgba(244, 197, 66, 0.25);
-  border-radius: var(--radius-full);
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  backdrop-filter: blur(5px);
-  animation: fadeInUp 0.8s ease 0.8s forwards;
-  opacity: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Legacy - keep for backwards compatibility */
+.hero-limited {
+  display: none;
 }
 
 /* Pulsing CTA button */
@@ -592,6 +686,14 @@ section {
   width: clamp(280px, 40vw, 450px);
   margin: 0 auto var(--space-xl);
   filter: drop-shadow(0 8px 40px rgba(0,0,0,0.4));
+}
+
+/* Extra large hero logo - when logo is the primary focal point */
+.hero-logo.hero-logo-xlarge {
+  width: clamp(494px, 72vw, 845px);
+  margin: 0 auto 0;
+  filter: drop-shadow(0 10px 50px rgba(0,0,0,0.5));
+  animation-delay: 0s;
 }
 
 .hero-title {
