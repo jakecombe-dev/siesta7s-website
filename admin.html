@@ -2895,6 +2895,7 @@
       }
 
       // Calculate revenue by type
+      // Column indices for Amount Due: Teams=9, Free Agents=4, Vendors=4
       let teamRevenue = 0;
       let agentRevenue = 0;
       let vendorRevenue = 0;
@@ -2904,7 +2905,7 @@
       let pendingRevenue = 0;
 
       allData['Teams'].forEach((row, i) => {
-        const amount = parseFloat(row[row.length - 1]) || 0;
+        const amount = parseFloat(row[9]) || 0; // Amount Due at index 9
         teamRevenue += amount;
         if (isRowPaid('Teams', i)) {
           paidCount++;
@@ -2916,7 +2917,7 @@
       });
 
       allData['Free Agents'].forEach((row, i) => {
-        const amount = parseFloat(row[row.length - 1]) || 0;
+        const amount = parseFloat(row[4]) || 0; // Amount Due at index 4 for Free Agents
         agentRevenue += amount;
         if (isRowPaid('Free Agents', i)) {
           paidRevenue += amount;
@@ -2926,7 +2927,7 @@
       });
 
       allData['Vendors'].forEach((row, i) => {
-        const amount = parseFloat(row[row.length - 1]) || 0;
+        const amount = parseFloat(row[4]) || 0; // Amount Due at index 4 for Vendors
         vendorRevenue += amount;
         if (isRowPaid('Vendors', i)) {
           paidRevenue += amount;
