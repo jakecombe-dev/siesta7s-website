@@ -1839,8 +1839,14 @@
         <!-- Financial & Countdown Row -->
         <div class="dashboard-grid">
           <div class="financial-card">
-            <div class="financial-total" id="totalRevenue">$0</div>
-            <div class="financial-label">Total Expected Revenue</div>
+            <div style="display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;">
+              <div class="financial-total" id="totalRevenue" style="color: var(--success);">$0</div>
+              <div style="font-size: 1.5rem; font-weight: 700; color: #f6893a;" id="pendingRevenue">+ $0</div>
+            </div>
+            <div class="financial-label">
+              <span style="color: var(--success);">Confirmed</span> &nbsp;|&nbsp; 
+              <span style="color: #f6893a;">Pending Revenue</span>
+            </div>
             <div class="financial-breakdown">
               <span class="breakdown-item">Teams: <strong id="teamRevenue">$0</strong></span>
               <span class="breakdown-item">Free Agents: <strong id="agentRevenue">$0</strong></span>
@@ -2722,16 +2728,16 @@
             <tr>
               <td>${date}</td>
               <td><strong>${row[1] || '-'}</strong></td>
-              <td>${row[2] || '-'}</td>
               <td>${row[3] || '-'}</td>
-              <td>${formatPhoneNumber(row[4])}</td>
-              <td>${row[5] || '-'}</td>
+              <td>${row[4] || '-'}</td>
+              <td>${formatPhoneNumber(row[5])}</td>
+              <td>${row[2] || '-'}</td>
               <td>
                 <button class="payment-toggle ${statusClass}" onclick="togglePaymentStatus('Teams', ${index})">
                   ${statusText}
                 </button>
               </td>
-              <td>${row[7] || row[6] || '-'}</td>
+              <td>${row[9] || '-'}</td>
               <td>
                 <button class="action-btn" onclick="editRow('${formType}', ${index})" title="Edit">✏️</button>
                 <button class="action-btn delete" onclick="deleteRow('${formType}', ${index})" title="Delete">🗑️</button>
@@ -2804,31 +2810,47 @@
       let vendorRevenue = 0;
       let paidCount = 0;
       let unpaidCount = 0;
+      let paidRevenue = 0;
+      let pendingRevenue = 0;
 
       allData['Teams'].forEach((row, i) => {
         const amount = parseFloat(row[row.length - 1]) || 0;
         teamRevenue += amount;
         if (isRowPaid('Teams', i)) {
           paidCount++;
+          paidRevenue += amount;
         } else {
           unpaidCount++;
+          pendingRevenue += amount;
         }
       });
 
-      allData['Free Agents'].forEach(row => {
+      allData['Free Agents'].forEach((row, i) => {
         const amount = parseFloat(row[row.length - 1]) || 0;
         agentRevenue += amount;
+        if (isRowPaid('Free Agents', i)) {
+          paidRevenue += amount;
+        } else {
+          pendingRevenue += amount;
+        }
       });
 
-      allData['Vendors'].forEach(row => {
+      allData['Vendors'].forEach((row, i) => {
         const amount = parseFloat(row[row.length - 1]) || 0;
         vendorRevenue += amount;
+        if (isRowPaid('Vendors', i)) {
+          paidRevenue += amount;
+        } else {
+          pendingRevenue += amount;
+        }
       });
 
       const totalRevenue = teamRevenue + agentRevenue + vendorRevenue;
 
       // Update financial card
-      document.getElementById('totalRevenue').textContent = `$${totalRevenue.toLocaleString()}`;
+      document.getElementById('totalRevenue').textContent = `$${paidRevenue.toLocaleString()}`;
+      const pendingRevEl = document.getElementById('pendingRevenue');
+      if (pendingRevEl) pendingRevEl.textContent = `+ $${pendingRevenue.toLocaleString()}`;
       
       const teamRevEl = document.getElementById('teamRevenue');
       const agentRevEl = document.getElementById('agentRevenue');
