@@ -2253,6 +2253,22 @@
     let paymentStatus = JSON.parse(localStorage.getItem('siesta7s_payment_status') || '{}');
 
     // ========================================
+    // PHONE NUMBER FORMATTING
+    // ========================================
+    
+    function formatPhoneNumber(value) {
+      if (!value) return '-';
+      // Remove all non-digit characters
+      const digits = String(value).replace(/\D/g, '');
+      
+      // Format based on length
+      if (digits.length === 0) return '-';
+      if (digits.length <= 3) return `(${digits})`;
+      if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+      return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+    }
+
+    // ========================================
     // THEME MANAGEMENT
     // ========================================
     
@@ -2557,7 +2573,7 @@
               <td><strong>${row[1] || '-'}</strong></td>
               <td>${row[2] || '-'}</td>
               <td>${row[3] || '-'}</td>
-              <td>${row[4] || '-'}</td>
+              <td>${formatPhoneNumber(row[4])}</td>
               <td>${row[5] || '-'}</td>
               <td>
                 <button class="payment-toggle ${statusClass}" onclick="togglePaymentStatus('Teams', ${index})">
@@ -2574,12 +2590,21 @@
         }).join('');
       } else {
         // Standard rendering for other types
+        // Phone column index varies: Free Agents=3, Vendors=4, Sponsors=4
+        const phoneIndex = formType === 'Free Agents' ? 3 : 4;
+        
         tbody.innerHTML = data.map((row, index) => {
           const date = row[0] ? new Date(row[0]).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-';
           return `
             <tr>
               <td>${date}</td>
-              ${row.slice(1).map(cell => `<td>${cell || '-'}</td>`).join('')}
+              ${row.slice(1).map((cell, i) => {
+                // Format phone number (i+1 because we sliced from index 1)
+                if (i + 1 === phoneIndex) {
+                  return `<td>${formatPhoneNumber(cell)}</td>`;
+                }
+                return `<td>${cell || '-'}</td>`;
+              }).join('')}
               <td>
                 <button class="action-btn" onclick="editRow('${formType}', ${index})" title="Edit">✏️</button>
                 <button class="action-btn delete" onclick="deleteRow('${formType}', ${index})" title="Delete">🗑️</button>

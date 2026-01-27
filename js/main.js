@@ -29,6 +29,52 @@ const CONFIG = {
 };
 
 // ========================================
+// Phone Number Formatting
+// ========================================
+function formatPhoneNumber(value) {
+  // Remove all non-digit characters
+  const digits = value.replace(/\D/g, '');
+  
+  // Format based on length
+  if (digits.length === 0) return '';
+  if (digits.length <= 3) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+}
+
+function initPhoneFormatting() {
+  // Find all phone input fields
+  const phoneInputs = document.querySelectorAll('input[type="tel"]');
+  
+  phoneInputs.forEach(input => {
+    // Format on input
+    input.addEventListener('input', (e) => {
+      const cursorPos = e.target.selectionStart;
+      const oldLength = e.target.value.length;
+      
+      e.target.value = formatPhoneNumber(e.target.value);
+      
+      // Adjust cursor position after formatting
+      const newLength = e.target.value.length;
+      const diff = newLength - oldLength;
+      e.target.setSelectionRange(cursorPos + diff, cursorPos + diff);
+    });
+    
+    // Format on paste
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasted = e.clipboardData.getData('text');
+      e.target.value = formatPhoneNumber(pasted);
+    });
+    
+    // Format existing value if any
+    if (input.value) {
+      input.value = formatPhoneNumber(input.value);
+    }
+  });
+}
+
+// ========================================
 // DOM Ready
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initMobileCTA();
   initForms();
+  initPhoneFormatting(); // Initialize phone formatting
   highlightCurrentTiers();
 });
 
