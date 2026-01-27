@@ -68,19 +68,40 @@
       font-size: 0.9rem;
     }
 
-    .login-input {
-      width: 100%;
-      padding: 1rem;
+    .login-input-group {
+      display: flex;
+      align-items: center;
       border: 2px solid var(--gray-200);
       border-radius: 8px;
-      font-size: 1rem;
       margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .login-input-group:focus-within {
+      border-color: var(--teal);
+    }
+
+    .login-prefix {
+      background: var(--gray-100);
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 1px;
+      border-right: 2px solid var(--gray-200);
+    }
+
+    .login-input {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      font-size: 1rem;
       transition: border-color 0.2s;
     }
 
     .login-input:focus {
       outline: none;
-      border-color: var(--teal);
     }
 
     .login-btn {
@@ -481,7 +502,10 @@
       <h1>🏉 Team Captain Portal</h1>
       <p>Enter your team code to manage your roster</p>
       <form id="loginForm">
-        <input type="text" class="login-input" id="teamCodeInput" placeholder="Team code (e.g. S7-ABC123)" autocomplete="off" required style="text-transform: uppercase; letter-spacing: 1px;">
+        <div class="login-input-group">
+          <span class="login-prefix">S7-</span>
+          <input type="text" class="login-input" id="teamCodeInput" placeholder="YOURTEAMNAME" autocomplete="off" required style="text-transform: uppercase; letter-spacing: 1px;">
+        </div>
         <button type="submit" class="login-btn">Access My Team</button>
         <p class="login-error" id="loginError">Team code not found. Check the code from your registration confirmation.</p>
       </form>
@@ -591,7 +615,11 @@
     // Login
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const teamCode = teamCodeInput.value.trim().toUpperCase();
+      let teamCode = teamCodeInput.value.trim().toUpperCase();
+      // Add S7- prefix if not already present
+      if (!teamCode.startsWith('S7-')) {
+        teamCode = 'S7-' + teamCode;
+      }
       loginError.style.display = 'none';
       
       const found = await loadTeam(teamCode);
