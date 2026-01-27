@@ -672,8 +672,21 @@
       document.getElementById('captainPhone').textContent = phone || '-';
       document.getElementById('regDate').textContent = date ? new Date(date).toLocaleDateString() : '-';
       
-      // Parse roster
-      roster = rosterData ? rosterData.split(',').map(p => p.trim()).filter(p => p) : [];
+      // Parse roster and ensure captain is first
+      let rosterPlayers = rosterData ? rosterData.split(',').map(p => p.trim()).filter(p => p) : [];
+      
+      // Filter out any team codes (starting with S7-) that may have been incorrectly added
+      rosterPlayers = rosterPlayers.filter(p => !p.toUpperCase().startsWith('S7-'));
+      
+      // Ensure captain is always first in the roster
+      if (captain) {
+        // Remove captain if already in list (to avoid duplicates)
+        rosterPlayers = rosterPlayers.filter(p => p.toLowerCase() !== captain.toLowerCase());
+        // Add captain at the beginning
+        rosterPlayers.unshift(captain);
+      }
+      
+      roster = rosterPlayers;
       renderRoster();
     }
 
@@ -699,17 +712,20 @@
       empty.style.display = 'none';
       list.style.display = 'block';
       
-      list.innerHTML = roster.map((player, index) => `
-        <li class="roster-item">
-          <div class="player-info">
-            <span class="player-number">${index + 1}</span>
-            <span class="player-name">${escapeHtml(player)}</span>
-          </div>
-          <div class="player-actions">
-            <button class="action-btn delete" onclick="removePlayer(${index})" title="Remove">🗑️</button>
-          </div>
-        </li>
-      `).join('');
+      list.innerHTML = roster.map((player, index) => {
+        const isCaptain = index === 0;
+        return `
+          <li class="roster-item">
+            <div class="player-info">
+              <span class="player-number">${index + 1}</span>
+              <span class="player-name">${escapeHtml(player)}${isCaptain ? ' <span style="background: var(--sunset); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-left: 8px;">CAPTAIN</span>' : ''}</span>
+            </div>
+            <div class="player-actions">
+              ${!isCaptain ? `<button class="action-btn delete" onclick="removePlayer(${index})" title="Remove">🗑️</button>` : ''}
+            </div>
+          </li>
+        `;
+      }).join('');
     }
 
     // Add player
