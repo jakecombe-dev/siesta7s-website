@@ -2864,7 +2864,8 @@
             <div class="recent-item">
               <div class="recent-info">
                 <div class="recent-name">${row[1] || 'Unnamed Team'}</div>
-                <div class="recent-meta">Captain: ${row[2] || '-'}</div>
+                <div class="recent-meta">Captain: ${row[3] || '-'}</div>
+                <div class="recent-meta" style="font-size: 0.7rem; color: var(--text-muted);">${row[2] || 'Division TBD'}</div>
               </div>
               <div class="recent-time">${getRelativeTime(row[0])}</div>
             </div>
