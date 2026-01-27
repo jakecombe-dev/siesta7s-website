@@ -522,6 +522,19 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
         </button>
       </div>
       <p style="font-size: 0.75rem; color: #718096; margin-bottom: 1rem;">📸 Screenshot this page or download your team card to save your code!</p>
+      
+      <!-- PWA Install Prompt -->
+      <div id="pwa-success-prompt" style="background: linear-gradient(135deg, #f6893a 0%, #e07830 100%); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 1rem; text-align: left;">
+        <div style="background: white; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+          <span style="font-size: 1.5rem;">📲</span>
+        </div>
+        <div style="flex: 1;">
+          <p style="color: white; font-weight: 600; font-size: 0.9rem; margin: 0 0 0.25rem 0;">Get the Team Portal App</p>
+          <p style="color: rgba(255,255,255,0.9); font-size: 0.75rem; margin: 0; line-height: 1.3;">Install on your phone for instant access to manage your roster!</p>
+        </div>
+        <a href="team-portal.html" style="background: white; color: #1a365d; padding: 0.6rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.8rem; text-decoration: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">Get App</a>
+      </div>
+      
       <p style="margin-bottom: 1rem;">
         <a href="team-portal.html" style="color: #2d8b9e; font-weight: 600;">Go to Team Captain Portal →</a>
       </p>
