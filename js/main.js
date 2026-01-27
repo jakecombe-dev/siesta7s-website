@@ -409,7 +409,7 @@ async function handleFormSubmit(e) {
   // Generate team code for Teams registration
   let teamCode = null;
   if (formType === 'Teams') {
-    teamCode = generateTeamCode();
+    teamCode = generateTeamCode(data.fields.teamName);
     data.fields.teamCode = teamCode;
   }
   
@@ -510,10 +510,10 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
   let teamCodeMessage = '';
   if (teamCode) {
     teamCodeMessage = `
-      <div style="background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
-        <p style="font-size: 0.875rem; margin-bottom: 0.5rem; opacity: 0.9;">Your Team Code:</p>
-        <p style="font-size: 1.5rem; font-weight: 700; font-family: monospace; letter-spacing: 2px; margin-bottom: 0.5rem;">${teamCode}</p>
-        <p style="font-size: 0.75rem; opacity: 0.8;">⚠️ Save this code! You'll need it to manage your roster.</p>
+      <div style="background: #f8fafc; border: 2px solid #1a365d; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; text-align: center;">
+        <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: #4a5568; font-weight: 500;">Your Team Code:</p>
+        <p style="font-size: 1.75rem; font-weight: 800; font-family: monospace; letter-spacing: 3px; margin-bottom: 0.75rem; color: #1a365d; background: #e2e8f0; padding: 0.5rem 1rem; border-radius: 8px; display: inline-block;">${teamCode}</p>
+        <p style="font-size: 0.8rem; color: #c53030; font-weight: 600; margin-top: 0.5rem;">⚠️ Save this code! You'll need it to manage your roster.</p>
       </div>
       <p style="margin-bottom: 1rem;">
         <a href="team-portal.html" style="color: #2d8b9e; font-weight: 600;">Go to Team Captain Portal →</a>
@@ -540,14 +540,30 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
   formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// Generate unique team code
-function generateTeamCode() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Removed confusing chars like 0,O,1,I
-  let code = 'S7-';
-  for (let i = 0; i < 6; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
+// Generate unique team code based on team name
+function generateTeamCode(teamName) {
+  if (!teamName) {
+    // Fallback to random code if no team name
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = 'S7-';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
   }
-  return code;
+  
+  // Clean team name: uppercase, remove special chars, replace spaces with nothing
+  let cleanName = teamName
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, '') // Remove non-alphanumeric
+    .substring(0, 10); // Limit to 10 chars
+  
+  // Ensure minimum length
+  if (cleanName.length < 3) {
+    cleanName = cleanName.padEnd(3, 'X');
+  }
+  
+  return `S7-${cleanName}`;
 }
 
 // ========================================
