@@ -336,6 +336,81 @@
       color: var(--gray-600);
     }
 
+    /* Schedule Preview Styles */
+    .schedule-preview-timeline {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .schedule-preview-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+    }
+
+    .schedule-preview-time {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .schedule-preview-day {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f4c542;
+      text-transform: uppercase;
+    }
+
+    .schedule-preview-date {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.25rem;
+    }
+
+    .schedule-preview-content {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .schedule-preview-content h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .schedule-preview-time-text {
+      color: #f4c542;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .schedule-preview-location {
+      color: #5dc9db;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .schedule-preview-content p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 500px) {
+      .schedule-preview-item {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Data Table */
     .table-card {
       background: var(--white);
@@ -2052,6 +2127,21 @@
             </table>
           </div>
         </div>
+
+        <!-- Live Preview Section -->
+        <div class="table-card" style="margin-top: 2rem;">
+          <div class="table-header">
+            <h2>👁️ Live Preview</h2>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">This is how the schedule will appear on the website</span>
+          </div>
+          <div class="schedule-preview-container" style="background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); border-radius: 12px; padding: 2rem; margin: 1.5rem;">
+            <h3 style="color: #fff; text-align: center; margin-bottom: 0.5rem; font-size: 1.5rem;">Weekend Schedule</h3>
+            <div style="width: 60px; height: 3px; background: #f4c542; margin: 0 auto 2rem;"></div>
+            <div id="schedulePreview" class="schedule-preview-timeline">
+              <!-- Preview items will be rendered here -->
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Tournament Tab -->
@@ -3339,6 +3429,34 @@
             </button>
           </td>
         </tr>
+      `).join('');
+      
+      // Render live preview
+      renderSchedulePreview(data);
+    }
+
+    function renderSchedulePreview(data) {
+      const preview = document.getElementById('schedulePreview');
+      if (!preview) return;
+      
+      if (!data || data.length === 0) {
+        preview.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">No events scheduled yet</p>';
+        return;
+      }
+      
+      preview.innerHTML = data.map(event => `
+        <div class="schedule-preview-item">
+          <div class="schedule-preview-time">
+            <div class="schedule-preview-day">${event.day}</div>
+            <div class="schedule-preview-date">${event.date}</div>
+          </div>
+          <div class="schedule-preview-content">
+            <h4>${event.title}</h4>
+            <div class="schedule-preview-time-text">🕐 ${event.time}</div>
+            <div class="schedule-preview-location">📍 ${event.location}</div>
+            <p>${event.description}</p>
+          </div>
+        </div>
       `).join('');
     }
 
