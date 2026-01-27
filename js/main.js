@@ -547,139 +547,61 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
   formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// Download team code card as image
-function downloadTeamCodeCard(teamCode, amount) {
-  // Create a canvas element
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+// Download team code card as image using html2canvas
+async function downloadTeamCodeCard(teamCode, amount) {
+  const successCard = document.getElementById('success-card-content');
   
-  // Set canvas size (matching mobile card dimensions)
-  const width = 400;
-  const height = 580;
-  canvas.width = width;
-  canvas.height = height;
-  
-  // Background - cream/sand color
-  ctx.fillStyle = '#f5f0e6';
-  ctx.fillRect(0, 0, width, height);
-  
-  // White card background
-  ctx.fillStyle = '#ffffff';
-  roundRect(ctx, 30, 30, width - 60, height - 60, 20, true, false);
-  
-  // Checkmark circle
-  const centerX = width / 2;
-  let y = 90;
-  
-  // Draw teal circle
-  ctx.beginPath();
-  ctx.arc(centerX, y, 35, 0, Math.PI * 2);
-  const gradient = ctx.createLinearGradient(centerX - 35, y - 35, centerX + 35, y + 35);
-  gradient.addColorStop(0, '#1a365d');
-  gradient.addColorStop(1, '#2d8b9e');
-  ctx.fillStyle = gradient;
-  ctx.fill();
-  
-  // Draw checkmark
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 4;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.beginPath();
-  ctx.moveTo(centerX - 12, y);
-  ctx.lineTo(centerX - 2, y + 10);
-  ctx.lineTo(centerX + 15, y - 10);
-  ctx.stroke();
-  
-  // "YOU'RE IN!" title
-  y = 160;
-  ctx.fillStyle = '#1a365d';
-  ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText("YOU'RE IN! 🎉", centerX, y);
-  
-  // Subtitle
-  y = 195;
-  ctx.fillStyle = '#4a5568';
-  ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText('Your teams registration has been', centerX, y);
-  ctx.fillText('submitted successfully.', centerX, y + 20);
-  
-  // Team code card background
-  y = 250;
-  const cardGradient = ctx.createLinearGradient(50, y, width - 50, y + 120);
-  cardGradient.addColorStop(0, '#1a365d');
-  cardGradient.addColorStop(1, '#2d8b9e');
-  ctx.fillStyle = cardGradient;
-  roundRect(ctx, 50, y, width - 100, 120, 12, true, false);
-  
-  // "Your Team Code:" label
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-  ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText('Your Team Code:', centerX, y + 30);
-  
-  // Team code
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 26px "SF Mono", Monaco, "Courier New", monospace';
-  ctx.fillText(teamCode, centerX, y + 70);
-  
-  // Warning message
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-  ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText("⚠️ Save this code! You'll need it to manage", centerX, y + 100);
-  ctx.fillText("your roster.", centerX, y + 115);
-  
-  // "Go to Team Captain Portal" link
-  y = 400;
-  ctx.fillStyle = '#2d8b9e';
-  ctx.font = '600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText('Go to Team Captain Portal →', centerX, y);
-  
-  // Amount due
-  if (amount > 0) {
-    y = 440;
-    ctx.fillStyle = '#1a365d';
-    ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText(`Amount Due: $${amount}`, centerX, y);
-    
-    // Payment info
-    y = 470;
-    ctx.fillStyle = '#4a5568';
-    ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('Please complete your payment via', centerX, y);
-    ctx.fillText('Venmo or Zelle to:', centerX, y + 18);
-    
-    // Email box
-    y = 510;
-    ctx.fillStyle = 'rgba(45, 139, 158, 0.1)';
-    roundRect(ctx, 60, y - 12, width - 120, 30, 6, true, false);
-    ctx.fillStyle = '#1a365d';
-    ctx.font = '13px "SF Mono", Monaco, "Courier New", monospace';
-    ctx.fillText('sarasotarugbyclub@gmail.com', centerX, y + 5);
+  if (!successCard) {
+    alert('Unable to capture card. Please take a screenshot instead.');
+    return;
   }
   
-  // Download the image
-  const link = document.createElement('a');
-  link.download = `siesta7s-${teamCode}.png`;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+  // Dynamically load html2canvas if not already loaded
+  if (typeof html2canvas === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = () => captureAndDownload(successCard, teamCode);
+    script.onerror = () => {
+      alert('Unable to load image capture library. Please take a screenshot instead.');
+    };
+    document.head.appendChild(script);
+  } else {
+    captureAndDownload(successCard, teamCode);
+  }
 }
 
-// Helper function to draw rounded rectangles
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-  if (fill) ctx.fill();
-  if (stroke) ctx.stroke();
+// Capture the element and download as JPG
+async function captureAndDownload(element, teamCode) {
+  try {
+    // Hide the download button temporarily for clean capture
+    const downloadBtn = element.querySelector('button');
+    const screenshotHint = element.querySelector('p[style*="color: #718096"]');
+    if (downloadBtn) downloadBtn.style.display = 'none';
+    if (screenshotHint) screenshotHint.style.display = 'none';
+    
+    // Capture the element
+    const canvas = await html2canvas(element, {
+      backgroundColor: '#ffffff',
+      scale: 2, // Higher resolution
+      useCORS: true,
+      allowTaint: true,
+      logging: false
+    });
+    
+    // Restore button visibility
+    if (downloadBtn) downloadBtn.style.display = '';
+    if (screenshotHint) screenshotHint.style.display = '';
+    
+    // Convert to JPG and download
+    const link = document.createElement('a');
+    link.download = `siesta7s-${teamCode}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+    
+  } catch (error) {
+    console.error('Error capturing card:', error);
+    alert('Unable to capture card. Please take a screenshot instead.');
+  }
 }
 
 // Generate unique team code based on team name
