@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Team Captain Portal | Siesta 7s</title>
+  <title>Siesta 7s Rugby | Team Portal</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Manage your Siesta 7s Beach Rugby team roster">
   
@@ -451,23 +451,211 @@
       color: #744210;
     }
 
-    /* Responsive */
+    /* Responsive - Mobile First */
     @media (max-width: 640px) {
-      .portal-content {
+      body {
+        overflow-x: hidden;
+      }
+
+      .login-screen {
         padding: 1rem;
       }
 
+      .login-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .portal-header {
+        padding: 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .portal-header h1 {
+        font-size: 1.1rem;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .logout-btn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
+      }
+
+      .portal-content {
+        padding: 1rem;
+        padding-bottom: 6rem; /* Space for PWA banner */
+      }
+
       .team-card-header {
-        padding: 1.5rem;
+        padding: 1.25rem;
+      }
+
+      .team-card-header h2 {
+        font-size: 1.25rem;
+        word-break: break-word;
       }
 
       .team-meta {
         flex-direction: column;
         gap: 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .team-card-body {
+        padding: 1.25rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .info-item span {
+        word-break: break-word;
+        font-size: 0.9rem;
+      }
+
+      .roster-header {
+        padding: 1rem 1.25rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .roster-header h3 {
+        font-size: 1rem;
+      }
+
+      .roster-body {
+        padding: 0.75rem 1.25rem 1.25rem;
+      }
+
+      .roster-item {
+        padding: 0.875rem 0;
+        gap: 0.5rem;
+      }
+
+      .player-info {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .player-name {
+        font-size: 0.9rem;
+        word-break: break-word;
+      }
+
+      .player-number {
+        width: 26px;
+        height: 26px;
+        font-size: 0.7rem;
+        flex-shrink: 0;
+      }
+
+      .action-btn {
+        padding: 0.5rem;
+        font-size: 1rem;
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .add-player-form {
         flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .add-player-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-size: 16px; /* Prevents iOS zoom */
+      }
+
+      .add-player-btn {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        justify-content: center;
+      }
+
+      .toast {
+        left: 1rem;
+        right: 1rem;
+        bottom: 5rem;
+        text-align: center;
+      }
+
+      /* PWA banner mobile adjustments */
+      .pwa-banner-content {
+        flex-wrap: wrap;
+      }
+
+      .pwa-text h4 {
+        font-size: 0.9rem;
+      }
+
+      .pwa-text p {
+        font-size: 0.75rem;
+      }
+
+      .pwa-actions {
+        width: 100%;
+        margin-top: 0.75rem;
+      }
+
+      .pwa-install-btn {
+        flex: 1;
+        padding: 0.875rem 1rem;
+      }
+
+      .pwa-dismiss-btn {
+        padding: 0.875rem;
+      }
+
+      /* iOS modal mobile */
+      .ios-modal-content {
+        padding: 1.5rem;
+        margin: 0.5rem;
+      }
+
+      .ios-step {
+        padding: 0.875rem;
+        gap: 0.75rem;
+      }
+
+      .ios-step-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+      }
+
+      .ios-step-text {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 380px) {
+      .login-card h1 {
+        font-size: 1.25rem;
+      }
+
+      .portal-header h1 {
+        font-size: 1rem;
+      }
+
+      .team-card-header h2 {
+        font-size: 1.1rem;
+      }
+
+      .info-item label {
+        font-size: 0.7rem;
+      }
+
+      .pwa-icon {
+        width: 44px;
+        height: 44px;
       }
     }
 
@@ -757,7 +945,9 @@
   <!-- Login Screen -->
   <div class="login-screen" id="loginScreen">
     <div class="login-card">
-      <h1>🏉 Team Captain Portal</h1>
+      <img src="/assets/images/pwa-icon-192.png" alt="Siesta 7s" style="width: 72px; height: 72px; border-radius: 16px; margin-bottom: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <h1>Siesta 7s Rugby</h1>
+      <p style="font-size: 1rem; font-weight: 500; color: var(--teal); margin-bottom: 1.5rem;">Team Portal</p>
       <p>Enter your team code to manage your roster</p>
       <form id="loginForm">
         <div class="login-input-group">
@@ -775,7 +965,10 @@
   <!-- Team Portal -->
   <div class="portal" id="portal">
     <header class="portal-header">
-      <h1>🏉 Team Captain Portal</h1>
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <img src="/assets/images/pwa-icon-192.png" alt="Siesta 7s" style="width: 36px; height: 36px; border-radius: 8px;">
+        <h1>Siesta 7s Team Portal</h1>
+      </div>
       <button class="logout-btn" id="logoutBtn">Logout</button>
     </header>
 
