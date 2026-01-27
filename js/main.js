@@ -506,15 +506,22 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
     `;
   }
   
-  // Team code message for Team registrations
+  // Team code message for Team registrations with download button
   let teamCodeMessage = '';
+  let downloadButton = '';
   if (teamCode) {
     teamCodeMessage = `
-      <div style="background: #f8fafc; border: 2px solid #1a365d; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; text-align: center;">
-        <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: #4a5568; font-weight: 500;">Your Team Code:</p>
-        <p style="font-size: 1.75rem; font-weight: 800; font-family: monospace; letter-spacing: 3px; margin-bottom: 0.75rem; color: #1a365d; background: #e2e8f0; padding: 0.5rem 1rem; border-radius: 8px; display: inline-block;">${teamCode}</p>
-        <p style="font-size: 0.8rem; color: #c53030; font-weight: 600; margin-top: 0.5rem;">⚠️ Save this code! You'll need it to manage your roster.</p>
+      <div id="team-code-card" style="background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; text-align: center;">
+        <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.85); font-weight: 500;">Your Team Code:</p>
+        <p style="font-size: 1.75rem; font-weight: 800; font-family: monospace; letter-spacing: 3px; margin-bottom: 0.75rem; color: #fff;">${teamCode}</p>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 0.5rem;">⚠️ Save this code! You'll need it to manage your roster.</p>
       </div>
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <button onclick="downloadTeamCodeCard('${teamCode}', ${amount || 0})" style="background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+          📥 Download Team Card
+        </button>
+      </div>
+      <p style="font-size: 0.75rem; color: #718096; margin-bottom: 1rem;">📸 Screenshot this page or download your team card to save your code!</p>
       <p style="margin-bottom: 1rem;">
         <a href="team-portal.html" style="color: #2d8b9e; font-weight: 600;">Go to Team Captain Portal →</a>
       </p>
@@ -522,7 +529,7 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
   }
   
   formCard.innerHTML = `
-    <div class="form-success">
+    <div class="form-success" id="success-card-content">
       <div class="form-success-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="20 6 9 17 4 12"></polyline>
@@ -538,6 +545,141 @@ function showFormSuccess(form, formType, amount, teamCode = null) {
   
   // Scroll to success message
   formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Download team code card as image
+function downloadTeamCodeCard(teamCode, amount) {
+  // Create a canvas element
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Set canvas size (matching mobile card dimensions)
+  const width = 400;
+  const height = 580;
+  canvas.width = width;
+  canvas.height = height;
+  
+  // Background - cream/sand color
+  ctx.fillStyle = '#f5f0e6';
+  ctx.fillRect(0, 0, width, height);
+  
+  // White card background
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, 30, 30, width - 60, height - 60, 20, true, false);
+  
+  // Checkmark circle
+  const centerX = width / 2;
+  let y = 90;
+  
+  // Draw teal circle
+  ctx.beginPath();
+  ctx.arc(centerX, y, 35, 0, Math.PI * 2);
+  const gradient = ctx.createLinearGradient(centerX - 35, y - 35, centerX + 35, y + 35);
+  gradient.addColorStop(0, '#1a365d');
+  gradient.addColorStop(1, '#2d8b9e');
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  
+  // Draw checkmark
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+  ctx.moveTo(centerX - 12, y);
+  ctx.lineTo(centerX - 2, y + 10);
+  ctx.lineTo(centerX + 15, y - 10);
+  ctx.stroke();
+  
+  // "YOU'RE IN!" title
+  y = 160;
+  ctx.fillStyle = '#1a365d';
+  ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText("YOU'RE IN! 🎉", centerX, y);
+  
+  // Subtitle
+  y = 195;
+  ctx.fillStyle = '#4a5568';
+  ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText('Your teams registration has been', centerX, y);
+  ctx.fillText('submitted successfully.', centerX, y + 20);
+  
+  // Team code card background
+  y = 250;
+  const cardGradient = ctx.createLinearGradient(50, y, width - 50, y + 120);
+  cardGradient.addColorStop(0, '#1a365d');
+  cardGradient.addColorStop(1, '#2d8b9e');
+  ctx.fillStyle = cardGradient;
+  roundRect(ctx, 50, y, width - 100, 120, 12, true, false);
+  
+  // "Your Team Code:" label
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+  ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText('Your Team Code:', centerX, y + 30);
+  
+  // Team code
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 26px "SF Mono", Monaco, "Courier New", monospace';
+  ctx.fillText(teamCode, centerX, y + 70);
+  
+  // Warning message
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+  ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText("⚠️ Save this code! You'll need it to manage", centerX, y + 100);
+  ctx.fillText("your roster.", centerX, y + 115);
+  
+  // "Go to Team Captain Portal" link
+  y = 400;
+  ctx.fillStyle = '#2d8b9e';
+  ctx.font = '600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText('Go to Team Captain Portal →', centerX, y);
+  
+  // Amount due
+  if (amount > 0) {
+    y = 440;
+    ctx.fillStyle = '#1a365d';
+    ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText(`Amount Due: $${amount}`, centerX, y);
+    
+    // Payment info
+    y = 470;
+    ctx.fillStyle = '#4a5568';
+    ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Please complete your payment via', centerX, y);
+    ctx.fillText('Venmo or Zelle to:', centerX, y + 18);
+    
+    // Email box
+    y = 510;
+    ctx.fillStyle = 'rgba(45, 139, 158, 0.1)';
+    roundRect(ctx, 60, y - 12, width - 120, 30, 6, true, false);
+    ctx.fillStyle = '#1a365d';
+    ctx.font = '13px "SF Mono", Monaco, "Courier New", monospace';
+    ctx.fillText('sarasotarugbyclub@gmail.com', centerX, y + 5);
+  }
+  
+  // Download the image
+  const link = document.createElement('a');
+  link.download = `siesta7s-${teamCode}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// Helper function to draw rounded rectangles
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
 }
 
 // Generate unique team code based on team name
