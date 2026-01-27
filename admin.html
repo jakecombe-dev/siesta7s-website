@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Admin Dashboard | Siesta 7s</title>
   <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Siesta 7s Admin Dashboard">
+  
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1a365d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="S7 Admin">
+  
+  <!-- Apple PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="S7 Admin">
+  <link rel="apple-touch-icon" href="/assets/images/pwa-icon-192.png">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -1599,6 +1613,143 @@
     [data-theme="dark"] .score-display {
       background: var(--bg-hover);
       color: var(--text-primary);
+    }
+
+    /* PWA Install Banner */
+    .pwa-install-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, var(--navy) 0%, #0f1f38 100%);
+      color: var(--white);
+      padding: 1.25rem;
+      padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+      display: none;
+      z-index: 9999;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pwa-install-banner.show { display: block; }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .pwa-banner-content {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pwa-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .pwa-text { flex: 1; }
+    .pwa-text h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--white); }
+    .pwa-text p { font-size: 0.8rem; opacity: 0.85; line-height: 1.4; margin: 0; }
+
+    .pwa-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+    .pwa-install-btn {
+      background: linear-gradient(135deg, var(--sunset) 0%, #e07830 100%);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(246, 137, 58, 0.4);
+    }
+
+    .pwa-install-btn:hover { transform: translateY(-2px); }
+
+    .pwa-dismiss-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.75rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .pwa-dismiss-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* iOS Install Modal */
+    .ios-install-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 1rem;
+    }
+
+    .ios-install-modal.show { display: flex; }
+
+    .ios-modal-content {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .ios-modal-content h3 { color: var(--navy); font-size: 1.25rem; margin-bottom: 1.5rem; }
+
+    .ios-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--gray-100);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+
+    .ios-step-icon {
+      width: 44px; height: 44px;
+      background: var(--white);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ios-step-text { font-size: 0.9rem; color: var(--gray-800); line-height: 1.4; }
+    .ios-step-text strong { color: var(--navy); }
+
+    .ios-close-btn {
+      margin-top: 1.5rem;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 0.875rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -4067,6 +4218,129 @@
       renderPricingTables();
       initTournament();
     }
+  </script>
+
+  <!-- PWA Install Banner -->
+  <div class="pwa-install-banner" id="pwaInstallBanner">
+    <div class="pwa-banner-content">
+      <img src="/assets/images/pwa-icon-192.png" alt="S7 Admin" class="pwa-icon">
+      <div class="pwa-text">
+        <h4>📲 Add to Home Screen</h4>
+        <p>Install Admin Dashboard for quick access!</p>
+      </div>
+      <div class="pwa-actions">
+        <button class="pwa-install-btn" id="pwaInstallBtn">Install App</button>
+        <button class="pwa-dismiss-btn" id="pwaDismissBtn">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS Install Instructions Modal -->
+  <div class="ios-install-modal" id="iosInstallModal">
+    <div class="ios-modal-content">
+      <h3>📲 Install S7 Admin</h3>
+      <div class="ios-step">
+        <div class="ios-step-icon">⋯</div>
+        <div class="ios-step-text">
+          Tap the <strong>⋯ menu</strong> button in the address bar
+        </div>
+      </div>
+      <div class="ios-step">
+        <div class="ios-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a365d" stroke-width="2">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <polyline points="16 6 12 2 8 6"/>
+            <line x1="12" y1="2" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <div class="ios-step-text">
+          Tap <strong>"Share"</strong> from the menu
+        </div>
+      </div>
+      <div class="ios-step">
+        <div class="ios-step-icon">➕</div>
+        <div class="ios-step-text">
+          Scroll down, tap <strong>"Add to Home Screen"</strong>
+        </div>
+      </div>
+      <button class="ios-close-btn" id="iosCloseBtn">Got it!</button>
+    </div>
+  </div>
+
+  <script>
+    // ========================================
+    // PWA INSTALLATION LOGIC
+    // ========================================
+    
+    let deferredPrompt = null;
+    const pwaInstallBanner = document.getElementById('pwaInstallBanner');
+    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+    const pwaDismissBtn = document.getElementById('pwaDismissBtn');
+    const iosInstallModal = document.getElementById('iosInstallModal');
+    const iosCloseBtn = document.getElementById('iosCloseBtn');
+    
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+    
+    // Check if already installed as PWA
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                         window.navigator.standalone === true;
+    
+    // Detect iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    // Detect if already dismissed this session
+    const pwaDismissed = sessionStorage.getItem('siesta7s_pwa_dismissed');
+    const pwaInstalled = localStorage.getItem('siesta7s_pwa_installed');
+    
+    // Listen for beforeinstallprompt (Android/Chrome)
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      if (!pwaDismissed && !pwaInstalled && !isStandalone) {
+        setTimeout(() => { pwaInstallBanner.classList.add('show'); }, 2000);
+      }
+    });
+    
+    // Show iOS install prompt
+    if (isIOS && !isStandalone && !pwaDismissed && !pwaInstalled) {
+      setTimeout(() => { pwaInstallBanner.classList.add('show'); }, 2000);
+    }
+    
+    // Install button click
+    pwaInstallBtn.addEventListener('click', async () => {
+      if (isIOS) {
+        iosInstallModal.classList.add('show');
+        pwaInstallBanner.classList.remove('show');
+      } else if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          localStorage.setItem('siesta7s_pwa_installed', 'true');
+        }
+        deferredPrompt = null;
+        pwaInstallBanner.classList.remove('show');
+      }
+    });
+    
+    // Dismiss - only for this session
+    pwaDismissBtn.addEventListener('click', () => {
+      pwaInstallBanner.classList.remove('show');
+      sessionStorage.setItem('siesta7s_pwa_dismissed', 'true');
+    });
+    
+    iosCloseBtn.addEventListener('click', () => {
+      iosInstallModal.classList.remove('show');
+      sessionStorage.setItem('siesta7s_pwa_dismissed', 'true');
+    });
+    
+    window.addEventListener('appinstalled', () => {
+      localStorage.setItem('siesta7s_pwa_installed', 'true');
+      pwaInstallBanner.classList.remove('show');
+    });
   </script>
 </body>
 </html>

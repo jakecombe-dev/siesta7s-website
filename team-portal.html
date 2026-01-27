@@ -855,27 +855,27 @@
     <div class="ios-modal-content">
       <h3>📲 Install S7 Portal</h3>
       <div class="ios-step">
+        <div class="ios-step-icon">⋯</div>
+        <div class="ios-step-text">
+          Tap the <strong>⋯ menu</strong> button in Safari's address bar
+        </div>
+      </div>
+      <div class="ios-step">
         <div class="ios-step-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a365d" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a365d" stroke-width="2">
             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
             <polyline points="16 6 12 2 8 6"/>
             <line x1="12" y1="2" x2="12" y2="15"/>
           </svg>
         </div>
         <div class="ios-step-text">
-          Tap the <strong>Share</strong> button at the bottom of Safari
+          Tap <strong>"Share"</strong> from the menu
         </div>
       </div>
       <div class="ios-step">
         <div class="ios-step-icon">➕</div>
         <div class="ios-step-text">
           Scroll down and tap <strong>"Add to Home Screen"</strong>
-        </div>
-      </div>
-      <div class="ios-step">
-        <div class="ios-step-icon">✓</div>
-        <div class="ios-step-text">
-          Tap <strong>"Add"</strong> to install the app
         </div>
       </div>
       <button class="ios-close-btn" id="iosCloseBtn">Got it!</button>
@@ -1124,8 +1124,8 @@
     // Detect iOS
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     
-    // Detect if already dismissed
-    const pwaDismissed = localStorage.getItem('siesta7s_pwa_dismissed');
+    // Detect if already dismissed (per session only)
+    const pwaDismissed = sessionStorage.getItem('siesta7s_pwa_dismissed');
     const pwaInstalled = localStorage.getItem('siesta7s_pwa_installed');
     
     // Use localStorage instead of sessionStorage for PWA persistence
@@ -1182,16 +1182,16 @@
       }
     });
     
-    // Dismiss button click
+    // Dismiss button click - only for this session
     pwaDismissBtn.addEventListener('click', () => {
       pwaInstallBanner.classList.remove('show');
-      localStorage.setItem('siesta7s_pwa_dismissed', 'true');
+      sessionStorage.setItem('siesta7s_pwa_dismissed', 'true');
     });
     
-    // iOS modal close
+    // iOS modal close - only for this session
     iosCloseBtn.addEventListener('click', () => {
       iosInstallModal.classList.remove('show');
-      localStorage.setItem('siesta7s_pwa_dismissed', 'true');
+      sessionStorage.setItem('siesta7s_pwa_dismissed', 'true');
     });
     
     // Track when app is successfully installed
