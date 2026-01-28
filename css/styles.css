@@ -1803,13 +1803,37 @@ section {
 .hosted-by {
   max-width: 600px;
   margin: var(--space-2xl) auto var(--space-3xl);
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  background: #000000;
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
   text-align: center;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
+}
+
+/* Background logo watermark */
+.hosted-by::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background-image: url('../assets/images/sarasota-rugby-club-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content stays above the watermark */
+.hosted-by > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hosted-by::before {
@@ -1820,6 +1844,7 @@ section {
   right: 0;
   height: 4px;
   background: var(--gradient-sunset);
+  z-index: 2;
 }
 
 .hosted-by-label {
