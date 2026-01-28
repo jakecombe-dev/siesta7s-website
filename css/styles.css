@@ -1847,6 +1847,15 @@ section {
   z-index: 2;
 }
 
+.hosted-by-logo {
+  display: block;
+  width: auto;
+  height: 60px;
+  margin: 0 auto var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
 .hosted-by-label {
   display: block;
   font-size: var(--text-xs);
