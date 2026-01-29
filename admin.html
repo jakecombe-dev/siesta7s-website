@@ -4117,14 +4117,14 @@
     // Sort schedule events by date and time
     function sortScheduleEvents(events) {
       return events.slice().sort((a, b) => {
-        const dateA = parseEventDateTime(a);
-        const dateB = parseEventDateTime(b);
+        const dateA = parseEventDateTime(a, events);
+        const dateB = parseEventDateTime(b, events);
         return dateA - dateB;
       });
     }
 
     // Parse event date and time into a comparable value
-    function parseEventDateTime(event) {
+    function parseEventDateTime(event, allEvents) {
       const dayOrder = { 'Friday': 0, 'Saturday': 1, 'Sunday': 2, 'Monday': 3, 'Tuesday': 4, 'Wednesday': 5, 'Thursday': 6 };
       
       // Try to parse the date field
@@ -4136,11 +4136,32 @@
       if (fullDateMatch) {
         eventDate = new Date(`${fullDateMatch[1]} ${fullDateMatch[2]}, ${fullDateMatch[3]}`);
       } else {
-        // If no full date, use day of week for ordering
+        // If no full date, try to find a reference date from another event on the same day
         const day = event.day || '';
-        const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
-        // Create a reference date (use 2026 as base year)
-        eventDate = new Date(2026, 0, 1 + dayNum);
+        let referenceDate = null;
+        
+        // Look for another event on the same day that has a full date
+        if (allEvents && allEvents.length > 0) {
+          for (const otherEvent of allEvents) {
+            if (otherEvent.day === day && otherEvent !== event) {
+              const otherDateStr = otherEvent.date || '';
+              const otherDateMatch = otherDateStr.match(/([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})/);
+              if (otherDateMatch) {
+                referenceDate = new Date(`${otherDateMatch[1]} ${otherDateMatch[2]}, ${otherDateMatch[3]}`);
+                break;
+              }
+            }
+          }
+        }
+        
+        if (referenceDate) {
+          eventDate = referenceDate;
+        } else {
+          // Fallback: use day of week for ordering relative to event date
+          const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
+          // Use the configured event date's year as reference (May 16, 2026)
+          eventDate = new Date(2026, 4, 15 + dayNum); // May 15 = Friday, May 16 = Saturday
+        }
       }
       
       // Parse time - look for patterns like "6:00 PM", "9:00 AM", "Kickoff at 9:00 AM"

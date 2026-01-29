@@ -270,10 +270,27 @@
       <!-- 5. PRIMARY ACTION - CTAs with integrated scarcity -->
       <div class="hero-action-group">
         <div class="hero-ctas">
-          <a href="register.html" class="btn btn-primary btn-lg btn-pulse">🏉 Register Your Team</a>
+          <div class="team-register-input-wrapper">
+            <div class="team-register-input-container">
+              <span class="team-register-emoji">🏉</span>
+              <input type="text" 
+                     id="hero-team-name-input" 
+                     class="team-register-input" 
+                     placeholder="Enter your team name..."
+                     maxlength="50"
+                     autocomplete="off">
+              <button type="button" class="team-register-submit" id="hero-team-submit" aria-label="Start registration">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+            <span class="team-register-hint">Press Enter or click the arrow to continue</span>
+          </div>
           <a href="register.html#freeagent" class="btn btn-secondary btn-lg">Join as Free Agent</a>
-          <a href="vendors.html" class="btn btn-vendor-link">Interested in vending?</a>
         </div>
+        <a href="vendors.html" class="btn btn-vendor-link">Interested in vending?</a>
         <div class="hero-social">
           <a href="https://www.instagram.com/srqsurge/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="hero-social-link">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -369,20 +386,20 @@
       
       <div class="about-intro reveal">
         <p class="about-intro-lead">
-          <strong>Rugby. Beach. Beers. What else do you need?</strong> 
-          Get your squad together and come throw it around on the best damn beach in America.
+          <strong>Three days of sun, sand, rugby, and good times.</strong> 
+          This isn't just a tournament. It's a full weekend takeover of Siesta Key.
         </p>
         <p class="about-intro-details">
-          <a href="https://www.sarasotarugbyclub.com" target="_blank" rel="noopener noreferrer" class="club-link"><strong>Sarasota Rugby Club</strong></a> 
-          is throwing a proper beach 7s tournament on Siesta Key. 16 teams going at it in the sand, 
-          cold ones flowing all day, and a legendary afterparty. Simple as that.
+          Kick things off <strong>Friday night</strong> at the Daiquiri Deck with live music, raffles, and the chance to scope out the competition. 
+          <strong>Saturday</strong> is all-day beach rugby on America's #1 beach: teams battling it out in the sand, cold drinks flowing, DJs spinning, food trucks grilling. 
+          Then keep the party rolling with the legendary <strong>Siesta Stumble bar crawl</strong> through Siesta Key Village.
         </p>
         <div class="about-highlights" id="cycling-pills">
           <!-- Pills will be dynamically populated by JavaScript -->
         </div>
         <p class="about-intro-cta">
-          Club team, old boys, or a bunch of mates who reckon they can play — doesn't matter. 
-          <strong>Get a team. Get registered. Get down here.</strong>
+          Whether you're here to compete, cheer, or just soak up the vibes,
+          <strong>this is the weekend you don't want to miss.</strong>
         </p>
         <div class="about-cta-buttons">
           <a href="register.html" class="btn btn-primary">🏉 Register Your Team</a>
@@ -520,25 +537,25 @@
           It started the way all great rugby ideas do: <strong>a few lads, a six-pack, and a beat-up <span class="hover-photo-trigger" data-photo="assets/gallery/beach-rugby-offload-pass-action.jpg">ball</span> on <span class="hover-photo-trigger" data-photo="assets/gallery/sunset-beach-rugby-siesta-key-florida.jpg">Siesta Key Beach</span>.</strong>
         </p>
         <p>
-          What began as casual summer sessions to keep the Sarasota Rugby Club squad in shape quickly became something more. Every week, the group got bigger. New faces showed up — some curious locals, some seasoned players, some just chasing the <span class="hover-photo-trigger" data-photo="assets/gallery/sarasota-rugby-club-sunset-practice.jpg">sunset</span> (and the cooler). Before long, it wasn't just training. It was a ritual. A <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-touch-rugby-community-group.jpg">community</span>.
+          What began as casual summer sessions to keep the Sarasota Rugby Club squad in shape quickly became something more. Every week, the group got bigger. New faces showed up: some curious locals, some seasoned players, some just chasing the <span class="hover-photo-trigger" data-photo="assets/gallery/sarasota-rugby-club-sunset-practice.jpg">sunset</span> (and the cooler). Before long, it wasn't just training. It was a ritual. A <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-touch-rugby-community-group.jpg">community</span>.
         </p>
         <p>
           Then someone asked the question: <em>"We're on America's #1 beach... why don't we throw a proper <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-7s-tournament-gameplay-florida.jpg">tournament</span>?"</em>
         </p>
         <p>
-          And honestly? The logic was bulletproof: <strong>everyone loves rugby, everyone loves Siesta Key, and nobody's ever said no to a cold beer.</strong> So the crew — Gary Jones, Ross Galbraith, RJ Dixon, Shaun Lulofs, Luke Paige, Jake Combe, and the rest of the <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-team-group-white-sand.jpg">Sarasota Rugby family</span> — decided to make it happen.
+          And honestly? The logic was bulletproof: <strong>everyone loves rugby, everyone loves Siesta Key, and nobody's ever said no to a cold beer.</strong> So the crew (Gary Jones, Ross Galbraith, RJ Dixon, Shaun Lulofs, Luke Paige, Jake Combe, and the rest of the <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-team-group-white-sand.jpg">Sarasota Rugby family</span>) decided to make it happen.
         </p>
         <p class="origin-vision">
-          Sure, there's a certain beach rugby tournament down south that calls itself "the world's greatest" — cute marketing, lads. But let's be honest: we've got the whitest <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-beach-rugby-crowd-atmosphere.jpg">sand</span> in America, better looking players (debatable, but we stand by it), and a pub crawl route that doesn't require a GPS and a prayer. <em>No shade, Beerfoot... okay, maybe a little shade.</em> 🍺
+          Sure, there's a certain beach rugby tournament down south that calls itself "the world's greatest." Nice try, lads. But let's be honest: we've got the whitest <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-beach-rugby-crowd-atmosphere.jpg">sand</span> in America, better looking players (debatable, but we stand by it), and a pub crawl route that doesn't require a GPS and a prayer. <em>No shade, Beerfoot...</em> 🍺
         </p>
         <p>
           (And yes, there have been reports of beached whales in Sarasota. Turns out it was just us crawling out of the water after the post-match cooler session.)
         </p>
         <p>
-          Some of our best memories as a club were made at tournaments just like this — scrums by the surf, <span class="hover-photo-trigger" data-photo="assets/gallery/beach-rugby-intense-tackle-sand-spray.jpg">tackles</span> in the tide, and friendships forged between the lines. We thought: why travel when we can bring it home?
+          Some of our best memories as a club were made at tournaments just like this: scrums by the surf, <span class="hover-photo-trigger" data-photo="assets/gallery/beach-rugby-intense-tackle-sand-spray.jpg">tackles</span> in the tide, and friendships forged between the lines. We thought: why travel when we can bring it home?
         </p>
         <p class="origin-cta">
-          So here we are. <strong>Siesta 7s.</strong> Born from a six-pack and a dream. Built for everyone — from elite players to first-timers who just want to feel the sand between their toes (and probably everywhere else). Welcome to the <span class="hover-photo-trigger" data-photo="assets/gallery/beach-rugby-7s-florida-tournament-action.jpg">beach</span>. Welcome to the <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-team-group-white-sand.jpg">family</span>.
+          So here we are. <strong>Siesta 7s.</strong> Born from a six-pack and a dream. Built for everyone, from elite players to first-timers who just want to feel the sand between their toes (and probably everywhere else). Welcome to the <span class="hover-photo-trigger" data-photo="assets/gallery/beach-rugby-7s-florida-tournament-action.jpg">beach</span>. Welcome to the <span class="hover-photo-trigger" data-photo="assets/gallery/siesta-key-team-group-white-sand.jpg">family</span>.
         </p>
       </div>
     </div>

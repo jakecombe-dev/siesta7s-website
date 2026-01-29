@@ -758,16 +758,17 @@ section {
 .hero-content {
   text-align: center;
   z-index: 3;
-  padding: var(--space-lg) var(--space-xl) var(--space-md);
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
+  gap: 0; /* Using individual margins for hierarchy control */
 }
 
 .hero-badge {
   display: inline-block;
+  margin-bottom: var(--space-2xl); /* Generous gap before main messaging */
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
   padding: var(--space-sm) var(--space-lg);
@@ -857,7 +858,7 @@ section {
 
 /* Hero headline *//* Hero Messaging Group - Headline + Tagline as a unit */
 .hero-messaging {
-  margin: 0;
+  margin: var(--space-lg) 0 var(--space-sm) 0; /* Space from badge + tight gap to meta */
   animation: fadeInUp 0.8s ease 0.15s forwards;
   opacity: 0;
 }
@@ -899,6 +900,10 @@ section {
   margin: 0;
   animation: fadeInUp 0.8s ease 0.5s forwards;
   opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md); /* Tighter gap within action group - related elements */
 }
 
 .hero-action-group .hero-ctas {
@@ -999,7 +1004,7 @@ section {
   gap: var(--space-xs) var(--space-md);
   color: rgba(255,255,255,0.9);
   font-size: var(--text-base);
-  margin: 0;
+  margin: 0 0 var(--space-xl) 0; /* Larger gap before CTAs - visual break before action area */
   animation: fadeInUp 0.8s ease 0.3s forwards;
   opacity: 0;
 }
@@ -1126,9 +1131,22 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-md);
+  align-items: stretch;
+  gap: var(--space-lg);
   animation: fadeInUp 0.8s ease 0.6s forwards;
   opacity: 0;
+}
+
+/* Make all hero CTA buttons the same height */
+.hero-ctas > .btn,
+.hero-ctas > .team-register-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.hero-ctas > .btn.btn-lg {
+  height: 60px;
+  min-height: 60px;
 }
 
 /* ========================================
@@ -1211,7 +1229,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-top: var(--space-xs);
+  margin-top: 0;
   transition: all var(--transition-base);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
@@ -1245,6 +1263,150 @@ section {
   padding: var(--space-lg) var(--space-2xl);
   font-size: var(--text-lg);
   min-height: 60px;
+}
+
+/* ========================================
+   Team Registration Interactive Input
+   ======================================== */
+.team-register-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.team-register-input-container {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(246, 137, 58, 1) 0%, rgba(224, 120, 48, 1) 100%);
+  border-radius: var(--radius-full);
+  padding: 0 6px 0 var(--space-xl);
+  box-shadow: 0 4px 25px rgba(246, 137, 58, 0.5), 0 0 0 0 rgba(246, 137, 58, 0.5);
+  transition: all var(--transition-base);
+  position: relative;
+  min-width: 360px;
+  max-width: 480px;
+  height: 60px;
+  animation: inputPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes inputPulse {
+  0%, 100% { box-shadow: 0 4px 25px rgba(246, 137, 58, 0.5), 0 0 0 0 rgba(246, 137, 58, 0.4); }
+  50% { box-shadow: 0 6px 35px rgba(246, 137, 58, 0.6), 0 0 0 8px rgba(246, 137, 58, 0); }
+}
+
+.team-register-input-container:focus-within {
+  animation: none;
+  box-shadow: 0 6px 40px rgba(246, 137, 58, 0.7), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
+}
+
+.team-register-emoji {
+  font-size: var(--text-xl);
+  margin-right: var(--space-sm);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.team-register-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-width: 220px;
+  padding: var(--space-md) 0;
+}
+
+.team-register-input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+.team-register-input:focus::placeholder {
+  opacity: 0.5;
+}
+
+.team-register-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.team-register-submit svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--white);
+  transition: transform var(--transition-fast);
+}
+
+.team-register-submit:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: var(--white);
+  transform: scale(1.1);
+}
+
+.team-register-submit:hover svg {
+  transform: translateX(3px);
+}
+
+.team-register-submit:active {
+  transform: scale(0.95);
+}
+
+/* Active state when input has text */
+.team-register-input-container.has-text .team-register-submit {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: var(--white);
+}
+
+.team-register-hint {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all var(--transition-base);
+}
+
+.team-register-input-container:focus-within + .team-register-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .team-register-input-container {
+    min-width: 280px;
+    padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+  }
+  
+  .team-register-input {
+    font-size: var(--text-sm);
+    min-width: 150px;
+  }
+  
+  .team-register-submit {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .team-register-emoji {
+    font-size: var(--text-lg);
+  }
 }
 
 /* ========================================
@@ -1319,7 +1481,10 @@ section {
 }
 
 .about-intro-lead strong {
-  color: var(--orange);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-intro-lead em {
@@ -1506,7 +1671,10 @@ section {
 }
 
 .about-intro-cta strong {
-  color: var(--orange);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 700;
 }
 
@@ -1669,8 +1837,6 @@ section {
   color: var(--white);
   overflow: hidden;
   padding-top: 10px;
-  border-bottom: 3px solid;
-  border-image: linear-gradient(135deg, var(--gold), var(--orange), var(--gold)) 1;
 }
 
 /* Photo background for schedule */
@@ -1681,14 +1847,20 @@ section {
   background-image: url('../assets/gallery/siesta-key-team-group-white-sand.jpg');
   background-size: cover;
   background-position: center top;
-  opacity: 0.12;
+  opacity: 0.25;
 }
 
 .schedule::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--navy-dark) 0%, transparent 20%, transparent 80%, var(--navy-dark) 100%);
+  background: linear-gradient(180deg, 
+    var(--navy-dark) 0%, 
+    rgba(15, 35, 64, 0.85) 8%, 
+    rgba(15, 35, 64, 0.4) 18%, 
+    transparent 30%, 
+    transparent 80%, 
+    var(--navy-dark) 100%);
 }
 
 .schedule .container {
@@ -1791,6 +1963,8 @@ section {
   background: var(--navy-dark);
   padding: var(--space-sm) 0;
   position: relative;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(135deg, var(--gold), var(--orange), var(--gold)) 1;
 }
 
 .photo-strip::before,
@@ -1885,18 +2059,38 @@ section {
   padding: var(--space-lg);
   text-align: center;
   min-width: 140px;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .schedule-day {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
-  color: var(--gold);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  order: 1;
 }
 
 .schedule-date {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  order: 3;
+}
+
+.schedule-event-time {
   font-size: var(--text-sm);
-  opacity: 0.8;
+  color: var(--white);
+  font-weight: 500;
+  order: 2;
+  padding: var(--space-xs) 0;
 }
 
 .schedule-content {
@@ -2090,18 +2284,18 @@ section {
   overflow: hidden;
 }
 
-/* Photo accent strip */
+/* Photo accent strip - full section coverage */
 .registration::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 200px;
+  bottom: 0;
   background-image: url('../assets/gallery/beach-rugby-players-celebration-sarasota.jpg');
   background-size: cover;
-  background-position: center;
-  opacity: 0.15;
+  background-position: center top;
+  opacity: 0.25;
 }
 
 .registration::after {
@@ -2110,8 +2304,9 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  height: 200px;
-  background: linear-gradient(180deg, transparent 0%, var(--sand) 100%);
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 30%, var(--sand) 100%);
+  pointer-events: none;
 }
 
 .registration .container {
@@ -2945,7 +3140,7 @@ section {
   justify-content: center;
   align-items: center;
   gap: var(--space-md);
-  margin-top: var(--space-sm);
+  margin-top: 0;
 }
 
 .hero-social-link {
@@ -3004,19 +3199,21 @@ section {
 
 /* Club link inline styling */
 .club-link {
-  color: var(--teal);
-  text-decoration: underline;
-  text-decoration-color: var(--teal);
-  text-underline-offset: 3px;
+  color: var(--teal-light);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
   transition: all var(--transition-fast);
+  border-bottom: 2px solid var(--teal);
 }
 
 .club-link:hover {
-  color: var(--teal-light);
-  text-decoration-color: var(--teal-light);
+  color: var(--gold);
+  border-bottom-color: var(--gold);
 }
 
 .club-link strong {
+  font-weight: 700;
   color: inherit;
 }
 
@@ -3318,7 +3515,7 @@ section {
    Photo Gallery Section
    ======================================== */
 .photo-gallery {
-  background: linear-gradient(180deg, var(--sand) 0%, var(--navy-dark) 5%, var(--navy-dark) 95%, var(--navy) 100%);
+  background: var(--navy-dark);
   padding: var(--space-section) 0;
   overflow: hidden;
 }
@@ -3881,6 +4078,7 @@ section {
 
 .banner-track {
   display: flex;
+  flex-wrap: nowrap;
   gap: var(--space-sm);
   animation: scroll-banner var(--scroll-duration, 120s) linear infinite;
   will-change: transform;
@@ -3914,15 +4112,15 @@ section {
   flex-shrink: 0;
   height: 180px;
   width: auto;
+  aspect-ratio: 4/3;
   border-radius: var(--radius-md);
   object-fit: cover;
-  transition: all var(--transition-base);
+  transition: filter var(--transition-base), box-shadow var(--transition-base);
   filter: brightness(0.9);
 }
 
 .banner-track img:hover {
   filter: brightness(1.1);
-  transform: scale(1.05);
   z-index: 5;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
@@ -4450,6 +4648,17 @@ section {
   background-size: cover;
   background-position: center;
   opacity: 0.15;
+}
+
+/* Top and bottom border lines */
+.registration-cta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 50%, var(--orange) 100%);
 }
 
 .registration-cta-content {

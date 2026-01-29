@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSocialFeed(); // Initialize social media feed
   initCyclingPills(); // Initialize cycling pills animation
   initPhotoBanner(); // Initialize seamless photo banner scrolling
+  initTeamRegisterInput(); // Initialize hero team registration input
 });
 
 // ========================================
@@ -653,7 +654,7 @@ function generateTeamCode(teamName) {
 const DEFAULT_SCHEDULE = [
   {
     day: 'Friday',
-    date: 'May 15, 2025',
+    date: 'May 15, 2026',
     title: 'Pre-Tournament Party',
     time: '6:00 PM - 9:00 PM',
     location: 'Daiquiri Deck Southbridge',
@@ -661,7 +662,7 @@ const DEFAULT_SCHEDULE = [
   },
   {
     day: 'Saturday',
-    date: 'May 16, 2025',
+    date: 'May 16, 2026',
     title: 'Tournament Day',
     time: 'Kickoff at 9:00 AM',
     location: 'Siesta Key Beach',
@@ -669,7 +670,8 @@ const DEFAULT_SCHEDULE = [
   },
   {
     day: 'Saturday',
-    date: 'Evening',
+    date: 'May 16, 2026',
+    displayDate: 'Evening',
     title: 'Siesta Stumble Bar Crawl',
     time: 'After Tournament Concludes',
     location: 'Siesta Key Village',
@@ -719,11 +721,11 @@ function loadSchedule() {
     <div class="schedule-item reveal">
       <div class="schedule-time">
         <div class="schedule-day">${event.day}</div>
-        <div class="schedule-date">${event.date}</div>
+        <div class="schedule-event-time">${event.time}</div>
+        <div class="schedule-date">${event.displayDate || event.date}</div>
       </div>
       <div class="schedule-content">
         <h3>${event.title}</h3>
-        <div class="time">${event.time}</div>
         <div class="location">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
           ${event.location}
@@ -737,14 +739,14 @@ function loadSchedule() {
 // Sort schedule events by date and time
 function sortScheduleEvents(events) {
   return events.slice().sort((a, b) => {
-    const dateA = parseEventDateTime(a);
-    const dateB = parseEventDateTime(b);
+    const dateA = parseEventDateTime(a, events);
+    const dateB = parseEventDateTime(b, events);
     return dateA - dateB;
   });
 }
 
 // Parse event date and time into a comparable value
-function parseEventDateTime(event) {
+function parseEventDateTime(event, allEvents) {
   const dayOrder = { 'Friday': 0, 'Saturday': 1, 'Sunday': 2, 'Monday': 3, 'Tuesday': 4, 'Wednesday': 5, 'Thursday': 6 };
   
   // Try to parse the date field
@@ -756,11 +758,32 @@ function parseEventDateTime(event) {
   if (fullDateMatch) {
     eventDate = new Date(`${fullDateMatch[1]} ${fullDateMatch[2]}, ${fullDateMatch[3]}`);
   } else {
-    // If no full date, use day of week for ordering
+    // If no full date, try to find a reference date from another event on the same day
     const day = event.day || '';
-    const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
-    // Create a reference date (use 2026 as base year)
-    eventDate = new Date(2026, 0, 1 + dayNum);
+    let referenceDate = null;
+    
+    // Look for another event on the same day that has a full date
+    if (allEvents && allEvents.length > 0) {
+      for (const otherEvent of allEvents) {
+        if (otherEvent.day === day && otherEvent !== event) {
+          const otherDateStr = otherEvent.date || '';
+          const otherDateMatch = otherDateStr.match(/([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})/);
+          if (otherDateMatch) {
+            referenceDate = new Date(`${otherDateMatch[1]} ${otherDateMatch[2]}, ${otherDateMatch[3]}`);
+            break;
+          }
+        }
+      }
+    }
+    
+    if (referenceDate) {
+      eventDate = referenceDate;
+    } else {
+      // Fallback: use day of week for ordering relative to event date
+      const dayNum = dayOrder[day] !== undefined ? dayOrder[day] : 99;
+      // Use the configured event date's year as reference (May 16, 2026)
+      eventDate = new Date(2026, 4, 15 + dayNum); // May 15 = Friday, May 16 = Saturday
+    }
   }
   
   // Parse time - look for patterns like "6:00 PM", "9:00 AM", "Kickoff at 9:00 AM"
@@ -1681,37 +1704,51 @@ function setupBannerLoop(track) {
     allImages[i].remove();
   }
   
-  // Clone all original images to create a seamless loop
-  // We need enough clones to fill the viewport plus some buffer
-  originalImages.forEach(img => {
-    const clone = img.cloneNode(true);
-    clone.classList.add('banner-clone');
-    track.appendChild(clone);
-  });
+  // Clone all original images TWICE to create a seamless loop
+  // This ensures we always have enough content visible during the animation
+  for (let i = 0; i < 2; i++) {
+    originalImages.forEach(img => {
+      const clone = img.cloneNode(true);
+      clone.classList.add('banner-clone');
+      track.appendChild(clone);
+    });
+  }
   
   // Mark as initialized
   track.dataset.loopInitialized = 'true';
   
-  // Calculate scroll amount after a short delay to ensure images are measured
+  // Calculate scroll amount after images are fully rendered
+  // Use multiple frames to ensure layout is complete
   requestAnimationFrame(() => {
-    recalculateScrollAmount(track);
+    requestAnimationFrame(() => {
+      recalculateScrollAmount(track);
+    });
   });
 }
 
 // Helper function to calculate and set the scroll amount
 function recalculateScrollAmount(track) {
-  const images = track.querySelectorAll('img:not(.banner-clone)');
-  if (images.length === 0) return;
+  const originalImages = track.querySelectorAll('img:not(.banner-clone)');
+  if (originalImages.length === 0) return;
   
-  const gap = parseFloat(getComputedStyle(track).gap) || 8;
+  const computedStyle = getComputedStyle(track);
+  const gap = parseFloat(computedStyle.gap) || 8;
+  
+  // Calculate total width of original content (all original images + gaps between them)
   let originalWidth = 0;
-  
-  images.forEach(img => {
-    originalWidth += img.offsetWidth + gap;
+  originalImages.forEach((img, index) => {
+    // Use getBoundingClientRect for precise measurements
+    const rect = img.getBoundingClientRect();
+    originalWidth += rect.width;
+    // Add gap for each image (including last one since clones follow)
+    originalWidth += gap;
   });
   
-  // Set the CSS variable for exact scroll amount (negative to scroll left)
-  track.style.setProperty('--scroll-amount', `${-originalWidth}px`);
+  // Ensure we have a valid width before setting
+  if (originalWidth > 0) {
+    // Set the CSS variable to scroll exactly one set of original images
+    track.style.setProperty('--scroll-amount', `${-originalWidth}px`);
+  }
 }
 
 // ========================================
@@ -1809,3 +1846,49 @@ window.addEventListener('resize', () => {
     }
   }, 250);
 });
+
+// ========================================
+// Team Registration Input Handler
+// ========================================
+function initTeamRegisterInput() {
+  const input = document.getElementById('hero-team-name-input');
+  const submitBtn = document.getElementById('hero-team-submit');
+  const container = document.querySelector('.team-register-input-container');
+  
+  if (!input || !submitBtn) return;
+  
+  // Handle input changes for visual feedback
+  input.addEventListener('input', () => {
+    if (input.value.trim().length > 0) {
+      container.classList.add('has-text');
+    } else {
+      container.classList.remove('has-text');
+    }
+  });
+  
+  // Handle Enter key
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitTeamRegistration(input.value);
+    }
+  });
+  
+  // Handle button click
+  submitBtn.addEventListener('click', () => {
+    submitTeamRegistration(input.value);
+  });
+}
+
+function submitTeamRegistration(teamName) {
+  const trimmedName = teamName.trim();
+  
+  // Build the URL with team name as parameter
+  let url = 'register.html';
+  if (trimmedName) {
+    url += '?teamName=' + encodeURIComponent(trimmedName);
+  }
+  
+  // Navigate to registration page
+  window.location.href = url;
+}
