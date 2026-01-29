@@ -291,6 +291,93 @@
         grid-template-columns: 1fr;
       }
     }
+    
+    /* Vendor Type Cycling Pill */
+    .vendor-type-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 245, 240, 0.98) 100%);
+      border: 2px solid rgba(26, 54, 93, 0.15);
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: var(--space-xl);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--navy);
+      box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+    }
+    
+    .vendor-type-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    
+    .vendor-pill-emoji {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    
+    .vendor-pill-text {
+      color: var(--navy);
+    }
+    
+    .vendor-pill-word-wrapper {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+    
+    .vendor-pill-word {
+      display: inline-block;
+      color: var(--orange);
+      font-weight: 700;
+      white-space: nowrap;
+      transition: width 0.3s ease;
+    }
+    
+    /* Active word animation - blur fade effect */
+    .vendor-pill-word.fade-out {
+      animation: fadeBlurOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    .vendor-pill-word.fade-in {
+      animation: fadeBlurIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    @keyframes fadeBlurOut {
+      0% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        filter: blur(4px);
+        transform: scale(0.95);
+      }
+    }
+    
+    @keyframes fadeBlurIn {
+      0% {
+        opacity: 0;
+        filter: blur(4px);
+        transform: scale(1.05);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -326,6 +413,17 @@
         <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
         Back to Main Site
       </a>
+      
+      <!-- Vendor Type Cycling Pill -->
+      <div class="vendor-type-pill">
+        <span class="vendor-pill-emoji">🍔</span>
+        <span class="vendor-pill-text">Amazing </span>
+        <span class="vendor-pill-word-wrapper">
+          <span class="vendor-pill-word" data-words="Food,Craft,Drink,Retail,Artisan,Wellness,Beach,Local,Mobile,Tasty">Food</span>
+        </span>
+        <span class="vendor-pill-text"> Vendors</span>
+      </div>
+      
       <h1>Become a Vendor</h1>
       <p>Get your brand in front of players, fans, and tourists at America's #1 beach. Join us for an unforgettable day on Siesta Key.</p>
     </div>
@@ -699,5 +797,35 @@
   </footer>
 
   <script src="js/main.js"></script>
+  
+  <!-- Vendor Type Cycling Animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const wordElement = document.querySelector('.vendor-pill-word');
+      if (!wordElement) return;
+      
+      const words = wordElement.dataset.words.split(',');
+      let currentIndex = 0;
+      
+      function cycleWord() {
+        // Start fade out animation
+        wordElement.classList.remove('fade-in');
+        wordElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+          // Update the word
+          currentIndex = (currentIndex + 1) % words.length;
+          wordElement.textContent = words[currentIndex];
+          
+          // Start fade in animation
+          wordElement.classList.remove('fade-out');
+          wordElement.classList.add('fade-in');
+        }, 300); // Match the animation duration
+      }
+      
+      // Start cycling every 2 seconds
+      setInterval(cycleWord, 2000);
+    });
+  </script>
 </body>
 </html>

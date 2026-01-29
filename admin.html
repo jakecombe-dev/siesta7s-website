@@ -1505,6 +1505,265 @@
     }
 
     /* =====================================================
+       EMAIL TEMPLATE EDITOR STYLES
+       ===================================================== */
+    
+    .email-editor-container {
+      max-width: 1400px;
+    }
+
+    .email-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .template-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .template-selector label {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .template-selector select {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .email-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .email-editor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .email-editor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .email-form-panel,
+    .email-preview-panel {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+
+    .email-form-panel h3,
+    .email-preview-panel h3 {
+      margin: 0 0 1.25rem 0;
+      font-size: 1rem;
+      color: var(--text-primary);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .email-form-panel small {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .email-preview-frame {
+      background: #ffffff;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1.5rem;
+      min-height: 500px;
+      max-height: 700px;
+      overflow-y: auto;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .email-preview-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .email-preview-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .email-preview-header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.875rem;
+      color: #718096;
+    }
+
+    .email-preview-teamcode {
+      padding: 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      margin: 1.25rem 0;
+      color: white;
+    }
+
+    .email-preview-teamcode .code-label {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .email-preview-teamcode .code-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      font-family: monospace;
+      letter-spacing: 3px;
+    }
+
+    .email-preview-teamcode .code-warning {
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      opacity: 0.85;
+    }
+
+    .email-preview-cta {
+      text-align: center;
+      margin: 1.25rem 0;
+    }
+
+    .email-preview-cta a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      color: white;
+    }
+
+    .email-preview-details {
+      background: #f7fafc;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin: 1.25rem 0;
+    }
+
+    .email-preview-details h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      border: none;
+      padding: 0;
+    }
+
+    .email-preview-details p {
+      margin: 0.375rem 0;
+    }
+
+    .email-preview-payment {
+      background: #fef3cd;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      border-left: 4px solid #f6893a;
+      margin: 1.25rem 0;
+    }
+
+    .email-preview-payment .payment-email {
+      font-family: monospace;
+      background: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    .email-preview-footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #718096;
+    }
+
+    .email-code-section {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .code-header h3 {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    .email-code-block {
+      background: #1a1a2e;
+      color: #a0aec0;
+      padding: 1.25rem;
+      margin: 0;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .email-code-block code {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    [data-theme="dark"] .email-editor-header,
+    [data-theme="dark"] .email-form-panel,
+    [data-theme="dark"] .email-preview-panel,
+    [data-theme="dark"] .email-code-section {
+      background: var(--bg-card);
+    }
+
+    [data-theme="dark"] .template-selector select {
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .email-form-panel h3,
+    [data-theme="dark"] .email-preview-panel h3,
+    [data-theme="dark"] .code-header {
+      border-color: var(--border-color);
+    }
+
+    [data-theme="dark"] .email-preview-frame {
+      border-color: var(--border-color);
+    }
+
+    /* =====================================================
        TOURNAMENT STYLES
        ===================================================== */
     
@@ -1862,6 +2121,8 @@
       <button class="nav-tab" data-tab="schedule" data-tooltip="Manage event schedule" data-tooltip-position="bottom">Schedule</button>
       <button class="nav-tab" data-tab="tournament" data-tooltip="Manage tournament brackets & scores" data-tooltip-position="bottom">🏆 Tournament</button>
       <button class="nav-tab" data-tab="pricing" data-tooltip="Manage pricing tiers" data-tooltip-position="bottom">Pricing</button>
+      <button class="nav-tab" data-tab="emails" data-tooltip="Customize confirmation emails" data-tooltip-position="bottom">📧 Emails</button>
+      <button class="nav-tab" data-tab="social" data-tooltip="Manage social media feed posts" data-tooltip-position="bottom">📱 Social</button>
     </nav>
 
     <main class="dashboard-content">
@@ -2285,6 +2546,158 @@
           </div>
         </div>
       </div>
+
+      <!-- Email Templates Tab -->
+      <div class="tab-panel" id="emails">
+        <div class="email-editor-container">
+          <!-- Template Selector -->
+          <div class="email-editor-header">
+            <div class="template-selector">
+              <label>Template Type:</label>
+              <select id="emailTemplateType" onchange="loadEmailTemplate()">
+                <option value="teams">Team Registration</option>
+                <option value="freeagents">Free Agent Registration</option>
+                <option value="vendors">Vendor Registration</option>
+              </select>
+            </div>
+            <div class="email-actions">
+              <button class="btn btn-secondary" onclick="resetEmailTemplate()">↺ Reset to Default</button>
+              <button class="btn btn-primary" onclick="saveEmailTemplate()">💾 Save Template</button>
+            </div>
+          </div>
+
+          <div class="email-editor-grid">
+            <!-- Editor Panel -->
+            <div class="email-form-panel">
+              <h3>✏️ Customize Email</h3>
+              
+              <div class="form-group">
+                <label>Subject Line</label>
+                <input type="text" id="emailSubject" placeholder="🏉 Welcome to Siesta 7's!" oninput="updateEmailPreview()">
+              </div>
+
+              <div class="form-group">
+                <label>Greeting</label>
+                <input type="text" id="emailGreeting" placeholder="Hey {name}! 🎉" oninput="updateEmailPreview()">
+                <small>Use {name} for captain/registrant name</small>
+              </div>
+
+              <div class="form-group">
+                <label>Confirmation Message</label>
+                <input type="text" id="emailConfirmation" placeholder="Your registration is confirmed!" oninput="updateEmailPreview()">
+              </div>
+
+              <div class="form-group">
+                <label>Payment Instructions</label>
+                <textarea id="emailPaymentInstructions" rows="3" placeholder="Send payment via Venmo or Zelle to: sarasotarugbyclub@gmail.com" oninput="updateEmailPreview()"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Footer Message</label>
+                <input type="text" id="emailFooter" placeholder="See you on the sand! 🏖️" oninput="updateEmailPreview()">
+              </div>
+
+              <div class="form-group">
+                <label>Primary Color</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <input type="color" id="emailPrimaryColor" value="#1a365d" onchange="updateEmailPreview()" style="width: 50px; height: 40px; padding: 0; border: none; cursor: pointer;">
+                  <input type="text" id="emailPrimaryColorText" value="#1a365d" oninput="syncColorFromText()" style="width: 100px; font-family: monospace;">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Accent Color</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <input type="color" id="emailAccentColor" value="#2d8b9e" onchange="updateEmailPreview()" style="width: 50px; height: 40px; padding: 0; border: none; cursor: pointer;">
+                  <input type="text" id="emailAccentColorText" value="#2d8b9e" oninput="syncColorFromText()" style="width: 100px; font-family: monospace;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Preview Panel -->
+            <div class="email-preview-panel">
+              <h3>👁️ Live Preview</h3>
+              <div class="email-preview-frame" id="emailPreviewFrame">
+                <!-- Preview content rendered here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Generated HTML Code -->
+          <div class="email-code-section">
+            <div class="code-header">
+              <h3>📋 Generated HTML (for Google Apps Script)</h3>
+              <button class="btn btn-secondary" onclick="copyEmailHtml()">📋 Copy HTML</button>
+            </div>
+            <pre id="emailHtmlCode" class="email-code-block"><code></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media Tab -->
+      <div class="tab-panel" id="social">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>📱 Social Media Feed</h3>
+            <p style="color: #718096; font-size: 0.9rem;">Manage posts displayed in the social media feed section on the website</p>
+          </div>
+          
+          <div class="social-admin-grid" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; margin-top: 1.5rem;">
+            <!-- Add Post Form -->
+            <div class="social-add-form" style="background: rgba(255,255,255,0.5); padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+              <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #1a365d;">➕ Add Post</h4>
+              
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #4a5568;">Platform</label>
+                <select id="socialPlatform" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+                  <option value="instagram">📸 Instagram</option>
+                  <option value="facebook">👥 Facebook</option>
+                </select>
+              </div>
+              
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #4a5568;">Post URL</label>
+                <input type="url" id="socialPostUrl" placeholder="https://www.instagram.com/p/..." style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+                <small style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem; display: block;">Paste the full URL of the post</small>
+              </div>
+              
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #4a5568;">Description (optional)</label>
+                <input type="text" id="socialPostDesc" placeholder="Beach action shot" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+              </div>
+              
+              <button onclick="addSocialPost()" style="width: 100%; padding: 0.875rem 1.5rem; background: linear-gradient(135deg, #1a365d 0%, #2d8b9e 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">Add Post</button>
+              
+              <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+                <h5 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: #4a5568;">💡 Hashtag Reference</h5>
+                <p style="font-size: 0.85rem; color: #718096; margin: 0;">Search for these hashtags on Instagram/Facebook to find posts to add:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                  <span style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">#Siesta7s</span>
+                  <span style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">#SRQSurge</span>
+                  <span style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">#BeachRugby</span>
+                  <span style="background: #1877f2; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">#SarasotaRugby</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Posts List -->
+            <div class="social-posts-list">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; color: #1a365d;">📋 Configured Posts</h4>
+                <span id="socialPostsCount" style="background: #edf2f7; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; color: #4a5568;">0 posts</span>
+              </div>
+              
+              <div id="socialPostsList" style="max-height: 500px; overflow-y: auto;">
+                <div class="empty-state" style="text-align: center; padding: 3rem; color: #a0aec0;">
+                  <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+                  <p style="margin: 0; font-size: 1rem;">No posts configured yet</p>
+                  <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Add Instagram or Facebook post URLs to display them on the website</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -2655,6 +3068,378 @@
     }
 
     // ========================================
+    // EMAIL TEMPLATE EDITOR
+    // ========================================
+
+    const DEFAULT_EMAIL_TEMPLATES = {
+      teams: {
+        subject: '🏉 Welcome to Siesta 7\'s, {teamName}!',
+        greeting: 'Hey {name}! 🎉',
+        confirmation: 'Your Teams registration is confirmed!',
+        paymentInstructions: 'Send ${amount} via Venmo or Zelle to:\nsarasotarugbyclub@gmail.com\n\nPlease include your team name in the payment note.',
+        footer: 'See you on the sand! 🏖️',
+        primaryColor: '#1a365d',
+        accentColor: '#2d8b9e'
+      },
+      freeagents: {
+        subject: '🏉 You\'re Registered as a Free Agent for Siesta 7\'s!',
+        greeting: 'Hey {name}! 🎉',
+        confirmation: 'Your Free Agent registration is confirmed!',
+        paymentInstructions: 'Send ${amount} via Venmo or Zelle to:\nsarasotarugbyclub@gmail.com\n\nInclude your name in the payment note.',
+        footer: 'See you on the sand! 🏖️',
+        primaryColor: '#1a365d',
+        accentColor: '#2d8b9e'
+      },
+      vendors: {
+        subject: '🏉 Vendor Application Received - Siesta 7\'s',
+        greeting: 'Hello {name}! 🎉',
+        confirmation: 'Your Vendor application has been received!',
+        paymentInstructions: 'Send ${amount} via Venmo or Zelle to:\nsarasotarugbyclub@gmail.com\n\nInclude your business name in the payment note.',
+        footer: 'See you on the sand! 🏖️',
+        primaryColor: '#1a365d',
+        accentColor: '#2d8b9e'
+      }
+    };
+
+    function getEmailTemplates() {
+      try {
+        const stored = localStorage.getItem('siesta7s_email_templates');
+        return stored ? JSON.parse(stored) : { ...DEFAULT_EMAIL_TEMPLATES };
+      } catch (e) {
+        return { ...DEFAULT_EMAIL_TEMPLATES };
+      }
+    }
+
+    function saveEmailTemplates(templates) {
+      localStorage.setItem('siesta7s_email_templates', JSON.stringify(templates));
+    }
+
+    function loadEmailTemplate() {
+      const type = document.getElementById('emailTemplateType')?.value || 'teams';
+      const templates = getEmailTemplates();
+      const template = templates[type] || DEFAULT_EMAIL_TEMPLATES[type];
+
+      document.getElementById('emailSubject').value = template.subject || '';
+      document.getElementById('emailGreeting').value = template.greeting || '';
+      document.getElementById('emailConfirmation').value = template.confirmation || '';
+      document.getElementById('emailPaymentInstructions').value = template.paymentInstructions || '';
+      document.getElementById('emailFooter').value = template.footer || '';
+      document.getElementById('emailPrimaryColor').value = template.primaryColor || '#1a365d';
+      document.getElementById('emailPrimaryColorText').value = template.primaryColor || '#1a365d';
+      document.getElementById('emailAccentColor').value = template.accentColor || '#2d8b9e';
+      document.getElementById('emailAccentColorText').value = template.accentColor || '#2d8b9e';
+
+      updateEmailPreview();
+    }
+
+    function saveEmailTemplate() {
+      const type = document.getElementById('emailTemplateType').value;
+      const templates = getEmailTemplates();
+
+      templates[type] = {
+        subject: document.getElementById('emailSubject').value,
+        greeting: document.getElementById('emailGreeting').value,
+        confirmation: document.getElementById('emailConfirmation').value,
+        paymentInstructions: document.getElementById('emailPaymentInstructions').value,
+        footer: document.getElementById('emailFooter').value,
+        primaryColor: document.getElementById('emailPrimaryColor').value,
+        accentColor: document.getElementById('emailAccentColor').value
+      };
+
+      saveEmailTemplates(templates);
+      alert('✅ Template saved! Copy the HTML below to update your Google Apps Script.');
+    }
+
+    function resetEmailTemplate() {
+      const type = document.getElementById('emailTemplateType').value;
+      if (confirm('Reset this template to default? Your changes will be lost.')) {
+        const templates = getEmailTemplates();
+        templates[type] = { ...DEFAULT_EMAIL_TEMPLATES[type] };
+        saveEmailTemplates(templates);
+        loadEmailTemplate();
+      }
+    }
+
+    function syncColorFromText() {
+      const primaryText = document.getElementById('emailPrimaryColorText').value;
+      const accentText = document.getElementById('emailAccentColorText').value;
+
+      if (/^#[0-9A-Fa-f]{6}$/.test(primaryText)) {
+        document.getElementById('emailPrimaryColor').value = primaryText;
+      }
+      if (/^#[0-9A-Fa-f]{6}$/.test(accentText)) {
+        document.getElementById('emailAccentColor').value = accentText;
+      }
+      updateEmailPreview();
+    }
+
+    function updateEmailPreview() {
+      const type = document.getElementById('emailTemplateType')?.value || 'teams';
+      const greeting = document.getElementById('emailGreeting')?.value || 'Hey {name}! 🎉';
+      const confirmation = document.getElementById('emailConfirmation')?.value || 'Your registration is confirmed!';
+      const paymentInstructions = document.getElementById('emailPaymentInstructions')?.value || 'Send payment via Venmo or Zelle.';
+      const footer = document.getElementById('emailFooter')?.value || 'See you on the sand! 🏖️';
+      const primaryColor = document.getElementById('emailPrimaryColor')?.value || '#1a365d';
+      const accentColor = document.getElementById('emailAccentColor')?.value || '#2d8b9e';
+
+      const isTeamType = type === 'teams';
+      const sampleName = 'Captain Mike';
+      const sampleTeam = 'Beach Beasts';
+      const sampleAmount = '250';
+      const sampleCode = 'S7-BEACHBEASTS';
+
+      // Replace placeholders
+      const greetingDisplay = greeting.replace('{name}', sampleName).replace('{teamName}', sampleTeam);
+      const paymentDisplay = paymentInstructions.replace('${amount}', sampleAmount).replace(/\n/g, '<br>');
+
+      const teamCodeHtml = isTeamType ? `
+        <div class="email-preview-teamcode" style="background: linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%);">
+          <div class="code-label">Your Team Code:</div>
+          <div class="code-value">${sampleCode}</div>
+          <div class="code-warning">⚠️ Save this! You'll need it to manage your roster.</div>
+        </div>
+        <div class="email-preview-cta">
+          <a href="#" style="background: #f6893a;">Access Team Portal →</a>
+        </div>
+      ` : '';
+
+      const previewHtml = `
+        <div class="email-preview-header">
+          <h1 style="color: ${primaryColor};">🏉 SIESTA 7's</h1>
+          <p>Beach Rugby Tournament • Siesta Key Beach</p>
+        </div>
+
+        <h2 style="color: ${primaryColor};">${greetingDisplay}</h2>
+        <p>${confirmation}</p>
+
+        ${teamCodeHtml}
+
+        <div class="email-preview-details">
+          <h3 style="color: ${primaryColor};">📋 Registration Details</h3>
+          ${isTeamType ? `<p><strong>Team Name:</strong> ${sampleTeam}</p>` : ''}
+          <p><strong>Tier:</strong> Early Bird</p>
+          <p><strong>Amount Due:</strong> $${sampleAmount}</p>
+        </div>
+
+        <div class="email-preview-payment">
+          <p><strong>💰 Complete Your Payment</strong></p>
+          <p>${paymentDisplay}</p>
+        </div>
+
+        <p style="margin-top: 1.5rem;">${footer}<br><strong style="color: ${primaryColor};">The Siesta 7's Team</strong></p>
+
+        <div class="email-preview-footer">
+          <p>May 16, 2026 • Siesta Key Beach, Sarasota FL</p>
+          <p><a href="https://siesta7s.com" style="color: ${accentColor};">siesta7s.com</a></p>
+        </div>
+      `;
+
+      const previewFrame = document.getElementById('emailPreviewFrame');
+      if (previewFrame) {
+        previewFrame.innerHTML = previewHtml;
+      }
+
+      // Update code block
+      updateEmailHtmlCode();
+    }
+
+    function updateEmailHtmlCode() {
+      const type = document.getElementById('emailTemplateType')?.value || 'teams';
+      const greeting = document.getElementById('emailGreeting')?.value || 'Hey {name}! 🎉';
+      const confirmation = document.getElementById('emailConfirmation')?.value || 'Your registration is confirmed!';
+      const paymentInstructions = document.getElementById('emailPaymentInstructions')?.value || 'Send payment via Venmo or Zelle.';
+      const footer = document.getElementById('emailFooter')?.value || 'See you on the sand! 🏖️';
+      const primaryColor = document.getElementById('emailPrimaryColor')?.value || '#1a365d';
+      const accentColor = document.getElementById('emailAccentColor')?.value || '#2d8b9e';
+
+      const isTeamType = type === 'teams';
+      const paymentHtml = paymentInstructions.replace(/\n/g, '<br>');
+
+      const teamCodeSnippet = isTeamType ? `
+    \${teamCode ? \`
+    <div style="background: linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%); color: white; padding: 24px; border-radius: 12px; margin: 24px 0; text-align: center;">
+      <p style="margin: 0 0 12px 0; font-size: 14px;">Your Team Code:</p>
+      <p style="margin: 0; font-size: 32px; font-weight: bold; letter-spacing: 4px; font-family: monospace;">\${teamCode}</p>
+      <p style="margin: 12px 0 0 0; font-size: 12px;">⚠️ Save this! You'll need it to manage your roster.</p>
+    </div>
+    <p style="text-align: center;"><a href="https://siesta7s.com/team-portal.html" style="background: #f6893a; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600;">Access Team Portal →</a></p>
+    \` : ''}` : '';
+
+      const htmlCode = `const htmlBody = \`
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h1 style="color: ${primaryColor}; text-align: center;">🏉 SIESTA 7's</h1>
+  <h2 style="color: ${primaryColor};">${greeting.replace('{name}', '${name}').replace('{teamName}', '${teamName}')}</h2>
+  <p>${confirmation.replace('{type}', '${formType}')}</p>
+  ${teamCodeSnippet}
+  <div style="background: #f7fafc; padding: 20px; border-radius: 12px; margin: 24px 0;">
+    <h3 style="color: ${primaryColor};">📋 Details</h3>
+    ${isTeamType ? '<p><strong>Team:</strong> \${teamName}</p>' : ''}
+    <p><strong>Tier:</strong> \${tier}</p>
+    <p><strong>Amount Due:</strong> $\${amount}</p>
+  </div>
+  <div style="background: #fef3cd; padding: 20px; border-radius: 12px; border-left: 4px solid #f6893a;">
+    <p><strong>💰 Payment:</strong></p>
+    <p>${paymentHtml.replace('${amount}', '${amount}')}</p>
+  </div>
+  <p style="margin-top: 24px;">${footer}<br><strong>Siesta 7's Team</strong></p>
+  <hr style="margin: 24px 0;">
+  <p style="font-size: 12px; color: #718096; text-align: center;">May 16, 2026 • Siesta Key Beach • <a href="https://siesta7s.com" style="color: ${accentColor};">siesta7s.com</a></p>
+</div>\`;`;
+
+      const codeBlock = document.querySelector('#emailHtmlCode code');
+      if (codeBlock) {
+        codeBlock.textContent = htmlCode;
+      }
+    }
+
+    function copyEmailHtml() {
+      const codeBlock = document.querySelector('#emailHtmlCode code');
+      if (codeBlock) {
+        navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+          alert('✅ HTML copied! Paste this into your Google Apps Script sendConfirmationEmail function.');
+        }).catch(() => {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = codeBlock.textContent;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          alert('✅ HTML copied! Paste this into your Google Apps Script.');
+        });
+      }
+    }
+
+    // Initialize email template editor when tab is shown
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load initial template if on emails tab
+      setTimeout(() => {
+        if (document.getElementById('emailTemplateType')) {
+          loadEmailTemplate();
+        }
+      }, 100);
+    });
+
+    // ========================================
+    // SOCIAL MEDIA FEED MANAGEMENT
+    // ========================================
+    
+    function loadSocialPosts() {
+      try {
+        const stored = localStorage.getItem('siesta7s_social_posts');
+        return stored ? JSON.parse(stored) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveSocialPosts(posts) {
+      localStorage.setItem('siesta7s_social_posts', JSON.stringify(posts));
+    }
+
+    function addSocialPost() {
+      const platform = document.getElementById('socialPlatform')?.value;
+      const url = document.getElementById('socialPostUrl')?.value?.trim();
+      const description = document.getElementById('socialPostDesc')?.value?.trim() || '';
+      
+      if (!url) {
+        alert('Please enter a valid post URL');
+        return;
+      }
+      
+      // Validate URL format
+      const validPatterns = {
+        instagram: /instagram\.com\/(p|reel|tv)\//,
+        facebook: /facebook\.com\/(.*\/(posts|photos|videos)\/|watch\/)/
+      };
+      
+      if (!url.match(validPatterns[platform]) && !url.includes(platform + '.com')) {
+        alert(`Please enter a valid ${platform === 'instagram' ? 'Instagram' : 'Facebook'} post URL`);
+        return;
+      }
+      
+      const posts = loadSocialPosts();
+      
+      // Check for duplicates
+      if (posts.some(p => p.url === url)) {
+        alert('This post is already in your feed');
+        return;
+      }
+      
+      posts.push({
+        id: Date.now().toString(),
+        platform,
+        url,
+        description,
+        addedAt: new Date().toISOString()
+      });
+      
+      saveSocialPosts(posts);
+      renderSocialPosts();
+      
+      // Clear form
+      document.getElementById('socialPostUrl').value = '';
+      document.getElementById('socialPostDesc').value = '';
+    }
+
+    function deleteSocialPost(id) {
+      if (!confirm('Remove this post from the feed?')) return;
+      
+      let posts = loadSocialPosts();
+      posts = posts.filter(p => p.id !== id);
+      saveSocialPosts(posts);
+      renderSocialPosts();
+    }
+
+    function renderSocialPosts() {
+      const container = document.getElementById('socialPostsList');
+      const countEl = document.getElementById('socialPostsCount');
+      if (!container) return;
+      
+      const posts = loadSocialPosts();
+      
+      if (countEl) {
+        countEl.textContent = `${posts.length} post${posts.length !== 1 ? 's' : ''}`;
+      }
+      
+      if (posts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="text-align: center; padding: 3rem; color: #a0aec0;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+            <p style="margin: 0; font-size: 1rem;">No posts configured yet</p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Add Instagram or Facebook post URLs to display them on the website</p>
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = posts.map(post => `
+        <div class="social-post-item" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 10px; margin-bottom: 0.75rem; border: 1px solid #e2e8f0;">
+          <div style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; ${post.platform === 'instagram' ? 'background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);' : 'background: #1877f2;'}">
+            ${post.platform === 'instagram' 
+              ? '<svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>'
+              : '<svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'
+            }
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <p style="margin: 0; font-weight: 600; font-size: 0.9rem; color: #1a365d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${post.description || 'Social post'}</p>
+            <a href="${post.url}" target="_blank" style="font-size: 0.8rem; color: #718096; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${post.url.substring(0, 50)}...</a>
+          </div>
+          <button onclick="deleteSocialPost('${post.id}')" style="background: none; border: none; cursor: pointer; padding: 8px; color: #e53e3e; font-size: 1.25rem;" title="Remove post">🗑️</button>
+        </div>
+      `).join('');
+    }
+
+    // Initialize social posts when the tab is shown
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (document.getElementById('socialPostsList')) {
+          renderSocialPosts();
+        }
+      }, 100);
+    });
+
+    // ========================================
     // RELATIVE TIME FORMATTING
     // ========================================
 
@@ -2722,6 +3507,11 @@
           const formType = tabId === 'freeagents' ? 'Free Agents' : 
                           tabId.charAt(0).toUpperCase() + tabId.slice(1);
           loadData(formType);
+        }
+        
+        // Load email template when switching to emails tab
+        if (tabId === 'emails') {
+          loadEmailTemplate();
         }
       });
     });
